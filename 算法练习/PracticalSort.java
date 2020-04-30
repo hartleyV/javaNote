@@ -66,6 +66,8 @@ public class PracticalSort
 		}
 	}
 
+//可以用归并排序衍生到求：小和、逆序对问题；
+	
 
 	//迭代求最大值
 	public static int getMax(int[] arr,int L,int R)
