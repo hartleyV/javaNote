@@ -1,5 +1,5 @@
 /**
-*实用排序：归并、堆、XX(运用递归，充分利用每次判断->降低时间复杂度）
+*实用排序：归并、快速排序、堆排序(运用递归，充分利用每次判断->降低时间复杂度）
 *@author Hartley
 *@version v1.0.0
 */
@@ -8,8 +8,9 @@ public class PracticalSort
 	
 
 /**
-*归并排序(运行分治的思想，将问题拆解为：先分别求左右两边的最大值，然后用外排法最终排序）
-*通过递归master公式得出：时间复杂度O(N*logN)
+********************************【归并排序】**********************************************
+*(运行分治的思想，将问题拆解为：先分别求左右两边的最大值，然后用外排法最终排序）
+*通过递归master公式得出：时间复杂度O(N*logN);额外空间复杂度O(N)---辅助数组help
 */
 	//重载一个默认只有数组参数方法
 	public static void mergeSort(int[] arr)
@@ -68,24 +69,107 @@ public class PracticalSort
 
 //可以用归并排序衍生到求：小和、逆序对问题；
 	
-
-	//迭代求最大值
-	public static int getMax(int[] arr,int L,int R)
+/**
+********************************【快速排序（常用！！】**********************************************
+*随机选择一个数a作为基准，将一组数按该数分为小于a、等于a和大于a三段，然后返回中间部分的角标
+*时间复杂度O(N*logN)--随机指定划分值，引入概率，长期期望为此;额外空间复杂度O(N)--最差时（最好时为O(1)）
+*/
+	public static void quickSort(int[] arr)
 	{
-		//迭代终止情况
-		if (L==R)
+		if (arr==null || arr.length<2)
 		{
-			return arr[L];
+			return;
 		}
-		//将问题分为两部分
-		//int mid = (L +R)/2;
-		int mid = L- ((L - R)>>1);//更安全~
-		int maxLeft = getMax(arr,L,mid);
-		int maxRight = getMax(arr,mid+1,R);
-		
-		return (int)Math.max(maxLeft,maxRight);
+
+		quickSort(arr,0,arr.length - 1);
+	}
+	public static void quickSort(int[] arr,int L,int R)
+	{
+		//终止条件
+		if(L<R)
+		{
+			//随机指定划分值 (1 3)- 
+			int index = L + (int)( (Math.random()) *(R-L)+1);
+			swap(arr,index,R);
+			int[] equal = partition(arr,L,R);
+			quickSort(arr,L,equal[0] - 1);
+			quickSort(arr,equal[1] + 1,R);
+		}
+	}
+	//快速排序关键：荷兰国旗问题--划分
+	public static int[] partition(int[] arr,int L,int R)
+	{
+		//分别指向小于区和大于区的指针
+		int small = L-1;
+		int large = R+1;
+		//取最后一项为划分值
+		int p = arr[R];
+		while(L < large)
+		{
+			if (arr[L] < p)
+			{
+				swap(arr,++small,L++);
+			}else if (arr[L] > p)
+			{
+				//划到大于区，由于交换过来的数值没有与划分值比较，所以“指针”L不动
+				swap(arr,--large,L);
+			}else
+			{
+				//等于区，不交换，指针L直接移到下一个数
+				L++;
+			}
+		}
+		return new int[]{small+1,large-1};
+	}
+	
+/**
+********************************【堆排序（堆结构很重要！】**********************************************
+*用数组表示堆（完全二叉树--由左到右依次排满），heapInsert形成大粗堆，然后堆化处理
+*--将大粗堆根与尾部元素交换，二叉树size-1，再根部与其子部比较，调整为大粗堆后继续交换，直至size<0截至
+*时间复杂度O(N*logN)--;额外空间复杂度O(1)
+*/
+	//待完成
+	public static void heapSort(int[] arr)
+	{
 
 	}
+	//插入堆--由下到上的过程：依次与父节点比较，如果插入节点较大，就依次交换上去
+	public static void insertHeap(int[] arr,int index)
+	{
+		while( arr[index] > arr[ (index - 1)/2] )
+		{
+			swap(arr,index,(index-1)/2);
+			index = (index-1)/2;
+			System.out.println(index);
+
+			/*
+			//不需要该语句，因为转换int时 (0-1)/2 = -0.5 整数部分为 -0
+			if (index==0)
+			{
+				return;
+			}
+			*/
+		}
+		
+	}
+	//调整堆--由上到下的过程：依次与子节点比较，若子节点较大，根节点处元素就依次换下去
+	public static void heapify(int[] arr,int index,int size)
+	{
+		//父节点的子左节点 (完全二叉树）
+		int left = index*2 + 1;
+		while( left < size)
+		{
+			//比较子左节点与子右节点，记住角标（注意left+1判断越界）
+			int large = (left + 1)<size && arr[left] < arr[left+1] ? left+1 : left;
+			System.out.println(large);
+			if (arr[large] > arr[index])
+			{
+				swap(arr,large,index);
+				left = large*2 + 1;
+			}
+		}
+	}
+
 	//交换数组中指定位置的元素
 	public static void swap(int[] arr,int i,int j)
 	{
@@ -114,7 +198,7 @@ public class PracticalSort
 	//程序入口
 	public static void main(String[] args) 
 	{
-		int[] arr = {2,4,1,7,9,3,6};
+		int[] arr = {2,4,6,8,55,12};
 		System.out.print("初始数组为：");
 		printArray(arr);
 /*
@@ -134,8 +218,31 @@ public class PracticalSort
 		int temp = 3+((2+3)>>1);//注意移位运算优先级比算数符低
 		System.out.print("移位后："+temp);
 		*/
+/*
 		mergeSort(arr);
 		System.out.print("合并排序后：");
 		printArray(arr);
+*/
+/*
+		//荷兰国旗问题
+		int[] equal = partition(arr,0,arr.length-1);
+		printArray(arr);
+		printArray(equal);
+*/
+/*
+		//快速排序
+		quickSort(arr);
+		printArray(arr);
+*/
+
+		//插入堆
+		//insertHeap(arr,1);
+		//堆调整
+		heapify(arr,0,arr.length);
+		printArray(arr);
+
 	}
+
+
+	
 }
