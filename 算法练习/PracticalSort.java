@@ -128,19 +128,33 @@ public class PracticalSort
 *--将大粗堆根与尾部元素交换，二叉树size-1，再根部与其子部比较，调整为大粗堆后继续交换，直至size<0截至
 *时间复杂度O(N*logN)--;额外空间复杂度O(1)
 */
-	//待完成
+	//先生成大根堆，再砍根，再调整，再砍根，直至砍完即达成排序
 	public static void heapSort(int[] arr)
 	{
+		for (int i=0;i<arr.length ;i++ )
+		{
+			insertHeap(arr,i);
+		}
+		System.out.print("排完大根树后");     
+		printArray(arr);
+
+		int size = arr.length;
+
+		while(size>0)
+		{
+			swap(arr,0,--size);
+			//System.out.println(size);
+			heapify(arr,0,size);
+		}
 
 	}
-	//插入堆--由下到上的过程：依次与父节点比较，如果插入节点较大，就依次交换上去
+	//构造堆--由下到上的过程：从零开始依次与父节点比较，如果插入节点较大，就依次交换上去
 	public static void insertHeap(int[] arr,int index)
 	{
 		while( arr[index] > arr[ (index - 1)/2] )
 		{
-			swap(arr,index,(index-1)/2);
+			swap(arr,index,(index-1)/2); 
 			index = (index-1)/2;
-			System.out.println(index);
 
 			/*
 			//不需要该语句，因为转换int时 (0-1)/2 = -0.5 整数部分为 -0
@@ -157,16 +171,22 @@ public class PracticalSort
 	{
 		//父节点的子左节点 (完全二叉树）
 		int left = index*2 + 1;
+		//进入循环说明有子节点
 		while( left < size)
 		{
-			//比较子左节点与子右节点，记住角标（注意left+1判断越界）
+			//最大子节点角标：比较子左节点与子右节点，记住角标（注意left+1判断越界）
 			int large = (left + 1)<size && arr[left] < arr[left+1] ? left+1 : left;
-			System.out.println(large);
-			if (arr[large] > arr[index])
+			//交换前比较当前节点index与其最大子节点大小，
+			large = arr[large] > arr[index] ? large : index;
+			//如果子节点不比父节点大，退出循环
+			if (large == index)
 			{
-				swap(arr,large,index);
-				left = large*2 + 1;
+				break;
 			}
+			swap(arr,large,index);
+			//重置父节点
+			index = large;
+			left = large*2 + 1;
 		}
 	}
 
@@ -198,7 +218,7 @@ public class PracticalSort
 	//程序入口
 	public static void main(String[] args) 
 	{
-		int[] arr = {2,4,6,8,55,12};
+		int[] arr = {5,6,9,9,9,4,8,9,1,9,9};
 		System.out.print("初始数组为：");
 		printArray(arr);
 /*
@@ -236,9 +256,11 @@ public class PracticalSort
 */
 
 		//插入堆
-		//insertHeap(arr,1);
+		//insertHeap(arr,arr.length-1);
 		//堆调整
-		heapify(arr,0,arr.length);
+		//heapify(arr,0,arr.length);
+		heapSort(arr);
+		System.out.print("堆排序完成：");
 		printArray(arr);
 
 	}
