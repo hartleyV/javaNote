@@ -9,7 +9,7 @@ class Structure
 
 	public static void main(String[] args) 
 	{
-		Stack s = new Stack(6);
+		QueueTest s = new QueueTest(3);
 		s.push(7);
 		s.push(3);
 		s.push(-8);
@@ -18,16 +18,17 @@ class Structure
 		System.out.println(s.poll() );
 		System.out.println(s.poll() );
 		System.out.println(s.poll() );
+		System.out.println(s.peek() );
 
 	}
 }
 
 //*******************************【数组模拟栈结构】********************************
-class Stack
+class StackTest
 {
 	int[] arr;
 	int index= -1 ;//当前指针位置
-	public Stack(int size)
+	public StackTest(int size)
 	{
 		arr = new int[size];
 	}
@@ -55,4 +56,45 @@ class Stack
 		return arr[index--];
 	}
 
+}
+
+//*******************************【数组模拟队列结构】********************************
+class QueueTest
+{
+	int size;
+	int start=0;
+	int end=0;
+	int[] arr;
+	public QueueTest(int size)
+	{
+		this.size = size;
+		arr = new int[size];
+	}
+	public int peek()
+	{
+		return arr[start];
+	}
+	//添加元素时，start end+1
+	public void push(int num)
+	{
+		end = getPos(arr,end);
+		arr[end++] = num;
+		
+	}
+	//弹出元素时，start+1 end
+	public int poll()
+	{
+		start = getPos(arr,start);
+		return arr[start++];
+	}
+	//判断是否超出数组大小，循环start、end指针
+	public int getPos(int[] arr,int p)
+	{
+		if(p>=arr.length)
+		{
+			p = 0;
+		}
+
+		return p;
+	}
 }
