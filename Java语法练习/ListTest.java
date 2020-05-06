@@ -1,7 +1,7 @@
 import java.util.*;
 /**
 *List接口-集合--有序可重复；添加元素会建立索引
-*ArrayList--线程不安全，可由Collection工具类
+*ArrayList--线程不安全，可由Collection工具类包装
 *Vector--线程安全，性能低
 *Queue--队列接口--
 *---PriorityQueue实现类--【准队列】结构(会将队列元素自动排序

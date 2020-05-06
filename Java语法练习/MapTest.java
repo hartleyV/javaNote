@@ -50,7 +50,7 @@ class  MapTest
 		//replace--当key不存在时，不会改变
 		mt.replace(4,"飞天小女警");
 		println(mt);
-		//merge--对应key的value为null时直接换为指定值，否则用key通过mappingFunction计算
+		//merge--对应key的value为null时直接换为指定值，否则用key通过BiFunction remappingFunction计算
 		mt.merge(2,"野原新之助",(old,cur)->((String)old).length()+"个"+(String)cur );
 		println(mt);
 		
