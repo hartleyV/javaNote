@@ -4,7 +4,7 @@ import java.nio.charset.*;
 import java.io.*;
 import java.util.*;
 /**
-*NIO：面向块处理--采用内存映射文件的方式,将部分文件的区域映射到内存，提高读写效率
+*NIO-java4：面向块处理--采用内存映射文件的方式,将部分文件的区域映射到内存，提高读写效率
          （旧IO采用依次读取字节的方式）
     |--核心对象：
 	    |--【Channel】通道：类比输入输出流
@@ -36,9 +36,17 @@ import java.util.*;
 										便捷操作（简单编码时）---直接调用Charset的encode方法--返回字节缓存
 						获取解码器CharsetDecoder decoder = cn.newDecoder();---decoder的decode方法
 										简单解码时------直接调用Charset的decode方法--返回字符缓存
-***待填坑
+
 *文件锁
+	    |--用于阻止多个并发进程同时修改一个文件
+	    |--用法：Channel的lock(position,size,boolean shared)，从文件position开始的内容加锁-阻塞式（shared-true表示允许其他进程读，false表示排他锁，不许其他进程读写）
+		               trylock(同上)，但非阻塞，--成功则返回文件锁--不成则返回null
+	    |--注意：有些平台--文件锁只是建议性的 + 不能同步锁定一个文件到内存中+关闭某个FileChannel后会释放该文件所有锁
+		               文件锁时Java虚拟机持有的，所以同一虚拟机上不能有两个程序对同一文件上锁
+
+***待填坑******************
 *NIO2-Java7
+	    |--
 
 *@author Hartley
 *@version 1.0.0
@@ -122,6 +130,7 @@ class  NIOTest
 	public static void randomTest()
 	{
 		File file = new File("tt.txt");
+
 		try(RandomAccessFile raf = new RandomAccessFile( file, "rw" );//注意访问参数须为字符串
 			 FileChannel channel = raf.getChannel() )//RandomAccessFile的文件通道可读可写
 		{
@@ -206,6 +215,26 @@ class  NIOTest
 		}
 		
 	}
+
+	//文件锁尝试
+	public static void fileLockTest()
+	{
+		File file = new File("new.txt");
+		try(//用节点流获取Channel对象？？？要用OutputStream//true是追加 false或不写是覆盖
+			 FileChannel channel = new FileOutputStream(file,true).getChannel() )
+		{
+				
+			println(channel.size());
+			FileLock lock = channel.tryLock();//非阻塞式
+			Thread.sleep(10000);
+			lock.release();
+			 /**/
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 	//************程序入口***************
 	public static void main(String[] args) 
 	{
@@ -213,7 +242,8 @@ class  NIOTest
 		//channelTest();
 		 //randomTest();
 		 //readFileTest();
-		charsetTest();
+		//charsetTest();
+		fileLockTest();
 		
 	}
 
