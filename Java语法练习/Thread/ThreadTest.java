@@ -55,11 +55,82 @@ import java.util.concurrent.*;//Callable的包装类FutureTask
 	 									MAX_PRIORITY==10;MIN_PRIORITY==1;NORM_PRIORITY==5;
 *【线程安全】
      |---两个线程同时取钱，由于线程调用不确定性，很可能取多了--需要【同步监视器】的锁定
-     |---【同步监视器】：
+     |---【同步代码块】：
 	 		     |---目的：阻止线程对同一共享资源进行并发访问-->将共享变量作为同步监视器
 	 		     |---用法：阻synchronized(obj){同步代码块}---obj为同步监视器
 	 		     |---流程：加锁同步监视器---修改---释放
-
+     |---【同步方法】：
+	 		     |---用法：在方法前加 synchronized修饰符，会隐式将 this 作为同步监视器，
+				 				 即将调用该方法的对象锁定起来--然后修改对象实例变量---方法结束释放锁
+	 		     |---特点：对修改多线程共享实例变量的方法进行同步---线程安全类
+				 				 每个线程都可以正确调用该类的方法，并且对象保持合理状态
+			 	 |---不可变类因为对象状态不可变，一定是线程安全的，可变类则应创建两个版本（单线程不同步，多线程同步）
+     |---释放同步监视器的情况：
+	 		     |---调用监视器对象的wait方法--当前线程暂停（sleep、yield不会释放，其他进程调用
+					  该进程的suspend方法，该进程不会释放锁--应避免使用suspend resume控制线程）
+				 |---同步代码块、方法 执行完毕 OR 抛出异常错误 OR return break中止
+     |---【同步锁】：
+	 		     |---用法：加锁lock后，当获取多个锁，应按相反的加锁顺序释放锁unlock
+	 		     |---相比synchronized特点
+					   |--灵活，可重入锁可以多次加锁，
+					   |--提供了非块结构的tryLock方法，传入时间参数 获取超时失效锁tryLock(long,TimeUnit)
+						   获取可中断锁的lockInterruptibly					   	  
+	 		     |---根接口
+				       |--Lock接口--实现类ReentrantLock可重入锁--一个线程可对已上重入锁的继续加锁（常用）
+					   |--ReadWriterLock接口--ReentrantReadWriteLock
+					   |--Java8新增StampedLock类，大部分可以替代以上两个，有Writing、Reading、ReadOptimistic三种模式的锁
+     |---死锁：两线程相互**等待对方释放同步监视器**时(注意并非程序堵塞就是死锁）--见DeadLockTest.java
+*【线程通信】
+	 |---为保证线程间协调运行，在进程不退出synchronized下，其他进程能够访问共享变量
+     |---【传统方法】---synchronized
+	        可以用 同步代码块的【同步监视器】/同步方法的【this】 调用Object类中--见ThreadExercise2.java
+			|--wait--有带时间参数的--不带参数表示当前线程一直等待，直至其他线程notify/notifyAll
+						 同时会释放当前线程对同步监视器的锁定，（线程被放到对象等待池，notify后对象被放到锁标志等待池）
+			|--notify--随机唤醒等待线程中的某一个线程，且只当调用notify的线程释放锁定后（wait后）
+							该线程才会被唤醒
+			|--notifyAll--唤醒所有等待中断线程
+     |---【Condition】---Lock
+	 		用Lock对象充当同步监视器，Condition对象来暂停、唤醒指定线程（类似上面的）
+			Condition condition = lock.newCondition();//将Condition对象绑定在该lock对象上
+			|--await--让当前线程等待，直到用Condition对象调用signal/signalAll__还有很多变形：awaitUntil、awaitNanos(long)
+			|--signal--唤醒某一个线程，且只当调用线程释放Lock对象锁定(await后)，该线程才被唤醒			
+			|--signalAll--唤醒在此Lock对象上等待的所有线程			
+     |---【阻塞队列-BlockingQueue】
+	 		BlockingQueue接口的put、take为阻塞式方法，当加入/删元素时队列满/空-则阻塞该线程
+			|--实现类：
+				|--ArrayBlockingQueue：基于数组实现的阻塞队列
+				|--LinkedBlockingQueue：基于链表
+				|--PriorityBlockingQueue：类似PriorityQueue，会自动排序--
+					通过对象的Comparable自然排序或Comparator定制排序
+				|--SynchronousQueue：同步队列，存取必须交替进行
+				|--DelayQueue：按Delay接口的getDelay排序（存入元素必须实现Delay接口并实现getDelay）
+*【线程组】
+     |---对一批线程分类管理，程序可直接操控线程组；如果没有显示指定线程属于哪个线程组，
+	 	  则该线程归为创建它的线程所在的线程组ThreadGroup
+     |---创建线程时可指定new Thread(ThreadGroup group,Runnable target,String name);
+     |---创建线程组：new Thread(ThreadGroup, String name);//父进程组可空
+		  |---常用方法
+			 |---activeCount：线程组中活动的线程数
+			 |---interupt：中断线程组中所有线程
+			 |---setPriority(int)：设置线程组中线程的最大优先级
+			 |---setDaemon(boolean)：设置线程组中进程为后台线程（当线程组最后一个后台线程没了，线程组自动销毁）
+			 |---isDaemon()：是否后台线程组
+			 |---void uncaughtException(Thread,Throwable)：处理组内没处理异常的任意线程？？怎么用
+			      ThreadGroup实现了Thread.UncaughtExceptionHandler静态接口的方法（如上），
+				  所有每个线程组被当作默认的异常处理器（当组内线程不处理、抛出异常时）
+*【异常处理器】
+			 |---Thread类提供两个方法设置异常处理器：
+			 		静态：static setDefaultUncaughtExceptionHandler(Thread.UncaughtExceptionHandler eh) //给线程类的所有线程实例设置默认的异常处理器
+					setUncaughtExceptionHandler(Thread.UncaughtExceptionHandler eh)给调用该方法的线程实例设置异常处理器
+			 |---选择用异常处理器流程：
+			 		某个线程抛出异常，先看该线程有没有设置异常处理器
+					如果没有，则调用该线程所在组的uncaughtException方法（线程组有父进程组则
+					调用父进程组的uncaughtException方法）；否则看该线程所在类有无设置默认异
+					常处理器；（如果异常对象是ThreadDeath的对象，则不处理）最后打印跟踪信息
+					到错误输入流，结束线程。
+			 |---与catch区别：catch捕获异常后，异常不会向上传给上一级调用者，而异常处理器会
+*【线程池】
+*【相关工具类】
 *@author Hartley
 *@version 1.0.0
 */
@@ -204,13 +275,33 @@ class  ThreadTest
 			}
 		}
 	}
+
+	//异常处理器
+	public static void exhandleTest()
+	{
+		//【2】线程所在组的uncaughtException方法
+		ThreadGroup group = Thread.currentThread().getThreadGroup();
+		//【3】线程类设置的默认异常处理器
+		Thread.setDefaultUncaughtExceptionHandler( (thread,throwable)->
+					System.out.println("线程默认异常处理器："+throwable.getMessage()+"异常"));
+		//【1】线程直接对应的异常处理器
+		
+		Thread.currentThread().setUncaughtExceptionHandler( (thread,throwable)->
+					System.out.println(thread.getName()+"线程产生了"+throwable.getMessage()+"异常"));
+		/**/
+		int a = 9;
+		int b = a/0;//算术异常
+
+		System.out.println("over");
+	}
 	//************程序入口***************
 	public static void main(String[] args) 
 	{
 		//threadTest1();
 		//threadTest2();
 		//daemonTest();
-		sleepTest();
+		//sleepTest();
+		exhandleTest();
 	}
 }
 
