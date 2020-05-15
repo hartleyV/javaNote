@@ -1,4 +1,5 @@
 import java.util.concurrent.*;//Callable的包装类FutureTask
+import java.util.*;
 /**
 *【线程】
      |---进程：系统运行时多个进程并发执行，具有独立性--地址空间、动态性--生命周期、并发性
@@ -130,7 +131,45 @@ import java.util.concurrent.*;//Callable的包装类FutureTask
 					到错误输入流，结束线程。
 			 |---与catch区别：catch捕获异常后，异常不会向上传给上一级调用者，而异常处理器会
 *【线程池】
-*【相关工具类】
+     |---用来做啥：程序要用大量生存周期短的线程时，通过线程池执行任务节省启动新线程的成本；
+							有效控制并发线程数量（防止并发线程过多，导致性能下降，JVM崩溃）
+     |---怎么创建：用【Executors】工厂类的静态工厂方法创建
+	       |---创建【ExecutorService】线程池
+		   			 newCachedThreadPool缓存功能的线程池，创建线程后放入池中缓存
+					 newFixedThreadPool(int)创建可重用固定线程的池--newSingleThreadExecutor()单线程
+					 newWorkingSteelPool(int并行级别)创建足够多的线程池以支持并行级别，参数留空则根据几核的CPU设置级别
+	       |---创建【ScheduledExecutorService】线程池
+		   			 newScheduledThreadPool(int池中保存的线程数)可以指定延时后执行任务，
+					 创建指定线程数的池；newSingleScheduledThreadPool创建单个线程可以延时的池
+     |---怎么用：		
+		ExecutorSerivice：submit(Runnable、Callable对象)将这两个对象提交给线程池，线程池在
+									有空闲线程时执行该对象任务，run结束后返回值Future（isDone、isCancelled方法获取线程执行状态）
+		ScheduledExecutorSerivice：
+			*schedule(Runnable/Callable,long delay,TimeUnit)指定任务在延迟后执行，返回ScheduledFuture	
+			*scheduleAtFixedRate(Runnable,intialDelay,period,TimeUnit)按指定频率持续重复执行，
+		      intialDelay后开始执行，intialDelay+period后重复执行。。。
+			*scheduleAtFixedDely((Runnable,intialDelay,delay,TimeUnit)每次执行中止和下一次开始
+			  都存在固定的延迟delay
+     |---拢共四点步骤
+	             |---创建线程池	 		
+	             |---创建Runnable/Callable对象，作为执行任务 		
+	             |---加任务submit给线程池（用线程池对象调用submit方法）--不需要Thread start什么的，线程池会自动执行	
+	             |---不提交任务，则用shutdown关闭线程池	
+*Java7 ForkJoinPool(ExecutorService实现类）：利用多核系统并行计算能力，大任务拆除小任务
+				在各个processor上运算，最后合并返回结果（任务需要可分解ForkJoinTask）
+*【相关类】
+     |---ThredLocal<T>:用于隔离多个线程间的数据共享（同步是为解决多线程对共享资源并发访问）
+									通过将并发访问的共享资源复制多份，每个进程都有资源副本，所以不需要同步
+	             |---使用：将其作为共享变量的类型，在赋值、取值时用其set(T), T get()方法	 								
+     |---Collections静态方法：包装集合为线程安全的集合
+	 		synchronizedCollection(Collection<>)--包装为线程安全的集合
+			synchronizedXXX--Set、SortSet、List、Map、SortMap
+     |---线程安全的集合类
+	      ConCurrentXXX支持并发多线程写入访问
+		  （多线程访问以公共集合可以ConcurrentLinkedQueue--多线程高效访问，不可含null）
+		  （多线程写入可用ConcurrentHashMap---支持16线程同时写入）
+		  CopyOnWriteXXX（xxArraySet底层封装了xxArrayList）--适合读操作，因写操作会频繁复制数组，性能差
+
 *@author Hartley
 *@version 1.0.0
 */
@@ -294,14 +333,83 @@ class  ThreadTest
 
 		System.out.println("over");
 	}
+
+	//线程池
+	public static void ThreadPoolTest()
+	{
+		ExecutorService pool = Executors.newFixedThreadPool(6);//创建固定大小的线程池
+		Runnable task = ()->{
+			for (int i =0 ; i<100 ;i++ )
+			{
+				System.out.println(Thread.currentThread().getName()+"  : "+i);
+				//从线程名字中带pool可知该线程为线程池中的~
+			}
+		};
+
+		Future result = pool.submit(task);//给线程池提交任务
+		pool.submit(task);
+		
+		
+		pool.shutdown();//关闭线程池！！！
+		System.out.println("task完成了没？"+result.isDone());//false---实时判断线程完成没
+		try
+		{
+			Thread.sleep(1000);
+			System.out.println("task完成了没？"+result.isDone());//true
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+
+	//Java7的Fork JoinPool
+	//打印任务-无返回值
+	public static void forkJoinPoolTest() throws InterruptedException
+	{
+		ForkJoinPool pool = new ForkJoinPool();//创建ForkJoin池
+
+		PrintTask task = new PrintTask(0,300);//创建任务打印0-300
+		pool.submit(task);
+		
+		pool.awaitTermination(3,TimeUnit.SECONDS);//shutdown前加这个用来设定时间等待ForkJoin池跑完任务
+		pool.shutdown();//关闭池
+	}
+
+	//add任务-有返回值
+	public static void forkJoinPoolTest2() throws InterruptedException,ExecutionException
+	{
+		int[] arr = new int[300];
+		Random random = new Random();//随机赋值
+		int total = 0;//边赋值边计算总和
+		for (int i=0;i<300 ;i++ )
+		{
+			arr[i] = random.nextInt(20);//20以内随机数
+			total+=arr[i];
+		}
+		System.out.println("arr正确总和为："+total);
+
+		//创建ForkJoin池
+		//ForkJoinPool pool = new ForkJoinPool();
+		ForkJoinPool pool = ForkJoinPool.commonPool();//创建通用池
+		AddTask task = new AddTask(arr,0,arr.length);//创建求和任务
+		Future<Integer> future = pool.submit(task);//任务提交给pool
+		System.out.println("并行计算结果为: "+future.get());
+
+		pool.shutdown();//关闭池
+	}
 	//************程序入口***************
-	public static void main(String[] args) 
+	public static void main(String[] args) throws Exception
 	{
 		//threadTest1();
 		//threadTest2();
 		//daemonTest();
 		//sleepTest();
-		exhandleTest();
+		//exhandleTest();
+		//ThreadPoolTest();
+		//forkJoinPoolTest();
+		forkJoinPoolTest2();
 	}
 }
 
@@ -337,3 +445,79 @@ class SecondThread implements Runnable
 	}
 }
 
+//并行打印任务--无返回值，用fork并行计算就可=============================
+class PrintTask extends RecursiveAction//继承可分解任务的抽线类，重写compute方法
+{
+	private final static int THRESHOLD = 50;//每个并行线程只打印50条
+	private int start;
+	private int end;
+	public PrintTask(int start,int end)
+	{
+		this.start = start;
+		this.end = end;
+	}
+
+	@Override
+	protected void compute()
+	{
+		//只有当start与end在50以内才打印
+		if (end - start < THRESHOLD)
+		{
+			for (int i = start ;i<end ;i++ )
+			{
+				System.out.println(Thread.currentThread().getName() +" : "+i);
+			}			
+		}else{
+			//否则递归创建对象
+			int mid = (start + end)>>1;
+			PrintTask left = new PrintTask(start,mid);
+			PrintTask right = new PrintTask(mid,end);
+
+			left.fork();//并行计算小任务
+			right.fork();
+		}
+	}
+
+}
+
+//并行加和任务，用fork并行计算 + join合并计算结果==========================
+class AddTask extends RecursiveTask<Integer>//注意并行计算有返回值需加泛型
+{
+	private final static int THRESHOLD = 50;//每个并行线程只加50条
+	private int start;
+	private int end;
+	private int[] arr;
+	public AddTask(int[] arr,int start,int end)
+	{
+		this.arr = arr;
+		this.start = start;
+		this.end = end;
+	}
+
+	@Override
+	protected Integer compute()//有返回值咯~
+	{
+		//只有当start与end在50以内才加和
+		if (end - start < THRESHOLD)
+		{
+			int sum = 0;
+			for (int i = start ;i<end ;i++ )
+			{
+				sum+=arr[i];
+			}			
+			return sum;
+
+		}else{
+			//否则递归创建对象
+			int mid = (start + end)>>1;
+			AddTask left = new AddTask(arr,start,mid);//此处mid不会被取
+			AddTask right = new AddTask(arr,mid,end);
+
+			left.fork();//并行计算小任务
+			right.fork();
+
+			return left.join() + right.join();
+		}
+	}
+
+}
