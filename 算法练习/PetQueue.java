@@ -10,7 +10,7 @@ import java.util.LinkedList;
 class  PetQueue
 {
 	//宠物---猫//狗
-	public static class Pet {
+	public static class Pet {//因为是内部类，在main调用的时候需要静态
 		private String type;
 
 		public Pet(String type) {
@@ -65,7 +65,7 @@ class  PetQueue
 			return count;
 		}
 		
-		public String getEnterPetType()//返回当前对象类型==用于转换
+		public String getEnterPetType()//返回当前对象类型==用于传入Pet后判断类型
 		{
 			return this.pet.getPetType();
 		}
