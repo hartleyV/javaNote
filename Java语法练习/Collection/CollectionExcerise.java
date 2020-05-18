@@ -1,13 +1,13 @@
 import java.util.*;
 /**
-*¼¯ºÏ¿ÎºóÁ·Ï°
+*é›†åˆè¯¾åç»ƒä¹ 
 *@author Hartley
 *@version 1.0.0
 */
 
 class  CollectionExcerise
 {
-	//ÓÃSet¼¯ºÏ±£´æÓÃ»§ÊäÈëµÄ×Ö·û´®
+	//ç”¨Seté›†åˆä¿å­˜ç”¨æˆ·è¾“å…¥çš„å­—ç¬¦ä¸²
 	public static void test1(int num)
 	{
 		Set set =new LinkedHashSet();
@@ -24,7 +24,7 @@ class  CollectionExcerise
 		
 	}
 
-	//ÓÃlist»ñÈ¡¡¢É¾³ıÖ¸¶¨Ë÷Òı´¦µÄÔªËØ
+	//ç”¨listè·å–ã€åˆ é™¤æŒ‡å®šç´¢å¼•å¤„çš„å…ƒç´ 
 	public static void test2()
 	{
 		List list = new ArrayList();
@@ -40,22 +40,22 @@ class  CollectionExcerise
 		System.out.println(list.indexOf("b"));
 		System.out.println(list.remove(1));
 	}
-	//½«×Ö·û´®Êı×é¼ÓÈëMapÖĞkey£¬³öÏÖ´ÎÊı·ÅÈëvalue
-	//±©Á¦Ë¼Â·£º±éÀúÊı×é£¬¸üĞÂ´ÎÊı
+	//å°†å­—ç¬¦ä¸²æ•°ç»„åŠ å…¥Mapä¸­keyï¼Œå‡ºç°æ¬¡æ•°æ”¾å…¥value
+	//æš´åŠ›æ€è·¯ï¼šéå†æ•°ç»„ï¼Œæ›´æ–°æ¬¡æ•°
 	public static void test3()
 	{
 		String[] level= {"a","b","b","a","b","c","d","e"};
 		Map freq = new HashMap();
-		//¿ÉÒÔÓÃforeach
+		//å¯ä»¥ç”¨foreach
 		for (String key:level)
 		{
-			//ÀûÓÃmapµÄÄ¬ÈÏ·½·¨£º²éÑ¯½á¹ûµÄvalueÎªnullÊ±£¬½«Æä¸³ÖµÎª1£¬·ÇnullÊ±¼ÓÒ»
+			//åˆ©ç”¨mapçš„é»˜è®¤æ–¹æ³•ï¼šæŸ¥è¯¢ç»“æœçš„valueä¸ºnullæ—¶ï¼Œå°†å…¶èµ‹å€¼ä¸º1ï¼Œénullæ—¶åŠ ä¸€
 			freq.merge(key,1,(old,cur)->(Integer)old+1);
 			/*
 			if (freq.containsKey( key))
 			{
 				Integer f = (Integer)freq.get(key);
-				freq.put(key,f+1); //¸ù¾İHash'Map²»¿ÉÖØ£¬¿ÉÒÔÖ±½Ó¸²¸Ç~
+				freq.put(key,f+1); //æ ¹æ®Hash'Mapä¸å¯é‡ï¼Œå¯ä»¥ç›´æ¥è¦†ç›–~
 			}else{
 				freq.put(key,1);
 			}

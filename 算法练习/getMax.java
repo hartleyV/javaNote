@@ -1,20 +1,20 @@
 /**
-*µü´ú·¨Çó×îÖµ
+*è¿­ä»£æ³•æ±‚æœ€å€¼
 *@author Hatley
 */
 class getMax
 {
-	//µü´úÇó×î´óÖµ
+	//è¿­ä»£æ±‚æœ€å¤§å€¼
 	public static int getMax(int[] arr,int L,int R)
 	{
-		//µü´úÖÕÖ¹Çé¿ö
+		//è¿­ä»£ç»ˆæ­¢æƒ…å†µ
 		if (L==R)
 		{
 			return arr[L];
 		}
-		//½«ÎÊÌâ·ÖÎªÁ½²¿·Ö
+		//å°†é—®é¢˜åˆ†ä¸ºä¸¤éƒ¨åˆ†
 		//int mid = (L +R)/2;
-		int mid = L- ((L - R)>>1);//¸ü°²È«~
+		int mid = L- ((L - R)>>1);//æ›´å®‰å…¨~
 		int maxLeft = getMax(arr,L,mid);
 		int maxRight = getMax(arr,mid+1,R);
 		
@@ -26,6 +26,6 @@ class getMax
 	{
 		int[] arr = {3,5,2,7,1,5};
 		//3+10+6 = 19
-		System.out.println(smallAdd(arr));
+		System.out.println(getMax(arr,0,arr.length-1));
 	}
 }

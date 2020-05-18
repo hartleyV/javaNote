@@ -1,14 +1,14 @@
 import java.util.*;
 /**
-*Collections¼¯ºÏ¹¤¾ßÀà-¿É²Ù×÷Set¡¢List¡¢Map
-*¹¦ÄÜ£ºÅÅĞò--²éÑ¯--ĞŞ¸Ä--Í¬²½--²»¿É±ä
+*Collectionsé›†åˆå·¥å…·ç±»-å¯æ“ä½œSetã€Listã€Map
+*åŠŸèƒ½ï¼šæ’åº--æŸ¥è¯¢--ä¿®æ”¹--åŒæ­¥--ä¸å¯å˜
 *@author Hartley
 *@version 1.0.0
 */
 
 class  CollectionsTest
 {
-	//ÅÅĞò
+	//æ’åº
 	public static void sortTest()
 	{
 		ArrayList id = new ArrayList();
@@ -17,21 +17,21 @@ class  CollectionsTest
 		id.add(7);
 		id.add(3);
 		System.out.println(id);
-		//ÓÃCollectionsµÄreverse·½·¨´ÎĞò·´×ª
+		//ç”¨Collectionsçš„reverseæ–¹æ³•æ¬¡åºåè½¬
 		Collections.reverse(id);
 		System.out.println(id);
-		//sortÅÅĞò£¨Ä¬ÈÏÉıĞò£©
+		//sortæ’åºï¼ˆé»˜è®¤å‡åºï¼‰
 		Collections.sort(id);
 		System.out.println(id);
-		//¶¨ÖÆÅÅĞò(Comparator-lambda)
+		//å®šåˆ¶æ’åº(Comparator-lambda)
 		Collections.sort(id,(o1,o2)->(Integer)o2-(Integer)o1 );
 		System.out.println(id);
-		//shuffleÀàËÆËæ»úÏ´ÅÆ
+		//shuffleç±»ä¼¼éšæœºæ´—ç‰Œ
 		Collections.shuffle(id);
 		System.out.println(id);
 
 	}
-	//¶ş·Ö²éÑ¯¡¢Ìæ»»¡¢×îÖµ¡¢´ÊÆµ
+	//äºŒåˆ†æŸ¥è¯¢ã€æ›¿æ¢ã€æœ€å€¼ã€è¯é¢‘
 	public static void searchTest()
 	{
 		ArrayList id = new ArrayList();
@@ -41,30 +41,30 @@ class  CollectionsTest
 		id.add(-9);
 		id.add(3);
 		System.out.println(id);
-		//¶ş·Ö²éÑ¯ĞèÒªÏÈÅÅĞò
+		//äºŒåˆ†æŸ¥è¯¢éœ€è¦å…ˆæ’åº
 		Collections.sort(id);
 		System.out.println(id);
 		int index = Collections.binarySearch(id,5);
-		System.out.println("5ÔÚlist¼¯ºÏÖĞµÄË÷ÒıÎª£º"+index);
-		//Ìæ»»(È«²¿Ìæ»»£©
+		System.out.println("5åœ¨listé›†åˆä¸­çš„ç´¢å¼•ä¸ºï¼š"+index);
+		//æ›¿æ¢(å…¨éƒ¨æ›¿æ¢ï¼‰
 		Collections.replaceAll(id,5,6);
 		System.out.println(id);
-		//×îÖµ
+		//æœ€å€¼
 		System.out.println(Collections.max(id));
-		//´ÊÆµ
-		System.out.println("6ÔÚ¼¯ºÏidÖĞ³öÏÖ¹ı£º"+Collections.frequency(id,6));
+		//è¯é¢‘
+		System.out.println("6åœ¨é›†åˆidä¸­å‡ºç°è¿‡ï¼š"+Collections.frequency(id,6));
 
 	}
-	//°ü×°³ÉÏß³ÌÍ¬²½
+	//åŒ…è£…æˆçº¿ç¨‹åŒæ­¥
 	public static void synchronizedTest()
 	{
-		Collection c = Collections.synchronizedCollection(new ArrayList() );//×¢Òâ´Ë´¦°ü×°·½·¨£ºÍ¬²½XXX
+		Collection c = Collections.synchronizedCollection(new ArrayList() );//æ³¨æ„æ­¤å¤„åŒ…è£…æ–¹æ³•ï¼šåŒæ­¥XXX
 		List list = Collections.synchronizedList(new ArrayList() );
 		Set set = Collections.synchronizedSet(new HashSet() );
 		Map map = Collections.synchronizedMap(new HashMap() );
 
 	}
-	//Éú³ÉÖ»¶Á¼¯ºÏ
+	//ç”Ÿæˆåªè¯»é›†åˆ
 	public static void unmodifiableTest()
 	{
 		ArrayList id = new ArrayList();
@@ -74,21 +74,21 @@ class  CollectionsTest
 		id.add(-9);
 		id.add(3);
 		System.out.println(id);
-		//°ü×°³É²»¿ÉĞŞ¸Ä¼¯ºÏ
+		//åŒ…è£…æˆä¸å¯ä¿®æ”¹é›†åˆ
 		List unmodifiableId = Collections.unmodifiableList( id );
 		System.out.println(unmodifiableId);
-		//unmodifiableId.add(4);//²»¿ÉĞŞ¸ÄÀ²£¡
+		//unmodifiableId.add(4);//ä¸å¯ä¿®æ”¹å•¦ï¼
 
-		//´´½¨¿ÕµÄ²»¿É¸Ä±äµÄ¶ÔÏó
+		//åˆ›å»ºç©ºçš„ä¸å¯æ”¹å˜çš„å¯¹è±¡
 		Map emptyMap = Collections.emptyMap();
 		System.out.println(emptyMap);
 
-		//´´½¨Ö»ÓĞÒ»¸ö¶ÔÏóÇÒ²»¿É±»ĞŞ¸ÄµÄ¼¯ºÏ
-		List list = Collections.singletonList("¶ÀÉú×ÓÎÒÊÇ");
+		//åˆ›å»ºåªæœ‰ä¸€ä¸ªå¯¹è±¡ä¸”ä¸å¯è¢«ä¿®æ”¹çš„é›†åˆ
+		List list = Collections.singletonList("ç‹¬ç”Ÿå­æˆ‘æ˜¯");
 		System.out.println(list);
 
 	}
-	//³ÌĞòÈë¿Ú
+	//ç¨‹åºå…¥å£
 	public static void main(String[] args) 
 	{
 		//sortTest();

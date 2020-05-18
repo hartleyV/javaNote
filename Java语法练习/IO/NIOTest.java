@@ -4,47 +4,47 @@ import java.nio.charset.*;
 import java.io.*;
 import java.util.*;
 /**
-*NIO-java4£ºÃæÏò¿é´¦Àí--²ÉÓÃÄÚ´æÓ³ÉäÎÄ¼şµÄ·½Ê½,½«²¿·ÖÎÄ¼şµÄÇøÓòÓ³Éäµ½ÄÚ´æ£¬Ìá¸ß¶ÁĞ´Ğ§ÂÊ
-         £¨¾ÉIO²ÉÓÃÒÀ´Î¶ÁÈ¡×Ö½ÚµÄ·½Ê½£©
-    |--ºËĞÄ¶ÔÏó£º
-	    |--¡¾Channel¡¿Í¨µÀ£ºÀà±ÈÊäÈëÊä³öÁ÷
-		      |--ÌØµã£º
-			         ³ÌĞò²»ÄÜÖ±½Ó·ÃÎÊchannelÊı¾İ£¬ĞèÒªBuffer×÷ÎªÖĞ¼äÉÌ
-					 ¿ÉÒÔÖ¸¶¨²¿·Ö»òÕßÈ«²¿ÎÄ¼şÓ³Éäµ½Buffer
-		      |--Channel½Ó¿ÚµÄÊµÏÖÀà
-			  	     FileChannelÎÄ¼ş£¨FileInputStream/FileOutputStreamÖ»ÄÜ¶Á/Ğ´£¬RandomAccessFile¿É¶ÁĞ´-¸ù¾İÆä¹¹ÔìÆ÷µÄmode²ÎÊı£©
-			         Pipe.SinkChannel/Pipe.SourceChannel ÓÃÓÚ½ø³Ì¼äÍ¨ĞÅµÄ¹ÜµÀ
-					 ServerSocketChannel/SocketChannel ÓÃÓÚTCPÍøÂçÍ¨ĞÅµÄÍ¨µÀ
-					 DatagramChannel ÓÃÓÚUDPÍøÂçÍ¨ĞÅµÄÍ¨µÀ
-		      |--´´½¨£ºÍ¨¹ı´«Í³½ÚµãµÄgetChannel·½·¨·µ»Ø¶ÔÓ¦Í¨µÀ
-		      |--ÖØÒª·½·¨£º¡¾map¡¿½«Channel²¿·Ö»òËùÓĞÊı¾İÓ³ÉäÎªByteBuffer
-			  							MappedByteBuffer map(FileChannel.MapMode-Ö»¶Á-¶ÁĞ´, position,size)
-								   ¡¾read/write¡¿¼°ÆäÖØÔØĞÎÊ½ÓÃÓÚÏòBuffer¶ÁĞ´
-	    |--¡¾Buffer¡¿»º´æ£º×°ÈëÊı¾İ¡¢Êä³öÊı¾İ£¬Êı¾İµÄÊäÈëºÍÊä³ö¶¼Òª¾­¹ı»º´æ£¨±¾ÖÊÊÇÊı×é£¬ÈİÁ¿allocateºó²»¿É¸Ä±ä£©
-	          |--Buffer½Ó¿ÚµÄÊµÏÖÀàÓĞ£º¡¾ByteBuffer¡¢MappedByteBuffer¡¢CharXX¡¿
-														£¨Short¡¢Int¡¢Long¡¢Float¡¢Double²»³£ÓÃ£©
-			      Ã»ÓĞ¹¹ÔìÆ÷£¬Éú³É¶ÔÓ¦¶ÔÏóĞèÒªµ÷ÓÃstatic XxxBuffer allocate(int capacity)--
-				  --|ByteBuffer»¹¿ÉallocateDirect³öÒ»¸ö¶ÁĞ´Ğ§ÂÊ¸ßµÄÖ±½ÓBuffer£¬µ«ÊÇÆä´´½¨³É±¾´ó
-	          |--ÖØÒªË÷Òı£º0<=mark<=positionÎ»ÖÃ(¶ÁĞ´Ö¸Õë)<=limit½çÏŞ<=capacityÈİÁ¿
-	          |--ÖØÒª·½·¨£º¡¾flip¡¿£¨×¼±¸¶ÁÈ¡Êı¾İÇ°£©£º½«limitÖÃÎªµ±Ç°positionÎ»ÖÃ£¬½«positionÖÃ0
-			  					   ¡¾clear¡¿£¨×¼±¸×°ÈëÊı¾İÇ°£©£º½«positionÖÃ0£¬½«limitÖÃcapacity
-	          |--¡¾put()¡¿Ê±positionÇ°ÒÆ£»¡¾get(index)¡¿»ñÈ¡Ë÷ÒıÎ»ÖÃÊı¾İ
+*NIO-java4ï¼šé¢å‘å—å¤„ç†--é‡‡ç”¨å†…å­˜æ˜ å°„æ–‡ä»¶çš„æ–¹å¼,å°†éƒ¨åˆ†æ–‡ä»¶çš„åŒºåŸŸæ˜ å°„åˆ°å†…å­˜ï¼Œæé«˜è¯»å†™æ•ˆç‡
+         ï¼ˆæ—§IOé‡‡ç”¨ä¾æ¬¡è¯»å–å­—èŠ‚çš„æ–¹å¼ï¼‰
+    |--æ ¸å¿ƒå¯¹è±¡ï¼š
+	    |--ã€Channelã€‘é€šé“ï¼šç±»æ¯”è¾“å…¥è¾“å‡ºæµ
+		      |--ç‰¹ç‚¹ï¼š
+			         ç¨‹åºä¸èƒ½ç›´æ¥è®¿é—®channelæ•°æ®ï¼Œéœ€è¦Bufferä½œä¸ºä¸­é—´å•†
+					 å¯ä»¥æŒ‡å®šéƒ¨åˆ†æˆ–è€…å…¨éƒ¨æ–‡ä»¶æ˜ å°„åˆ°Buffer
+		      |--Channelæ¥å£çš„å®ç°ç±»
+			  	     FileChannelæ–‡ä»¶ï¼ˆFileInputStream/FileOutputStreamåªèƒ½è¯»/å†™ï¼ŒRandomAccessFileå¯è¯»å†™-æ ¹æ®å…¶æ„é€ å™¨çš„modeå‚æ•°ï¼‰
+			         Pipe.SinkChannel/Pipe.SourceChannel ç”¨äºè¿›ç¨‹é—´é€šä¿¡çš„ç®¡é“
+					 ServerSocketChannel/SocketChannel ç”¨äºTCPç½‘ç»œé€šä¿¡çš„é€šé“
+					 DatagramChannel ç”¨äºUDPç½‘ç»œé€šä¿¡çš„é€šé“
+		      |--åˆ›å»ºï¼šé€šè¿‡ä¼ ç»ŸèŠ‚ç‚¹çš„getChannelæ–¹æ³•è¿”å›å¯¹åº”é€šé“
+		      |--é‡è¦æ–¹æ³•ï¼šã€mapã€‘å°†Channeléƒ¨åˆ†æˆ–æ‰€æœ‰æ•°æ®æ˜ å°„ä¸ºByteBuffer
+			  							MappedByteBuffer map(FileChannel.MapMode-åªè¯»-è¯»å†™, position,size)
+								   ã€read/writeã€‘åŠå…¶é‡è½½å½¢å¼ç”¨äºå‘Bufferè¯»å†™
+	    |--ã€Bufferã€‘ç¼“å­˜ï¼šè£…å…¥æ•°æ®ã€è¾“å‡ºæ•°æ®ï¼Œæ•°æ®çš„è¾“å…¥å’Œè¾“å‡ºéƒ½è¦ç»è¿‡ç¼“å­˜ï¼ˆæœ¬è´¨æ˜¯æ•°ç»„ï¼Œå®¹é‡allocateåä¸å¯æ”¹å˜ï¼‰
+	          |--Bufferæ¥å£çš„å®ç°ç±»æœ‰ï¼šã€ByteBufferã€MappedByteBufferã€CharXXã€‘
+														ï¼ˆShortã€Intã€Longã€Floatã€Doubleä¸å¸¸ç”¨ï¼‰
+			      æ²¡æœ‰æ„é€ å™¨ï¼Œç”Ÿæˆå¯¹åº”å¯¹è±¡éœ€è¦è°ƒç”¨static XxxBuffer allocate(int capacity)--
+				  --|ByteBufferè¿˜å¯allocateDirectå‡ºä¸€ä¸ªè¯»å†™æ•ˆç‡é«˜çš„ç›´æ¥Bufferï¼Œä½†æ˜¯å…¶åˆ›å»ºæˆæœ¬å¤§
+	          |--é‡è¦ç´¢å¼•ï¼š0<=mark<=positionä½ç½®(è¯»å†™æŒ‡é’ˆ)<=limitç•Œé™<=capacityå®¹é‡
+	          |--é‡è¦æ–¹æ³•ï¼šã€flipã€‘ï¼ˆå‡†å¤‡è¯»å–æ•°æ®å‰ï¼‰ï¼šå°†limitç½®ä¸ºå½“å‰positionä½ç½®ï¼Œå°†positionç½®0
+			  					   ã€clearã€‘ï¼ˆå‡†å¤‡è£…å…¥æ•°æ®å‰ï¼‰ï¼šå°†positionç½®0ï¼Œå°†limitç½®capacity
+	          |--ã€put()ã€‘æ—¶positionå‰ç§»ï¼›ã€get(index)ã€‘è·å–ç´¢å¼•ä½ç½®æ•°æ®
 
-*×Ö·û¼¯CharSet£¨¶ş½øÖÆÓë×Ö·û¼ä¶ÔÓ¦¹ØÏµ£©
-	    |--ÓÃ·¨£º »ñÈ¡×Ö·û¼¯ Charset cn = Charset.forName(×Ö·û¼¯±ğÃû)
-						»ñÈ¡±àÂëÆ÷CharsetEncoder encoder = cn.newEncoder();----encoderµÄencode·½·¨
-										±ã½İ²Ù×÷£¨¼òµ¥±àÂëÊ±£©---Ö±½Óµ÷ÓÃCharsetµÄencode·½·¨--·µ»Ø×Ö½Ú»º´æ
-						»ñÈ¡½âÂëÆ÷CharsetDecoder decoder = cn.newDecoder();---decoderµÄdecode·½·¨
-										¼òµ¥½âÂëÊ±------Ö±½Óµ÷ÓÃCharsetµÄdecode·½·¨--·µ»Ø×Ö·û»º´æ
+*å­—ç¬¦é›†CharSetï¼ˆäºŒè¿›åˆ¶ä¸å­—ç¬¦é—´å¯¹åº”å…³ç³»ï¼‰
+	    |--ç”¨æ³•ï¼š è·å–å­—ç¬¦é›† Charset cn = Charset.forName(å­—ç¬¦é›†åˆ«å)
+						è·å–ç¼–ç å™¨CharsetEncoder encoder = cn.newEncoder();----encoderçš„encodeæ–¹æ³•
+										ä¾¿æ·æ“ä½œï¼ˆç®€å•ç¼–ç æ—¶ï¼‰---ç›´æ¥è°ƒç”¨Charsetçš„encodeæ–¹æ³•--è¿”å›å­—èŠ‚ç¼“å­˜
+						è·å–è§£ç å™¨CharsetDecoder decoder = cn.newDecoder();---decoderçš„decodeæ–¹æ³•
+										ç®€å•è§£ç æ—¶------ç›´æ¥è°ƒç”¨Charsetçš„decodeæ–¹æ³•--è¿”å›å­—ç¬¦ç¼“å­˜
 
-*ÎÄ¼şËø
-	    |--ÓÃÓÚ×èÖ¹¶à¸ö²¢·¢½ø³ÌÍ¬Ê±ĞŞ¸ÄÒ»¸öÎÄ¼ş
-	    |--ÓÃ·¨£ºChannelµÄlock(position,size,boolean shared)£¬´ÓÎÄ¼şposition¿ªÊ¼µÄÄÚÈİ¼ÓËø-×èÈûÊ½£¨shared-true±íÊ¾ÔÊĞíÆäËû½ø³Ì¶Á£¬false±íÊ¾ÅÅËûËø£¬²»ĞíÆäËû½ø³Ì¶ÁĞ´£©
-		               trylock(Í¬ÉÏ)£¬µ«·Ç×èÈû£¬--³É¹¦Ôò·µ»ØÎÄ¼şËø--²»³ÉÔò·µ»Ønull
-	    |--×¢Òâ£ºÓĞĞ©Æ½Ì¨--ÎÄ¼şËøÖ»ÊÇ½¨ÒéĞÔµÄ + ²»ÄÜÍ¬²½Ëø¶¨Ò»¸öÎÄ¼şµ½ÄÚ´æÖĞ+¹Ø±ÕÄ³¸öFileChannelºó»áÊÍ·Å¸ÃÎÄ¼şËùÓĞËø
-		               ÎÄ¼şËøÊ±JavaĞéÄâ»ú³ÖÓĞµÄ£¬ËùÒÔÍ¬Ò»ĞéÄâ»úÉÏ²»ÄÜÓĞÁ½¸ö³ÌĞò¶ÔÍ¬Ò»ÎÄ¼şÉÏËø
+*æ–‡ä»¶é”
+	    |--ç”¨äºé˜»æ­¢å¤šä¸ªå¹¶å‘è¿›ç¨‹åŒæ—¶ä¿®æ”¹ä¸€ä¸ªæ–‡ä»¶
+	    |--ç”¨æ³•ï¼šChannelçš„lock(position,size,boolean shared)ï¼Œä»æ–‡ä»¶positionå¼€å§‹çš„å†…å®¹åŠ é”-é˜»å¡å¼ï¼ˆshared-trueè¡¨ç¤ºå…è®¸å…¶ä»–è¿›ç¨‹è¯»ï¼Œfalseè¡¨ç¤ºæ’ä»–é”ï¼Œä¸è®¸å…¶ä»–è¿›ç¨‹è¯»å†™ï¼‰
+		               trylock(åŒä¸Š)ï¼Œä½†éé˜»å¡ï¼Œ--æˆåŠŸåˆ™è¿”å›æ–‡ä»¶é”--ä¸æˆåˆ™è¿”å›null
+	    |--æ³¨æ„ï¼šæœ‰äº›å¹³å°--æ–‡ä»¶é”åªæ˜¯å»ºè®®æ€§çš„ + ä¸èƒ½åŒæ­¥é”å®šä¸€ä¸ªæ–‡ä»¶åˆ°å†…å­˜ä¸­+å…³é—­æŸä¸ªFileChannelåä¼šé‡Šæ”¾è¯¥æ–‡ä»¶æ‰€æœ‰é”
+		               æ–‡ä»¶é”æ—¶Javaè™šæ‹ŸæœºæŒæœ‰çš„ï¼Œæ‰€ä»¥åŒä¸€è™šæ‹Ÿæœºä¸Šä¸èƒ½æœ‰ä¸¤ä¸ªç¨‹åºå¯¹åŒä¸€æ–‡ä»¶ä¸Šé”
 
-***´ıÌî¿Ó******************
+***å¾…å¡«å‘******************
 *NIO2-Java7
 	    |--
 
@@ -54,49 +54,49 @@ import java.util.*;
 
 class  NIOTest
 {
-	//Buffer²Ù×÷
+	//Bufferæ“ä½œ
 	public static void bufferTest()
 	{
-		//´´½¨CharBuffer
-		CharBuffer buffer = CharBuffer.allocate(8);//·ÖÅä»º´æ´óĞ¡Îª8¸ö×Ö·û
-		//´òÓ¡µ±Ç°Ë÷Òı×´Ì¬
+		//åˆ›å»ºCharBuffer
+		CharBuffer buffer = CharBuffer.allocate(8);//åˆ†é…ç¼“å­˜å¤§å°ä¸º8ä¸ªå­—ç¬¦
+		//æ‰“å°å½“å‰ç´¢å¼•çŠ¶æ€
 		println("Position : "+buffer.position() );
 		println("limit : "+buffer.limit() );
 		println("Capacity : "+buffer.capacity() );
 
-		//ÏòbufferÌí¼ÓÊı¾İ
+		//å‘bufferæ·»åŠ æ•°æ®
 		buffer.put('a');
 		buffer.put('b');
 		buffer.put('c');
 
-		//ÔÙ´Î´òÓ¡£º
-		println("=======Ìí¼ÓÔ­Ê¼ºó=====");
-		println("Position : "+buffer.position() );//Îª3£¨0¡¢1¡¢2Î»ÖÃÓĞÊı¾İ£©
+		//å†æ¬¡æ‰“å°ï¼š
+		println("=======æ·»åŠ åŸå§‹å=====");
+		println("Position : "+buffer.position() );//ä¸º3ï¼ˆ0ã€1ã€2ä½ç½®æœ‰æ•°æ®ï¼‰
 		println("limit : "+buffer.limit() );
 
-		//flip µ½´ıÈ¡³ö×´Ì¬
+		//flip åˆ°å¾…å–å‡ºçŠ¶æ€
 		buffer.flip();
-		//ÔÙ´Î´òÓ¡£º
-		println("=======flip()ºó=====");
+		//å†æ¬¡æ‰“å°ï¼š
+		println("=======flip()å=====");
 		println("Position : "+buffer.position() );
 		println("limit : "+buffer.limit() );
 		
-		//¾ø¶Ô¶ÁÈ¡get È¡³öµÚÒ»¸öÔªËØ
-		println("µÚÒ»¸öÔªËØÎª£º"+buffer.get(0) );
+		//ç»å¯¹è¯»å–get å–å‡ºç¬¬ä¸€ä¸ªå…ƒç´ 
+		println("ç¬¬ä¸€ä¸ªå…ƒç´ ä¸ºï¼š"+buffer.get(0) );
 		println("Position : "+buffer.position() );
 
-		//clear µ½´ı×°Èë×´Ì¬£¨Ö»ÊÇË÷Òı¸Ä±ä£¬ÆäÄÚ²¿ÔªËØÎ´¶¯£©
+		//clear åˆ°å¾…è£…å…¥çŠ¶æ€ï¼ˆåªæ˜¯ç´¢å¼•æ”¹å˜ï¼Œå…¶å†…éƒ¨å…ƒç´ æœªåŠ¨ï¼‰
 		buffer.clear();
-		println("=======clear()ºó=====");
+		println("=======clear()å=====");
 		println("Position : "+buffer.position() );
 		println("limit : "+buffer.limit() );
-		println("µÚÒ»¸öÔªËØÈÔÎª£º"+buffer.get(0) );
-		println("Ö´ĞĞgetºóµÄPosition : "+buffer.position() );//²»±ä
+		println("ç¬¬ä¸€ä¸ªå…ƒç´ ä»ä¸ºï¼š"+buffer.get(0) );
+		println("æ‰§è¡Œgetåçš„Position : "+buffer.position() );//ä¸å˜
 	}
 
-	//channel²Ù×÷
-	//´´½¨ÊäÈëÊä³öÍ¨µÀ£¬ÓÃÊäÈëÍ¨µÀµ÷ÓÃmap·½·¨·µ»Ø²¿·Ö»òÈ«²¿×Ö½Ú»º´æ--ÎÄ¼şÓ³Éäµ½»º´æ
-	//ÓÃÊä³öÍ¨µÀµÄwrite·½·¨¿ÉÒÔ½«Byte»º´æÒ»´ÎĞÔĞ´³ö
+	//channelæ“ä½œ
+	//åˆ›å»ºè¾“å…¥è¾“å‡ºé€šé“ï¼Œç”¨è¾“å…¥é€šé“è°ƒç”¨mapæ–¹æ³•è¿”å›éƒ¨åˆ†æˆ–å…¨éƒ¨å­—èŠ‚ç¼“å­˜--æ–‡ä»¶æ˜ å°„åˆ°ç¼“å­˜
+	//ç”¨è¾“å‡ºé€šé“çš„writeæ–¹æ³•å¯ä»¥å°†Byteç¼“å­˜ä¸€æ¬¡æ€§å†™å‡º
 	public static void channelTest()
 	{
 		File file = new File("tt.txt");
@@ -104,16 +104,16 @@ class  NIOTest
 		try(FileChannel inChannel = new FileInputStream(file).getChannel();
 			 FileChannel outChannel =new FileOutputStream(file2).getChannel() )
 		{
-			//ÓÃ¶ÁÈëÍ¨µÀ½«ÎÄ¼şÄÚÈİÒ»¹ÉÄÔµÄ·ÅÈë»º´æÖĞ£¬£¬Ö»¶Á
+			//ç”¨è¯»å…¥é€šé“å°†æ–‡ä»¶å†…å®¹ä¸€è‚¡è„‘çš„æ”¾å…¥ç¼“å­˜ä¸­ï¼Œï¼Œåªè¯»
 			MappedByteBuffer buffer = inChannel.map(FileChannel.MapMode.READ_ONLY,0,file.length());
-			//½«bufferÊı¾İÈ«²¿Êä³ö
+			//å°†bufferæ•°æ®å…¨éƒ¨è¾“å‡º
 			outChannel.write(buffer);
-			//ÖØÖÃbufferË÷Òı
+			//é‡ç½®bufferç´¢å¼•
 			buffer.clear();
 
-			//×Ö·û¼¯²ÉÓÃGBK
+			//å­—ç¬¦é›†é‡‡ç”¨GBK
 			Charset charset = Charset.forName("GBK");
-			//´´½¨½âÂëÆ÷£¬²¢½«×Ö½Ú±äÎª×Ö·û
+			//åˆ›å»ºè§£ç å™¨ï¼Œå¹¶å°†å­—èŠ‚å˜ä¸ºå­—ç¬¦
 			CharsetDecoder decoder = charset.newDecoder();
 			CharBuffer charBuffer = decoder.decode(buffer);
 			println(charBuffer);
@@ -126,19 +126,19 @@ class  NIOTest
 
 	}
 
-	//RandomAccessFileµÄFileChannel
+	//RandomAccessFileçš„FileChannel
 	public static void randomTest()
 	{
 		File file = new File("tt.txt");
 
-		try(RandomAccessFile raf = new RandomAccessFile( file, "rw" );//×¢Òâ·ÃÎÊ²ÎÊıĞëÎª×Ö·û´®
-			 FileChannel channel = raf.getChannel() )//RandomAccessFileµÄÎÄ¼şÍ¨µÀ¿É¶Á¿ÉĞ´
+		try(RandomAccessFile raf = new RandomAccessFile( file, "rw" );//æ³¨æ„è®¿é—®å‚æ•°é¡»ä¸ºå­—ç¬¦ä¸²
+			 FileChannel channel = raf.getChannel() )//RandomAccessFileçš„æ–‡ä»¶é€šé“å¯è¯»å¯å†™
 		{
-			//´Ë´¦channelÓ³ÉäÏàµ±ÓÚÊäÈëÁ÷Í¨µÀµÄÊı¾İ¶ÁÈ¡µ½ByteBufferÖĞ
+			//æ­¤å¤„channelæ˜ å°„ç›¸å½“äºè¾“å…¥æµé€šé“çš„æ•°æ®è¯»å–åˆ°ByteBufferä¸­
 			ByteBuffer buffer = channel.map(FileChannel.MapMode.READ_ONLY,0,file.length() );
-			//°ÑChannelÖĞ¼ÇÂ¼Ö¸ÕëÒÆµ½Ä©Î²£¨´Ë´¦ChannelÏàµ±ÓÚÊä³öÁ÷--£©£¬ÒÔ±ãÔÚÎÄ¼şºóÃæĞ´Èë
+			//æŠŠChannelä¸­è®°å½•æŒ‡é’ˆç§»åˆ°æœ«å°¾ï¼ˆæ­¤å¤„Channelç›¸å½“äºè¾“å‡ºæµ--ï¼‰ï¼Œä»¥ä¾¿åœ¨æ–‡ä»¶åé¢å†™å…¥
 			channel.position(file.length());
-			channel.write(buffer);//Ò»´ÎĞÔĞ´µ½ÎÄ¼şÄ©Î²
+			channel.write(buffer);//ä¸€æ¬¡æ€§å†™åˆ°æ–‡ä»¶æœ«å°¾
 		}
 		catch (IOException e)
 		{
@@ -146,27 +146,27 @@ class  NIOTest
 		}
 	}
 	
-	//Ò»´ÎĞÔ¶ÁÈ¡--map--ÎÄ¼ş¹ı´óÓ³Éäµ½ÄÚ´æ¿ÉÄÜÔì³ÉĞÔÄÜÏÂ½µ£¬¿É²ÉÓÃ¡¾Channel + Buffer¡¿
+	//ä¸€æ¬¡æ€§è¯»å–--map--æ–‡ä»¶è¿‡å¤§æ˜ å°„åˆ°å†…å­˜å¯èƒ½é€ æˆæ€§èƒ½ä¸‹é™ï¼Œå¯é‡‡ç”¨ã€Channel + Bufferã€‘
 	public static void readFileTest()
 	{
 		File file = new File("tt.txt");
 
-		try(FileInputStream fis = new FileInputStream(file);//ÎÄ¼şÊäÈëÁ÷
-			 FileChannel inChannel = fis.getChannel() )//Ö»¿ÉÒÔÊäÈëµÄÍ¨µÀ)
+		try(FileInputStream fis = new FileInputStream(file);//æ–‡ä»¶è¾“å…¥æµ
+			 FileChannel inChannel = fis.getChannel() )//åªå¯ä»¥è¾“å…¥çš„é€šé“)
 		{
-			//¶¨ÒåÖØ¸´È¡Ë®µÄÈİÆ÷£¬ByteBuffer£¬Í¨¹ı¾²Ì¬·½·¨
+			//å®šä¹‰é‡å¤å–æ°´çš„å®¹å™¨ï¼ŒByteBufferï¼Œé€šè¿‡é™æ€æ–¹æ³•
 			ByteBuffer buffer = ByteBuffer.allocate(256);
-			//Ã¿´Î´ÓÊäÈëÍ¨µÀÏòbufferÖĞÊä³öÊı¾İ
+			//æ¯æ¬¡ä»è¾“å…¥é€šé“å‘bufferä¸­è¾“å‡ºæ•°æ®
 			while ( (inChannel.read(buffer)) != -1)
 			{
-				buffer.flip();//limit×¡bufferÖĞÃ»ÓĞÊı¾İµÄ¿Õ°×²¿·Ö
+				buffer.flip();//limitä½bufferä¸­æ²¡æœ‰æ•°æ®çš„ç©ºç™½éƒ¨åˆ†
 
 				Charset charset = Charset.forName("GBK");
 				CharsetDecoder decoder = charset.newDecoder();
-				CharBuffer charBuffer = decoder.decode(buffer);//ÓÃÖ¸¶¨×Ö·û¼¯½«×Ö½Ú»º´æ×ªÎª×Ö·û»º´æ
+				CharBuffer charBuffer = decoder.decode(buffer);//ç”¨æŒ‡å®šå­—ç¬¦é›†å°†å­—èŠ‚ç¼“å­˜è½¬ä¸ºå­—ç¬¦ç¼“å­˜
 
 				println(charBuffer);
-				buffer.clear();//»Ö¸´bufferµ½´ı×°Èë×´Ì¬
+				buffer.clear();//æ¢å¤bufferåˆ°å¾…è£…å…¥çŠ¶æ€
 			}
 		}
 		catch (IOException e)
@@ -175,11 +175,11 @@ class  NIOTest
 		}
 	}
 
-	//×Ö·û¼¯
+	//å­—ç¬¦é›†
 	public static void charsetTest()
 	{
 		 /*
-		 //Êä³öÏµÍ³Ö§³ÖµÄ×Ö·û¼¯
+		 //è¾“å‡ºç³»ç»Ÿæ”¯æŒçš„å­—ç¬¦é›†
 		 SortedMap<String,Charset> map = Charset.availableCharsets();
 		 for (String alias : map.keySet() )
 		 {
@@ -190,24 +190,24 @@ class  NIOTest
 		Charset cn = Charset.forName("GBK");
 		CharsetEncoder encoder = cn.newEncoder();
 		CharsetDecoder decoder = cn.newDecoder();
-		//CharBuffer¶ÔÏó
+		//CharBufferå¯¹è±¡
 		CharBuffer cb = CharBuffer.allocate(10);
-		cb.put("¶à");
-		cb.put("À­");
-		cb.put("°¡");
-		cb.put("ÃÎ");
-		cb.flip();//¶ÁÈ¡Ç°ĞèÒªÉèÖÃlimitÖ¸Õë£¡£¡
+		cb.put("å¤š");
+		cb.put("æ‹‰");
+		cb.put("å•Š");
+		cb.put("æ¢¦");
+		cb.flip();//è¯»å–å‰éœ€è¦è®¾ç½®limitæŒ‡é’ˆï¼ï¼
 		try
 		{
-			//±àÂë
+			//ç¼–ç 
 			ByteBuffer bb = encoder.encode(cb);
 			println( bb.capacity() );
-			for (int i=0 ;i<bb.capacity() ;i++ )//ÈôÎª¶ßÀ²AÃÎÊı×éÔ½½ç£¿£¿
+			for (int i=0 ;i<bb.capacity() ;i++ )//è‹¥ä¸ºå“†å•¦Aæ¢¦æ•°ç»„è¶Šç•Œï¼Ÿï¼Ÿ
 			{
 				System.out.print(bb.get(i) + " ");
 			}
 			println("");
-			println("½âÂëºóµÄĞÅÏ¢Îª£º"+decoder.decode(bb));
+			println("è§£ç åçš„ä¿¡æ¯ä¸ºï¼š"+decoder.decode(bb));
 		}
 		catch (Exception e)
 		{
@@ -216,16 +216,16 @@ class  NIOTest
 		
 	}
 
-	//ÎÄ¼şËø³¢ÊÔ
+	//æ–‡ä»¶é”å°è¯•
 	public static void fileLockTest()
 	{
 		File file = new File("new.txt");
-		try(//ÓÃ½ÚµãÁ÷»ñÈ¡Channel¶ÔÏó£¿£¿£¿ÒªÓÃOutputStream//trueÊÇ×·¼Ó false»ò²»Ğ´ÊÇ¸²¸Ç
+		try(//ç”¨èŠ‚ç‚¹æµè·å–Channelå¯¹è±¡ï¼Ÿï¼Ÿï¼Ÿè¦ç”¨OutputStream//trueæ˜¯è¿½åŠ  falseæˆ–ä¸å†™æ˜¯è¦†ç›–
 			 FileChannel channel = new FileOutputStream(file,true).getChannel() )
 		{
 				
 			println(channel.size());
-			FileLock lock = channel.tryLock();//·Ç×èÈûÊ½
+			FileLock lock = channel.tryLock();//éé˜»å¡å¼
 			Thread.sleep(10000);
 			lock.release();
 			 /**/
@@ -235,7 +235,7 @@ class  NIOTest
 			e.printStackTrace();
 		}
 	}
-	//************³ÌĞòÈë¿Ú***************
+	//************ç¨‹åºå…¥å£***************
 	public static void main(String[] args) 
 	{
 		//bufferTest();
@@ -247,7 +247,7 @@ class  NIOTest
 		
 	}
 
-	//´òÓ¡
+	//æ‰“å°
 	public static void println(Object obj)
 	{
 		System.out.println(obj);

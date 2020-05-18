@@ -1,23 +1,23 @@
 /**
-*Êı×é¡¢¾ØÕó´òÓ¡Á·Ï°Ìâ===ºê¹Ûµ÷¶ÈË¼Â·£¬ŞğÆú¾Ö²¿×ø±ê±ä»»
-°¸Àı¡¾1¡¿£º×ªÈ¦´òÓ¡Ò»Êı×ÖÊı×é
+*æ•°ç»„ã€çŸ©é˜µæ‰“å°ç»ƒä¹ é¢˜===å®è§‚è°ƒåº¦æ€è·¯ï¼Œæ‘’å¼ƒå±€éƒ¨åæ ‡å˜æ¢
+æ¡ˆä¾‹ã€1ã€‘ï¼šè½¬åœˆæ‰“å°ä¸€æ•°å­—æ•°ç»„
 1    2   3
 4   5   6       =>    1  2  3  6  9  8  7  4  5  
 7   8   9
-Ë¼Â·£ºÈ·¶¨ÍâÎª×óÉÏºÍÓÒÏÂ×ø±ê£¬ÓÉÍâÏòÄÚ°şÑó´Ğ£¬
+æ€è·¯ï¼šç¡®å®šå¤–ä¸ºå·¦ä¸Šå’Œå³ä¸‹åæ ‡ï¼Œç”±å¤–å‘å†…å‰¥æ´‹è‘±ï¼Œ
 
-°¸Àı¡¾2¡¿£ºÖ®×ÖĞÎ´òÓ¡--¶îÍâ¿Õ¼ä¸´ÔÓ¶ÈÎªO(1)
+æ¡ˆä¾‹ã€2ã€‘ï¼šä¹‹å­—å½¢æ‰“å°--é¢å¤–ç©ºé—´å¤æ‚åº¦ä¸ºO(1)
 1    2   3
 4   5   6       =>     1  2  4  7  5  3  6  8  9  
 7   8   9
-Ë¼Â·£ºÃ¿´ÎÈ·¶¨¸±/Ö÷¶Ô½ÇÏß¶Ëµã×ø±ê£¬ÏòÉÏ/ÏòÏÂ´òÓ¡¶Ô½ÇÔªËØ£¬¶Ëµã×ø±ê°´ÕÕ¹æÔòÒÆ¶¯
+æ€è·¯ï¼šæ¯æ¬¡ç¡®å®šå‰¯/ä¸»å¯¹è§’çº¿ç«¯ç‚¹åæ ‡ï¼Œå‘ä¸Š/å‘ä¸‹æ‰“å°å¯¹è§’å…ƒç´ ï¼Œç«¯ç‚¹åæ ‡æŒ‰ç…§è§„åˆ™ç§»åŠ¨
 *@author Hartley
 *@version 1.0.0
 */
 
 class  PrintExercise
 {
-		//************³ÌĞòÈë¿Ú***************
+		//************ç¨‹åºå…¥å£***************
 	public static void main(String[] args) 
 	{
 		//printMatrix();
@@ -26,7 +26,7 @@ class  PrintExercise
 	}
 
 
-	//¡¾1¡¿×ªÈ¦´òÓ¡¾ØÕó£¨¶şÎ¬Êı×é£©===ºê¹Û¼Ü¹¹
+	//ã€1ã€‘è½¬åœˆæ‰“å°çŸ©é˜µï¼ˆäºŒç»´æ•°ç»„ï¼‰===å®è§‚æ¶æ„
 	public static void printMatrix()
 	{
 		int[][] arr =  { { 1, 2, 3, 4 }, 
@@ -37,17 +37,17 @@ class  PrintExercise
 		int upCol = 0;
 		int downRow = arr.length - 1;
 		int downCol = arr[0].length - 1;
-		//Ò»²ãÒ»²ã°ş¿ª£¬×óÉÏÓëÓÒÏÂ×ø±ê´íÎ»Ê±£¬Í£Ö¹
+		//ä¸€å±‚ä¸€å±‚å‰¥å¼€ï¼Œå·¦ä¸Šä¸å³ä¸‹åæ ‡é”™ä½æ—¶ï¼Œåœæ­¢
 		while ( (downRow>=upRow) && (downCol>=upCol) )
 		{
 			printEdge(arr,upRow++,upCol++,downRow--,downCol--);
 		}
 	}
 
-	//½«Ã¿Ò»²½³éÏóÎª£º´òÓ¡Íâ²¿Ò»È¦
+	//å°†æ¯ä¸€æ­¥æŠ½è±¡ä¸ºï¼šæ‰“å°å¤–éƒ¨ä¸€åœˆ
 	public static void printEdge(int[][] arr,int upRow,int upCol,int downRow,int downCol)
 	{
-		//µ¥¶ÀÒ»ĞĞ»òÕßÒ»ÁĞ
+		//å•ç‹¬ä¸€è¡Œæˆ–è€…ä¸€åˆ—
 		if (upRow == downRow)
 		{
 			for (int i =upCol;i<=downCol ;i++ )
@@ -64,74 +64,74 @@ class  PrintExercise
 		{
 			int curCol = upCol;
 			int curRow = upRow;
-			//°şÑó´Ğ--°ş³öÒ»¸öÍêÕûÈ¦
-			while (curCol != downCol)//ÍâÉÏÈ¦Ò»ĞĞ
+			//å‰¥æ´‹è‘±--å‰¥å‡ºä¸€ä¸ªå®Œæ•´åœˆ
+			while (curCol != downCol)//å¤–ä¸Šåœˆä¸€è¡Œ
 			{
 				System.out.print(arr[curRow][curCol++] + " , ");
 			}
-			while (curRow != downRow)//ÍâÓÒÈ¦Ò»ĞĞ
+			while (curRow != downRow)//å¤–å³åœˆä¸€è¡Œ
 			{
 				System.out.print(arr[curRow++][curCol] + " , ");
 			}
-			while (curCol != upCol)//ÍâÏÂÈ¦Ò»ĞĞ
+			while (curCol != upCol)//å¤–ä¸‹åœˆä¸€è¡Œ
 			{
 				System.out.print(arr[curRow][curCol--] + " , ");
 			}
-			while (curRow != upRow)//Íâ×óÈ¦Ò»ĞĞ
+			while (curRow != upRow)//å¤–å·¦åœˆä¸€è¡Œ
 			{
 				System.out.print(arr[curRow--][curCol] + " , ");
 			}
 		}
 	}
 
-	//¡¾2¡¿¶Ô½ÇÏßÒÀ´Î´òÓ¡¾ØÕó--
+	//ã€2ã€‘å¯¹è§’çº¿ä¾æ¬¡æ‰“å°çŸ©é˜µ--
 	public static void printZigzag()
 	{
 		int[][] arr  ={ { 1, 2, 3, 4 }, 
 							 { 5, 6, 7, 8 }, 
 							 { 9, 10, 11, 12 },
 							 { 13, 14, 15, 16 } };
-		int leftRow = 0;//×óÏÂ×ø±ê
+		int leftRow = 0;//å·¦ä¸‹åæ ‡
 		int leftCol = 0;
-		int upRow = 0;//ÓÒÉÏ×ø±ê
+		int upRow = 0;//å³ä¸Šåæ ‡
 		int upCol = 0;
 		boolean fromUp = false;
-		int endRow = arr.length-1;//¾ØÕó±ß½ç
+		int endRow = arr.length-1;//çŸ©é˜µè¾¹ç•Œ
 		int endCol = arr[0].length-1;
-		//µ±×óÏÂ×ø±êÅöµ½height±ß½çÊ±ÏÂÒÆ±äÓÒÒÆ£¬Ö±ÖÁÅöµ½width±ß½ç
-		//µ±ÓÒÉÏ×ø±êÅöµ½width±ß½çÊ±ÓÒÒÆ±äÏÂÒÆ£¬Ö±ÖÁÅöµ½height±ß½ç
-		//ËùÒÔÖĞÖ¹Ìõ¼şÎª×óÏÂ×ø±êµÄÁĞÔ½½ç »ò ÓÒÉÏ×ø±êµÄĞĞÔ½½ç
+		//å½“å·¦ä¸‹åæ ‡ç¢°åˆ°heightè¾¹ç•Œæ—¶ä¸‹ç§»å˜å³ç§»ï¼Œç›´è‡³ç¢°åˆ°widthè¾¹ç•Œ
+		//å½“å³ä¸Šåæ ‡ç¢°åˆ°widthè¾¹ç•Œæ—¶å³ç§»å˜ä¸‹ç§»ï¼Œç›´è‡³ç¢°åˆ°heightè¾¹ç•Œ
+		//æ‰€ä»¥ä¸­æ­¢æ¡ä»¶ä¸ºå·¦ä¸‹åæ ‡çš„åˆ—è¶Šç•Œ æˆ– å³ä¸Šåæ ‡çš„è¡Œè¶Šç•Œ
 		while (upRow!=endRow+1)
 		{
 			
 			printLevel(arr,leftRow,leftCol,upRow,upCol,fromUp);
 			
-			//ÅĞ¶ÏÁ½×ø±êÒÆ¶¯·½Ïò
-			//¡¾¸ù¾İ×ªÕÛµã--×óÏÂ½Ç×ø±êµÄĞĞµÈÓÚendRow + ÓÒÉÏ½Ç×ø±êµÄÁĞµÈÓÚendCol
-			//ÓÃÈıÄ¿ÔËËã·û¼ò»¯´úÂë¡¿		
+			//åˆ¤æ–­ä¸¤åæ ‡ç§»åŠ¨æ–¹å‘
+			//ã€æ ¹æ®è½¬æŠ˜ç‚¹--å·¦ä¸‹è§’åæ ‡çš„è¡Œç­‰äºendRow + å³ä¸Šè§’åæ ‡çš„åˆ—ç­‰äºendCol
+			//ç”¨ä¸‰ç›®è¿ç®—ç¬¦ç®€åŒ–ä»£ç ã€‘		
 			leftCol  =  leftRow == endRow ? leftCol+1 : leftCol ;
-			//×¢ÒâÕâ¸öË³ĞòºÜÖØÒª£¬±ß½ç´¦£¬µÈÏÂÃæÌõ¼ş±äÎªµÈÓÚ£¬ÏÂÒ»´ÎÑ­»·²ÅÖ´ĞĞ¸Ã¾ä
-			leftRow = leftRow == endRow ? leftRow : leftRow+1;//×ªÕÛµãÇ° ĞĞÊıÔö¼Ó
+			//æ³¨æ„è¿™ä¸ªé¡ºåºå¾ˆé‡è¦ï¼Œè¾¹ç•Œå¤„ï¼Œç­‰ä¸‹é¢æ¡ä»¶å˜ä¸ºç­‰äºï¼Œä¸‹ä¸€æ¬¡å¾ªç¯æ‰æ‰§è¡Œè¯¥å¥
+			leftRow = leftRow == endRow ? leftRow : leftRow+1;//è½¬æŠ˜ç‚¹å‰ è¡Œæ•°å¢åŠ 
 			
 			upRow = upCol == endCol ? upRow+1 : upRow;
-			upCol = upCol == endCol ? upCol : upCol+1;//×ªÕÛµãÇ°ÁĞÊıÔö¼Ó
+			upCol = upCol == endCol ? upCol : upCol+1;//è½¬æŠ˜ç‚¹å‰åˆ—æ•°å¢åŠ 
 			
 			//System.out.println("[ left=("+leftRow+" , "+leftCol+")"+"up=("+upRow+" , "+upCol+") ]");
 			fromUp = !fromUp;
 		}
 
 	}
-	//¶Ô½ÇÏß´òÓ¡
+	//å¯¹è§’çº¿æ‰“å°
 	public static void printLevel(int[][] arr,int leftRow,int leftCol,int upRow,int upCol,
 												boolean fromUp)
 	{
-		if (fromUp)//´ÓÓÒÉÏÏò×ó´òÓ¡
+		if (fromUp)//ä»å³ä¸Šå‘å·¦æ‰“å°
 		{
 			while(upCol >= leftCol)
 			{		
 				System.out.print(arr[upRow++][upCol--] +" ");
 			}
-		}else//´Ó×ó¶ËµãÏòÓÒÉÏ´òÓ¡
+		}else//ä»å·¦ç«¯ç‚¹å‘å³ä¸Šæ‰“å°
 		{
 			while(leftCol <= upCol)
 			{

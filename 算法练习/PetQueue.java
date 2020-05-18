@@ -1,16 +1,16 @@
 import java.util.Queue;
 import java.util.LinkedList;
 /**
-*³èÎï£¨Ã¨¡¢¹·£©½ø¶ÓÁĞ
-//¸Ã¶ÓÁĞ¿ÉÒÔÑ¹ÈëÃ¨¡¢¹·£»¿ÉÒÔµ¯³ö×îÔç½øÈë¶ÓÁĞµÄ³èÎï£¬¿ÉÒÔµ¯³öÃ¨¶ÓÁĞ×îÔç½øÈë¶ÓÁĞµÄÃ¨...
+*å® ç‰©ï¼ˆçŒ«ã€ç‹—ï¼‰è¿›é˜Ÿåˆ—
+//è¯¥é˜Ÿåˆ—å¯ä»¥å‹å…¥çŒ«ã€ç‹—ï¼›å¯ä»¥å¼¹å‡ºæœ€æ—©è¿›å…¥é˜Ÿåˆ—çš„å® ç‰©ï¼Œå¯ä»¥å¼¹å‡ºçŒ«é˜Ÿåˆ—æœ€æ—©è¿›å…¥é˜Ÿåˆ—çš„çŒ«...
 *@author Hartley
 *@version 1.0.0
 */
 
 class  PetQueue
 {
-	//³èÎï---Ã¨//¹·
-	public static class Pet {//ÒòÎªÊÇÄÚ²¿Àà£¬ÔÚmainµ÷ÓÃµÄÊ±ºòĞèÒª¾²Ì¬
+	//å® ç‰©---çŒ«//ç‹—
+	public static class Pet {//å› ä¸ºæ˜¯å†…éƒ¨ç±»ï¼Œåœ¨mainè°ƒç”¨çš„æ—¶å€™éœ€è¦é™æ€
 		private String type;
 
 		public Pet(String type) {
@@ -34,9 +34,9 @@ class  PetQueue
 		}
 	}
 
-	//==============ÒÔÏÂÎªÌí¼ÓµÄ´úÂë================
+	//==============ä»¥ä¸‹ä¸ºæ·»åŠ çš„ä»£ç ================
 
-	//½«PetÀà·â×°Ò»Êı¾İÏî£¬ÓÃÓÚ±ê¼Ç½øÈë¶ÓÁĞµÄ´ÎĞò
+	//å°†Petç±»å°è£…ä¸€æ•°æ®é¡¹ï¼Œç”¨äºæ ‡è®°è¿›å…¥é˜Ÿåˆ—çš„æ¬¡åº
 	public static class PetEnterQueue
 	{
 		private Pet pet;
@@ -65,14 +65,14 @@ class  PetQueue
 			return count;
 		}
 		
-		public String getEnterPetType()//·µ»Øµ±Ç°¶ÔÏóÀàĞÍ==ÓÃÓÚ´«ÈëPetºóÅĞ¶ÏÀàĞÍ
+		public String getEnterPetType()//è¿”å›å½“å‰å¯¹è±¡ç±»å‹==ç”¨äºä¼ å…¥Petååˆ¤æ–­ç±»å‹
 		{
 			return this.pet.getPetType();
 		}
 
 	}
 
-	//¹·Ã¨¶ÓÁĞÀà==add\pollAll pollDog pollCat\
+	//ç‹—çŒ«é˜Ÿåˆ—ç±»==add\pollAll pollDog pollCat\
 	public static class DogCatQueue
 	{
 		private Queue<PetEnterQueue> dogQ;
@@ -86,7 +86,7 @@ class  PetQueue
 			this.count = 0;
 		}
 
-		//½øÈë¶ÓÁĞ£ºÍ¨¹ıÅĞ¶ÏpetÊÇCat»¹ÊÇDog£¬´Ó¶ø½øÈë¶ÔÓ¦¶ÓÁĞ
+		//è¿›å…¥é˜Ÿåˆ—ï¼šé€šè¿‡åˆ¤æ–­petæ˜¯Catè¿˜æ˜¯Dogï¼Œä»è€Œè¿›å…¥å¯¹åº”é˜Ÿåˆ—
 		public void add(Pet pet)
 		{
 			if (pet.getPetType().equals("dog") )
@@ -101,20 +101,20 @@ class  PetQueue
 			}
 		}
 	
-		//Í¨¹ı±È¶ÔÃ¨¹·¶ÓÁĞ-¶ÓÊ×ÔªËØµÄcountÖµÀ´ÅĞ¶Ïµ¯³öÄÄ¸öÔªËØ
+		//é€šè¿‡æ¯”å¯¹çŒ«ç‹—é˜Ÿåˆ—-é˜Ÿé¦–å…ƒç´ çš„countå€¼æ¥åˆ¤æ–­å¼¹å‡ºå“ªä¸ªå…ƒç´ 
 		public Pet pollAll()
 		{
-			if ( !dogQ.isEmpty() && !catQ.isEmpty()  )//Ã¨¹·¶ÓÁĞ¾ùÓĞÔªËØ
+			if ( !dogQ.isEmpty() && !catQ.isEmpty()  )//çŒ«ç‹—é˜Ÿåˆ—å‡æœ‰å…ƒç´ 
 			{
-				//±È½ÏÄÄ¸öÊÇÔÚÃ¨¹·¶ÓÁĞµÄ¶ÓÊ×
+				//æ¯”è¾ƒå“ªä¸ªæ˜¯åœ¨çŒ«ç‹—é˜Ÿåˆ—çš„é˜Ÿé¦–
 				if (dogQ.peek().getCount() < catQ.peek().getCount())
 				{
-					return dogQ.poll().getPet();//poll·µ»ØµÄÊÇPetEnterQueue¶ÔÏó
+					return dogQ.poll().getPet();//pollè¿”å›çš„æ˜¯PetEnterQueueå¯¹è±¡
 				}else
 				{
 					return catQ.poll().getPet();
 				}
-			}else if (!dogQ.isEmpty())//Ö»ÓĞ¹·¶ÓÁĞ·Ç¿Õ
+			}else if (!dogQ.isEmpty())//åªæœ‰ç‹—é˜Ÿåˆ—éç©º
 			{
 				return dogQ.poll().getPet();
 			}else if (!catQ.isEmpty())
@@ -125,7 +125,7 @@ class  PetQueue
 				throw new RuntimeException("all queue is empty");
 			}
 		}
-		//µ¯³öÃ¨¶ÓÁĞ
+		//å¼¹å‡ºçŒ«é˜Ÿåˆ—
 		public Cat pollCat()
 		{
 			if (!catQ.isEmpty() )
@@ -136,7 +136,7 @@ class  PetQueue
 				throw new RuntimeException("cat queue is empty");
 			}
 		}
-		//µ¯³ö¹·¶ÓÁĞ
+		//å¼¹å‡ºç‹—é˜Ÿåˆ—
 		public Dog pollDog()
 		{
 			if (!dogQ.isEmpty() )
@@ -148,7 +148,7 @@ class  PetQueue
 			}
 		}
 
-		//ÊÇ·ñ¶ÓÁĞÎª¿Õ
+		//æ˜¯å¦é˜Ÿåˆ—ä¸ºç©º
 		public boolean isEmpty()
 		{
 			return catQ.isEmpty() && dogQ.isEmpty();
@@ -163,7 +163,7 @@ class  PetQueue
 		}
 	}
 
-	//************³ÌĞòÈë¿Ú***************
+	//************ç¨‹åºå…¥å£***************
 	public static void main(String[] args) 
 	{
 		DogCatQueue queue = new DogCatQueue();
@@ -184,15 +184,15 @@ class  PetQueue
 		/*
 		while ( !queue.isDogEmpty() )
 		{
-			System.out.println("µ¯³öµ±Ç°¶ÓÁĞ¶ÓÊ×ÔªËØ£º"+queue.pollDog().getPetType());
+			System.out.println("å¼¹å‡ºå½“å‰é˜Ÿåˆ—é˜Ÿé¦–å…ƒç´ ï¼š"+queue.pollDog().getPetType());
 		}
 		*/
 		while ( !queue.isEmpty() )
 		{
-			System.out.println("µ¯³öµ±Ç°¶ÓÁĞ¶ÓÊ×ÔªËØ£º"+queue.pollAll().getPetType());
+			System.out.println("å¼¹å‡ºå½“å‰é˜Ÿåˆ—é˜Ÿé¦–å…ƒç´ ï¼š"+queue.pollAll().getPetType());
 		}
 		
-		//System.out.println("µ¯³ö¹·¶ÓÁĞ¶ÓÊ×ÔªËØ£º"+queue.pollDog().getPetType());
+		//System.out.println("å¼¹å‡ºç‹—é˜Ÿåˆ—é˜Ÿé¦–å…ƒç´ ï¼š"+queue.pollDog().getPetType());
 	}
 }
 

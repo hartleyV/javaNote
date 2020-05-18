@@ -1,40 +1,40 @@
 /**
-*´òÓ¡¡¾ÓĞĞò¡¿Á´±íµÄ¹«¹²²¿·Ö£º
-Ë¼Â·£ºÀûÓÃÀàËÆÍâÅÅµÄ·½·¨
+*æ‰“å°ã€æœ‰åºã€‘é“¾è¡¨çš„å…¬å…±éƒ¨åˆ†ï¼š
+æ€è·¯ï¼šåˆ©ç”¨ç±»ä¼¼å¤–æ’çš„æ–¹æ³•
 *@author Hartley
 *@version 1.0.0
 */
 
 class  PrintCommonPart
 {
-	//Á´±í ½ÚµãÀà
+	//é“¾è¡¨ èŠ‚ç‚¹ç±»
 	public static class Node
 	{
 		public int value;
 		public Node next;
-		//¹¹Ôì·½·¨
+		//æ„é€ æ–¹æ³•
 		public Node(int value)
 		{
 			this.value = value;
 		}
 	}
 	
-	//ÀûÓÃÍâÅÅÕÒ³öÏàÍ¬Êı¾İ
-	//Ë­Ğ¡¶¯Ë­£¬Ä³¸ö±éÀúÍê³É£¬Ôò´òÓ¡½áÊø
+	//åˆ©ç”¨å¤–æ’æ‰¾å‡ºç›¸åŒæ•°æ®
+	//è°å°åŠ¨è°ï¼ŒæŸä¸ªéå†å®Œæˆï¼Œåˆ™æ‰“å°ç»“æŸ
 	public static void printCommonPart(Node node1,Node node2)
 	{
-		System.out.print("¹«¹²²¿·Ö£º");
+		System.out.print("å…¬å…±éƒ¨åˆ†ï¼š");
 		while (node1 != null && node2 != null)
 		{
 			if (node1.value==node2.value)
 			{
 				System.out.print(node1.value+" , ");
-				//Á½Á´±íÖ¸ÕëÍ¬Ê±ÒÆ¶¯
+				//ä¸¤é“¾è¡¨æŒ‡é’ˆåŒæ—¶ç§»åŠ¨
 				node1 = node1.next;
 				node2 = node2.next;
 			}else if (node1.value < node2.value)
 			{
-				node1 = node1.next;//Ë­Ğ¡¶¯Ë­
+				node1 = node1.next;//è°å°åŠ¨è°
 			}else
 			{
 				node2 = node2.next;
@@ -52,16 +52,16 @@ class  PrintCommonPart
 		System.out.println("");
 		System.out.println("========++=========");
 	}
-	//************³ÌĞòÈë¿Ú***************
+	//************ç¨‹åºå…¥å£***************
 	public static void main(String[] args) 
 	{
-		Node node1 = new Node(3);//Á´±íÒ»
+		Node node1 = new Node(3);//é“¾è¡¨ä¸€
 		node1.next = new Node(6);
 		node1.next.next = new Node(11);
 		node1.next.next.next = new Node(18);
 		node1.next.next.next.next = new Node(28);
 
-		Node node2 = new Node(11);//Á´±í¶ş
+		Node node2 = new Node(11);//é“¾è¡¨äºŒ
 		node2.next = new Node(18);
 		node2.next.next = new Node(19);
 		node2.next.next.next  = new Node(20);

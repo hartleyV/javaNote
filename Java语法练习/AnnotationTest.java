@@ -2,36 +2,36 @@ import java.util.List;
 import java.util.ArrayList;
 import java.lang.annotation.*;
 /**
-*×¢½â Annotation
-		ÔÚ±àÒë¡¢Àà¼ÓÔØ¡¢ÔËĞĞÊ±¶ÁÈ¡×¢½â£¬²¢×öÏàÓ¦´¦Àí
-	|--»ù±¾µÄ×¢½â==ÔÚjava.lang°üÏÂ
-			|--@Override//ÔÚÖØĞ´¸¸Àà·½·¨Ê±ÉùÃ÷£¨ÒÔ·À·½·¨Ç©Ãû³ö´í£©
-			|--@Deprecated//ĞŞÊÎ·½·¨¡¢Àà¡¢½Ó¿Ú--Ê¹ÓÃ±»ĞŞÊÎµÄÀà¡¢·½·¨Ê±»áÌáÊ¾¹ıÊ±µÄwarnning
-			|--@SuppressWarnings//¿ÉÒÔ¹Ø±ÕÖ¸¶¨valueµÄ¾¯¸æ
-			|--@SafeWarargs//ÓÃÓÚ¹Ø±Õ¡°¶ÑÎÛÈ¾¡±µÄ¾¯¸æ£¨·ºĞÍ²Á³ıºó£¬ÔÙ°Ñ¸Ã¶ÔÏó¸³Öµ¸ø´ø·ºĞÍµÄ¶ÔÏó £©
-			|--@FunctionInterface//Ö»ÓĞÒ»¸ö³éÏóº¯ÊıµÄ½Ó¿Ú--Lambda
-	|--ÔÚjava.lang.annotationÏÂ£¨ÓÃÀ´ĞŞÊÎAnnotation£©
-			|--@Retention(value = xxx)Ö¸¶¨ĞŞÊÎµÄ×¢½â·û¿ÉÒÔ±£Áôµ½Ê²Ã´Ê±ºò£¨Ö»´«valueÖµ£¬¿ÉÊ¡value=£©
-					vlaue = RetentionPolicy.CLASS£¨Ä¬ÈÏÖµ£©--annotation±£ÁôÔÚclassÎÄ¼şÖĞ£¬µ«ÔËĞĞÊ±JVM²»¿É»ñÈ¡annotationĞÅÏ¢
-					vlaue = RetentionPolicy.RUNTIME---×¢½âÒ²±£ÁôÔÚclassÎÄ¼ş£¬ÇÒÔËĞĞÊ±¿ÉÍ¨¹ı·´Éä¶ÁÈ¡annotationĞÅÏ¢
-					vlaue = RetentionPolicy.SOURCE---×¢½âÖ»±£ÁôÔÚÔ´ÎÄ¼ş£¬±àÒëÆ÷»á¶ªµôÕâÖÖ×¢½âĞÅÏ¢
-			|--@Target(value = xxx)Ö¸¶¨ĞŞÊÎµÄ×¢½â·û¿ÉÒÔĞŞÊÎÊ²Ã´
-					vlaue = ElementType.ANNOTATION_TYPE: ±»ĞŞÊÎµÄannotationÖ»ÄÜĞŞÊÎannotation
-					                                 .CONSTRUCTOR: ĞŞÊÎ¹¹ÔìÆ÷
-													 .FIELD£ºĞŞÊÎ³ÉÔ±±äÁ¿
-													 .LOCAL_VARIABLE£ºĞŞÊÎ¾Ö²¿±äÁ¿
-													 .METHOD£ºĞŞÊÎ·½·¨
-													 .PACKAGE£ºĞŞÊÎ°ü¶¨Òå
-													 .PARAMETER£ºĞŞÊÎ²ÎÊı
-													 .TYPE£ºĞŞÊÎÀà¡¢½Ó¿Ú£¨°üÀ¨×¢½âÀàĞÍ£©¡¢Ã¶¾Ù¶¨Òå
+*æ³¨è§£ Annotation
+		åœ¨ç¼–è¯‘ã€ç±»åŠ è½½ã€è¿è¡Œæ—¶è¯»å–æ³¨è§£ï¼Œå¹¶åšç›¸åº”å¤„ç†
+	|--åŸºæœ¬çš„æ³¨è§£==åœ¨java.langåŒ…ä¸‹
+			|--@Override//åœ¨é‡å†™çˆ¶ç±»æ–¹æ³•æ—¶å£°æ˜ï¼ˆä»¥é˜²æ–¹æ³•ç­¾åå‡ºé”™ï¼‰
+			|--@Deprecated//ä¿®é¥°æ–¹æ³•ã€ç±»ã€æ¥å£--ä½¿ç”¨è¢«ä¿®é¥°çš„ç±»ã€æ–¹æ³•æ—¶ä¼šæç¤ºè¿‡æ—¶çš„warnning
+			|--@SuppressWarnings//å¯ä»¥å…³é—­æŒ‡å®švalueçš„è­¦å‘Š
+			|--@SafeWarargs//ç”¨äºå…³é—­â€œå †æ±¡æŸ“â€çš„è­¦å‘Šï¼ˆæ³›å‹æ“¦é™¤åï¼Œå†æŠŠè¯¥å¯¹è±¡èµ‹å€¼ç»™å¸¦æ³›å‹çš„å¯¹è±¡ ï¼‰
+			|--@FunctionInterface//åªæœ‰ä¸€ä¸ªæŠ½è±¡å‡½æ•°çš„æ¥å£--Lambda
+	|--åœ¨java.lang.annotationä¸‹ï¼ˆç”¨æ¥ä¿®é¥°Annotationï¼‰
+			|--@Retention(value = xxx)æŒ‡å®šä¿®é¥°çš„æ³¨è§£ç¬¦å¯ä»¥ä¿ç•™åˆ°ä»€ä¹ˆæ—¶å€™ï¼ˆåªä¼ valueå€¼ï¼Œå¯çœvalue=ï¼‰
+					vlaue = RetentionPolicy.CLASSï¼ˆé»˜è®¤å€¼ï¼‰--annotationä¿ç•™åœ¨classæ–‡ä»¶ä¸­ï¼Œä½†è¿è¡Œæ—¶JVMä¸å¯è·å–annotationä¿¡æ¯
+					vlaue = RetentionPolicy.RUNTIME---æ³¨è§£ä¹Ÿä¿ç•™åœ¨classæ–‡ä»¶ï¼Œä¸”è¿è¡Œæ—¶å¯é€šè¿‡åå°„è¯»å–annotationä¿¡æ¯
+					vlaue = RetentionPolicy.SOURCE---æ³¨è§£åªä¿ç•™åœ¨æºæ–‡ä»¶ï¼Œç¼–è¯‘å™¨ä¼šä¸¢æ‰è¿™ç§æ³¨è§£ä¿¡æ¯
+			|--@Target(value = xxx)æŒ‡å®šä¿®é¥°çš„æ³¨è§£ç¬¦å¯ä»¥ä¿®é¥°ä»€ä¹ˆ
+					vlaue = ElementType.ANNOTATION_TYPE: è¢«ä¿®é¥°çš„annotationåªèƒ½ä¿®é¥°annotation
+					                                 .CONSTRUCTOR: ä¿®é¥°æ„é€ å™¨
+													 .FIELDï¼šä¿®é¥°æˆå‘˜å˜é‡
+													 .LOCAL_VARIABLEï¼šä¿®é¥°å±€éƒ¨å˜é‡
+													 .METHODï¼šä¿®é¥°æ–¹æ³•
+													 .PACKAGEï¼šä¿®é¥°åŒ…å®šä¹‰
+													 .PARAMETERï¼šä¿®é¥°å‚æ•°
+													 .TYPEï¼šä¿®é¥°ç±»ã€æ¥å£ï¼ˆåŒ…æ‹¬æ³¨è§£ç±»å‹ï¼‰ã€æšä¸¾å®šä¹‰
 
-			|--@DocumentĞŞÊÎµÄ×¢½â·û¿ÉÒÔÔÚjavadocÊ±±»ÌáÈ¡µ½ÎÄµµ£¨·½·¨ÃûÉÏÓĞ×¢½â£©					
-			|--@InheritedÊ¹ĞŞÊÎµÄ×¢½â·û¾ßÓĞ¼Ì³ĞĞÔ£¨¸¸Àà@InheritedĞŞÊÎ£¬Æä×ÓÀà»á×Ô¶¯±»@InheritedĞŞÊÎ£¬
-			|--@Interface×Ô¶¨ÒåAnnotation			
-	|--ÌáÈ¡AnnotationĞÅÏ¢
-	|--ÖØ¸´×¢½â£¨java8)
-	|--TypeAnnotation£¨java8)
-	|--APT¹¤¾ß-±àÒëÊ±´¦Àíannotation¹¤¾ß
+			|--@Documentä¿®é¥°çš„æ³¨è§£ç¬¦å¯ä»¥åœ¨javadocæ—¶è¢«æå–åˆ°æ–‡æ¡£ï¼ˆæ–¹æ³•åä¸Šæœ‰æ³¨è§£ï¼‰					
+			|--@Inheritedä½¿ä¿®é¥°çš„æ³¨è§£ç¬¦å…·æœ‰ç»§æ‰¿æ€§ï¼ˆçˆ¶ç±»@Inheritedä¿®é¥°ï¼Œå…¶å­ç±»ä¼šè‡ªåŠ¨è¢«@Inheritedä¿®é¥°ï¼Œ
+			|--@Interfaceè‡ªå®šä¹‰Annotation			
+	|--æå–Annotationä¿¡æ¯
+	|--é‡å¤æ³¨è§£ï¼ˆjava8)
+	|--TypeAnnotationï¼ˆjava8)
+	|--APTå·¥å…·-ç¼–è¯‘æ—¶å¤„ç†annotationå·¥å…·
 *@author Hartley
 *@version 1.0.0
 */
@@ -39,18 +39,18 @@ import java.lang.annotation.*;
 @SuppressWarnings(value = "unchecked")
 class  AnnotationTest
 {
-	//************³ÌĞòÈë¿Ú***************
+	//************ç¨‹åºå…¥å£***************
 	public static void main(String[] args) 
 	{
-		//new Carrot().color();//@Deprecated ÌáÊ¾¹ıÊ±µÄwarnning
+		//new Carrot().color();//@Deprecated æç¤ºè¿‡æ—¶çš„warnning
 		List<String> list = new ArrayList();
 	}
 }
 
-//×Ô¶¨Òå×¢½â
+//è‡ªå®šä¹‰æ³¨è§£
  @interface girl
 {
-	String name() default "null";//¿ÉÒÔº¬³ÉÔ±±äÁ¿£¨²»ÉèÖÃÄ¬ÈÏÖµÔòÔÚÊ¹ÓÃ×¢½âÊ±±ØĞëÖ¸¶¨£©
+	String name() default "null";//å¯ä»¥å«æˆå‘˜å˜é‡ï¼ˆä¸è®¾ç½®é»˜è®¤å€¼åˆ™åœ¨ä½¿ç”¨æ³¨è§£æ—¶å¿…é¡»æŒ‡å®šï¼‰
 }
 
 @girl
@@ -68,7 +68,7 @@ class Vegetable
 class Carrot extends Vegetable
 {
 	@Override
-	//public String eat()//»á¼ì²éÖØĞ´·½·¨Ç©Ãû£¬±¨´í
+	//public String eat()//ä¼šæ£€æŸ¥é‡å†™æ–¹æ³•ç­¾åï¼ŒæŠ¥é”™
 	public void eat()
 	{
 	}

@@ -1,11 +1,11 @@
 /**
-*��������ð�ݡ�ѡ�񡢲��루ʱ�临�Ӷ�ΪO��N^2) )
+*基本排序：冒泡、选择、插入（时间复杂度为O（N^2) )
 *@author Hartley
 *@version v1.0.0
 */
 public class BasicSort 
 {
-	//ð������(�ȽϺ�ֱ�ӽ�����
+	//冒泡排序(比较后直接交换）
 	public static void bubbleSort(int[] arr)
 	{
 		//base code
@@ -27,7 +27,7 @@ public class BasicSort
 			}
 		}
 	}
-	//ѡ�����򣨱ȽϺ��ס�Ǳ꣬��󽻻���
+	//选择排序（比较后记住角标，最后交换）
 	public static void switchSort(int[] arr)
 	{
 		//base code
@@ -52,7 +52,7 @@ public class BasicSort
 		}
 	}
 
-	//��������(����ץ�ƣ��źŵ�ǰ�ƣ��������λ���ȥ
+	//插入排序(类似抓牌，排号当前牌，新牌依次划过去
 	public static void insertSort(int[] arr)
 	{
 		//base code
@@ -61,7 +61,7 @@ public class BasicSort
 			return;
 		}
 		int end = arr.length-1;
-		//iΪ��ǰ�Ǳ꣬jΪ�½Ǳ�
+		//i为当前角标，j为新角标
 		for (int i=0; i<end;i++ )
 		{
 			for(int j = i+1;j>0 && arr[j-1]>arr[j];j--)
@@ -69,7 +69,7 @@ public class BasicSort
 				swap(arr,j-1,j);
 			}
 			/*
-			//���Լ�д
+			//可以简化写
 			for (int j=i+1;j>0 ;j-- )
 			{
 				if( arr[j-1]>arr[j] )
@@ -82,7 +82,7 @@ public class BasicSort
 		}      
 		
 	}
-	//����������ָ��λ�õ�Ԫ��
+	//交换数组中指定位置的元素
 	public static void swap(int[] arr,int i,int j)
 	{
 		//base code
@@ -94,7 +94,7 @@ public class BasicSort
 
 		}
 	}
-	//��ӡ����
+	//打印数组
 	public static void printArray(int[] arr)
 	{
 		if(arr==null)
@@ -107,23 +107,23 @@ public class BasicSort
 		System.out.println("");
 	}
 
-	//�������
+	//程序入口
 	public static void main(String[] args) 
 	{
 		int[] arr = {2,4,1,7,9,3,6};
-		System.out.print("��ʼ����Ϊ��");
+		System.out.print("初始数组为：");
 		printArray(arr);
 /*
 		bubbleSort(arr);
-		System.out.print("ð�������");
+		System.out.print("冒泡排序后：");
 		printArray(arr);
 */
 /*		switchSort(arr);
-		System.out.print("ѡ�������");
+		System.out.print("选择排序后：");
 		printArray(arr);
 */
 		insertSort(arr);
-		System.out.print("���������");
+		System.out.print("插入排序后：");
 		printArray(arr);
 	}
 }

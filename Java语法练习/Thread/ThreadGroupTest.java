@@ -1,49 +1,51 @@
+package Thread;
+
 /**
-*ThreadGroup--´´½¨ÓëÊ¹ÓÃ
+*ThreadGroup--åˆ›å»ºä¸ä½¿ç”¨
 *@author Hartley
 *@version 1.0.0
 */
 
 class  ThreadGroupTest
 {
-	//************³ÌĞòÈë¿Ú***************
+	//************ç¨‹åºå…¥å£***************
 	public static void main(String[] args) 
 	{
 		ThreadGroup defaultGroup = Thread.currentThread().getThreadGroup();
-		System.out.println("³õÊ¼£¬Ä¬ÈÏ×éÓĞ¼¸¸öÏß³Ì£º"+defaultGroup.activeCount());
-		System.out.println("Ä¬ÈÏ×é½ĞÊ²Ã´£º"+defaultGroup.getName());
-		System.out.println("Ä¬ÈÏ×éÊÇ·ñÎªºóÌ¨×é£º"+defaultGroup.isDaemon());
-		A a = new A();
+		System.out.println("åˆå§‹ï¼Œé»˜è®¤ç»„æœ‰å‡ ä¸ªçº¿ç¨‹ï¼š"+defaultGroup.activeCount());
+		System.out.println("é»˜è®¤ç»„å«ä»€ä¹ˆï¼š"+defaultGroup.getName());
+		System.out.println("é»˜è®¤ç»„æ˜¯å¦ä¸ºåå°ç»„ï¼š"+defaultGroup.isDaemon());
+		A1 a = new A1();
 		a.start();
-		System.out.println("Æô¶¯Ïß³Ìaºó£¬Ä¬ÈÏ×éÓĞ¼¸¸ö»î¶¯Ïß³Ì£º"+defaultGroup.activeCount());
-		defaultGroup.setDaemon(true);//ÉèÖÃÏß³Ì×éÎªºóÌ¨×é
-		System.out.println("ÉèÖÃºó£¬Ä¬ÈÏ×éÊÇ·ñÎªºóÌ¨×é£º"+defaultGroup.isDaemon());
+		System.out.println("å¯åŠ¨çº¿ç¨‹aåï¼Œé»˜è®¤ç»„æœ‰å‡ ä¸ªæ´»åŠ¨çº¿ç¨‹ï¼š"+defaultGroup.activeCount());
+		defaultGroup.setDaemon(true);//è®¾ç½®çº¿ç¨‹ç»„ä¸ºåå°ç»„
+		System.out.println("è®¾ç½®åï¼Œé»˜è®¤ç»„æ˜¯å¦ä¸ºåå°ç»„ï¼š"+defaultGroup.isDaemon());
 
-		ThreadGroup group = new ThreadGroup("ĞÂÏß³Ì");
-		A a2 = new A(group,"2");
-		A a3 = new A(group,"3");
-		System.out.println("ĞÂÏß³ÌËùÔÚ×éÓĞ¼¸¸öÔËĞĞµÄÏß³Ì£º"+group.activeCount());
+		ThreadGroup group = new ThreadGroup("æ–°çº¿ç¨‹");
+		A1 a2 = new A1(group,"2");
+		A1 a3 = new A1(group,"3");
+		System.out.println("æ–°çº¿ç¨‹æ‰€åœ¨ç»„æœ‰å‡ ä¸ªè¿è¡Œçš„çº¿ç¨‹ï¼š"+group.activeCount());
 		a2.start();
 		a3.start();
-		System.out.println("ĞÂÏß³ÌËùÔÚ×éÓĞ¼¸¸öÔËĞĞµÄÏß³Ì£º"+group.activeCount());
+		System.out.println("æ–°çº¿ç¨‹æ‰€åœ¨ç»„æœ‰å‡ ä¸ªè¿è¡Œçš„çº¿ç¨‹ï¼š"+group.activeCount());
 		
 	}
 }
 
-//¶¨ÒåÏß³ÌÀàA¡¢B
-class A extends Thread
+//å®šä¹‰çº¿ç¨‹ç±»Aã€B
+class A1 extends Thread
 {
-	public A(){}
-	public A (ThreadGroup group,String name)
+	public A1(){}
+	public A1(ThreadGroup group, String name)
 	{
-		super(group,name);//µ÷ÓÃ¸¸ÀàThreadµÄ¹¹ÔìÆ÷£¬Ò²¾ÍÊÇËµ½«µ±Ç°Ïß³Ì¹éÎªgroupÏß³Ì×é
+		super(group,name);//è°ƒç”¨çˆ¶ç±»Threadçš„æ„é€ å™¨ï¼Œä¹Ÿå°±æ˜¯è¯´å°†å½“å‰çº¿ç¨‹å½’ä¸ºgroupçº¿ç¨‹ç»„
 	}
 
 	public void run()
 	{
 		for (int i = 0;i<20 ;i++ )
 		{
-			//System.out.println(getName()+" :µ±Ç°¼ÆÊı= "+i);
+			//System.out.println(getName()+" :å½“å‰è®¡æ•°= "+i);
 		}
 	}
 }

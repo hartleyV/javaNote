@@ -2,18 +2,18 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 /**
-*ÊµÏÖÕ»£ºÏÈ½øºó³ö
-*ÊµÏÖ¶ÓÁĞ£ºÏÈ½øÏÈ³ö
-*ÊµÏÖÓÃÕ»½á¹¹Ä£Äâ¶ÓÁĞ & ÓÃ¶ÓÁĞ½á¹¹Ä£ÄâÕ»½á¹¹
+*å®ç°æ ˆï¼šå…ˆè¿›åå‡º
+*å®ç°é˜Ÿåˆ—ï¼šå…ˆè¿›å…ˆå‡º
+*å®ç°ç”¨æ ˆç»“æ„æ¨¡æ‹Ÿé˜Ÿåˆ— & ç”¨é˜Ÿåˆ—ç»“æ„æ¨¡æ‹Ÿæ ˆç»“æ„
 *@author Hartley
 */
 class Structure 
 {
 
-	//³ÌĞòÈë¿Ú
+	//ç¨‹åºå…¥å£
 	public static void main(String[] args) 
 	{
-		StackToQueueTest2 s = new StackToQueueTest2();
+		StackToQueueTest s = new StackToQueueTest();
 		//StackTest s = new StackTest(5);
 		s.push(1);
 		s.push(2);
@@ -36,21 +36,21 @@ class Structure
 	}
 }
 
-//*******************************¡¾Ä£ÄâÕ»½á¹¹¡¿********************************
-//Ë¼Â·£ºStack-ÏÈ½øºó³ö£¨»ùÓÚÊı×é£¬pushºóÖ¸Õë++£¬popºóÖ¸Õë--£¬peekºó¶ÁÈ¡Ö¸Õë+1µÄÖµ£©
-class StackTest
+//*******************************ã€æ¨¡æ‹Ÿæ ˆç»“æ„ã€‘********************************
+//æ€è·¯ï¼šStack-å…ˆè¿›åå‡ºï¼ˆåŸºäºæ•°ç»„ï¼ŒpushåæŒ‡é’ˆ++ï¼ŒpopåæŒ‡é’ˆ--ï¼Œpeekåè¯»å–æŒ‡é’ˆ+1çš„å€¼ï¼‰
+class StackTest1
 {
 	int[] arr;
-	int index= 0 ;//µ±Ç°Ö¸ÕëÎ»ÖÃ
-	public StackTest(int size)
+	int index= 0 ;//å½“å‰æŒ‡é’ˆä½ç½®
+	public StackTest1(int size)
 	{
 		arr = new int[size];
 	}
 
-	//²é¿´Õ»¶¥ÔªËØ
+	//æŸ¥çœ‹æ ˆé¡¶å…ƒç´ 
 	public Integer peek()
 	{
-		//ÅĞ¶ÏÈç¹û¶ÑÕ»Îª¿Õ--Ö¸ÕëĞ¡ÓÚ¶ÑÕ»´óĞ¡£¬Ôò±¨´í
+		//åˆ¤æ–­å¦‚æœå †æ ˆä¸ºç©º--æŒ‡é’ˆå°äºå †æ ˆå¤§å°ï¼Œåˆ™æŠ¥é”™
 		if(index == 0)
 		{
 			return null;
@@ -59,10 +59,10 @@ class StackTest
 		return arr[index-1];
 	}
 
-	//°ÑÔªËØÑ¹Õ»
+	//æŠŠå…ƒç´ å‹æ ˆ
 	public void push(int ele)
 	{
-		//ÅĞ¶ÏÈç¹ûÖ¸Õë³¬³ö¶ÑÕ»´óĞ¡£¬Ôò±¨´í
+		//åˆ¤æ–­å¦‚æœæŒ‡é’ˆè¶…å‡ºå †æ ˆå¤§å°ï¼Œåˆ™æŠ¥é”™
 		if(index == arr.length)
 		{
 			throw new ArrayIndexOutOfBoundsException("the stack is full!");
@@ -72,7 +72,7 @@ class StackTest
 
 	}
 
-	//°ÑÔªËØ´ÓÕ»ÖĞµ¯³ö
+	//æŠŠå…ƒç´ ä»æ ˆä¸­å¼¹å‡º
 	public int pop()
 	{
 		if(index<0)
@@ -84,12 +84,12 @@ class StackTest
 
 }
 
-//*******************************¡¾Ä£Äâ¶ÓÁĞ½á¹¹¡¿********************************
-//Ë¼Â·£ºQueue-ÏÈ½øÏÈ³ö£¨»ùÓÚÊı×é£¬Á½¸öÖ¸Õëstart¡¢end£»µ±Ç°¶ÓÁĞÔªËØ¸öÊısize£©
-//pushºóendÖ¸Õë++¡¢size++£»popºóstartÖ¸Õë++¡¢size--£¬peekºó¶ÁÈ¡Ö¸ÕëstartÎ»ÖÃµÄÖµ£©
+//*******************************ã€æ¨¡æ‹Ÿé˜Ÿåˆ—ç»“æ„ã€‘********************************
+//æ€è·¯ï¼šQueue-å…ˆè¿›å…ˆå‡ºï¼ˆåŸºäºæ•°ç»„ï¼Œä¸¤ä¸ªæŒ‡é’ˆstartã€endï¼›å½“å‰é˜Ÿåˆ—å…ƒç´ ä¸ªæ•°sizeï¼‰
+//pushåendæŒ‡é’ˆ++ã€size++ï¼›popåstartæŒ‡é’ˆ++ã€size--ï¼Œpeekåè¯»å–æŒ‡é’ˆstartä½ç½®çš„å€¼ï¼‰
 class QueueTest
 {
-	Integer size;//½â¾ö¶ÓÁĞ½á¹¹µÄ¹Ø¼ü--start¡¢end·Ö±ğÓësizeñîºÏ
+	Integer size;//è§£å†³é˜Ÿåˆ—ç»“æ„çš„å…³é”®--startã€endåˆ†åˆ«ä¸sizeè€¦åˆ
 	Integer start;
 	Integer end;
 	Integer[] arr;
@@ -114,7 +114,7 @@ class QueueTest
 		}
 		return arr[ start ];
 	}
-	//Ìí¼ÓÔªËØÊ±£¬end+1
+	//æ·»åŠ å…ƒç´ æ—¶ï¼Œend+1
 	public void push(int num)
 	{
 		if(size==arr.length)
@@ -122,24 +122,24 @@ class QueueTest
 			throw new ArrayIndexOutOfBoundsException("the Queue is full !");
 		}
 		arr[end] = num;
-		end = getPos(end);//endÖ¸ÕëÒÆµ½µ±Ç°Ä©Î²ÔªËØµÄÏÂÒ»¸öÎ»ÖÃ
+		end = getPos(end);//endæŒ‡é’ˆç§»åˆ°å½“å‰æœ«å°¾å…ƒç´ çš„ä¸‹ä¸€ä¸ªä½ç½®
 		size++;
 		
 	}
-	//µ¯³öÔªËØÊ±£¬start+1 
+	//å¼¹å‡ºå…ƒç´ æ—¶ï¼Œstart+1 
 	public Integer poll()
 	{
 		if(size==0)
 		{
 			throw new ArrayIndexOutOfBoundsException("the Queue is empty!");
 		}
-		int temp = start;//×¼±¸Òªµ¯³öµÄstartÖ¸Õë
-		start = getPos(start);//startÖ¸ÕëÏòÇ°ÒÆ¶¯Ò»¸ñ
-		size--;//¶ÔÓ¦¶ÓÁĞÔªËØsize¼õÒ»
+		int temp = start;//å‡†å¤‡è¦å¼¹å‡ºçš„startæŒ‡é’ˆ
+		start = getPos(start);//startæŒ‡é’ˆå‘å‰ç§»åŠ¨ä¸€æ ¼
+		size--;//å¯¹åº”é˜Ÿåˆ—å…ƒç´ sizeå‡ä¸€
 		//System.out.print("Start:"+start);
 		return arr[temp];
 	}
-	//ÅĞ¶ÏÊÇ·ñ³¬³öÊı×é´óĞ¡£¬Ñ­»·start¡¢endÖ¸Õë
+	//åˆ¤æ–­æ˜¯å¦è¶…å‡ºæ•°ç»„å¤§å°ï¼Œå¾ªç¯startã€endæŒ‡é’ˆ
 	public int getPos(int p)
 	{
 		if(p==arr.length-1)
@@ -153,9 +153,9 @@ class QueueTest
 	}
 }
 
-//*******************************¡¾Õ»Ä£Äâ¶ÓÁĞ½á¹¹¡¿********************************
-//Ë¼Â·£ºÓÃÁ½¸öÕ»£¬µÚÒ»¸öÕ»ÏòµÚ¶ş¸öÕ»µ¯ÔªËØ£¬Ê£µÚÒ»¸öÕ»ÖĞ×îºóÒ»¸öµ¯³öµÄ¼´ÎªÄ£Äâ¶ÓÁĞµÄpollÖµ
-//ÊµÏÖ£ºpopÕ»&pushÕ»£¨pushµ½popÕ»µ¼ÔªËØ£ºÒ»´ÎĞÔµ¹Íê£»popÕ»ÓĞÔªËØ²»Òªµ¹£© pop Õ»& helpÕ»£¨²»¿É£¡£©
+//*******************************ã€æ ˆæ¨¡æ‹Ÿé˜Ÿåˆ—ç»“æ„ã€‘********************************
+//æ€è·¯ï¼šç”¨ä¸¤ä¸ªæ ˆï¼Œç¬¬ä¸€ä¸ªæ ˆå‘ç¬¬äºŒä¸ªæ ˆå¼¹å…ƒç´ ï¼Œå‰©ç¬¬ä¸€ä¸ªæ ˆä¸­æœ€åä¸€ä¸ªå¼¹å‡ºçš„å³ä¸ºæ¨¡æ‹Ÿé˜Ÿåˆ—çš„pollå€¼
+//å®ç°ï¼špopæ ˆ&pushæ ˆï¼ˆpushåˆ°popæ ˆå¯¼å…ƒç´ ï¼šä¸€æ¬¡æ€§å€’å®Œï¼›popæ ˆæœ‰å…ƒç´ ä¸è¦å€’ï¼‰ pop æ ˆ& helpæ ˆï¼ˆä¸å¯ï¼ï¼‰
 class StackToQueueTest
 {
 	private Stack<Integer> pushStack;
@@ -190,7 +190,7 @@ class StackToQueueTest
 		return popStack.peek();
 	}
 
-	//´ÓpushStackµ¹ÈëpopStackĞèÒªÂú×ãpopStackÎª¿Õ£¬ÇÒµ¼ÈëÒªÒ»´ÎĞÔµ¹
+	//ä»pushStackå€’å…¥popStackéœ€è¦æ»¡è¶³popStackä¸ºç©ºï¼Œä¸”å¯¼å…¥è¦ä¸€æ¬¡æ€§å€’
 	public void pushToPop()
 	{
 		if(popStack.isEmpty() )
@@ -203,7 +203,7 @@ class StackToQueueTest
 	}
 	
 }
-//Ë¼Â·2²»¿É£¬¸úÓëhelpÕ»»¥»»ºó¡°¶ÓÎ²¡±ÔªËØÔÚÕ»µ×£¬¶øÓÃÕ»ĞÂÌí¼ÓµÄÔªËØ»áÖ±½Ó·ÅÔÚ¡°¶ÓÊ×¡±ÔªËØÉÏ
+//æ€è·¯2ä¸å¯ï¼Œè·Ÿä¸helpæ ˆäº’æ¢åâ€œé˜Ÿå°¾â€å…ƒç´ åœ¨æ ˆåº•ï¼Œè€Œç”¨æ ˆæ–°æ·»åŠ çš„å…ƒç´ ä¼šç›´æ¥æ”¾åœ¨â€œé˜Ÿé¦–â€å…ƒç´ ä¸Š
 /*
 class StackToQueueTest2
 {
@@ -250,7 +250,7 @@ class StackToQueueTest2
 		return res;
 	}
 
-	//½»»»helpÓëstack
+	//äº¤æ¢helpä¸stack
 	public void swap()
 	{
 		Stack<Integer> tmp = help;
@@ -260,9 +260,9 @@ class StackToQueueTest2
 	
 }
 */
-//*******************************¡¾¶ÓÁĞÄ£ÄâÕ»½á¹¹¡¿********************************
-//Ë¼Â·£ºÁ½¸ö¶ÓÁĞ£¬µÚÒ»¸ö¶ÓÁĞÏòµÚ¶ş¸ö¶ÓÁĞµ¯ÔªËØ£¬Ê£µÚÒ»¸ö¶ÓÁĞÖĞ×îºóÒ»¸öµ¯³öµÄ¼´ÎªÄ£ÄâÕ»µÄpopÖµ
-//¶ÓÁĞ¿É£ºÓëhelpÕ»»¥»»ºó¡°¶ÓÎ²¡±ÔªËØÔÚÕ»µ×£¬¶øÓÃ¶ÓÁĞĞÂÌí¼ÓµÄÔªËØ»áÖ±½Ó·ÅÔÚ¡°¶ÓÎ²¡±ÔªËØºó£¡
+//*******************************ã€é˜Ÿåˆ—æ¨¡æ‹Ÿæ ˆç»“æ„ã€‘********************************
+//æ€è·¯ï¼šä¸¤ä¸ªé˜Ÿåˆ—ï¼Œç¬¬ä¸€ä¸ªé˜Ÿåˆ—å‘ç¬¬äºŒä¸ªé˜Ÿåˆ—å¼¹å…ƒç´ ï¼Œå‰©ç¬¬ä¸€ä¸ªé˜Ÿåˆ—ä¸­æœ€åä¸€ä¸ªå¼¹å‡ºçš„å³ä¸ºæ¨¡æ‹Ÿæ ˆçš„popå€¼
+//é˜Ÿåˆ—å¯ï¼šä¸helpæ ˆäº’æ¢åâ€œé˜Ÿå°¾â€å…ƒç´ åœ¨æ ˆåº•ï¼Œè€Œç”¨é˜Ÿåˆ—æ–°æ·»åŠ çš„å…ƒç´ ä¼šç›´æ¥æ”¾åœ¨â€œé˜Ÿå°¾â€å…ƒç´ åï¼
 class QueueToStackTest
 {
 	private Queue<Integer> queue;
@@ -290,7 +290,7 @@ class QueueToStackTest
 		}
 		while (queue.size() != 1 )
 		{
-			help.add( queue.poll() );//queueÔÚpollÊ±Æäsize²»¶Ï--
+			help.add( queue.poll() );//queueåœ¨pollæ—¶å…¶sizeä¸æ–­--
 		}
 		Integer res = queue.poll();
 		swap();
@@ -305,15 +305,15 @@ class QueueToStackTest
 		}
 		while (queue.size() != 1 )
 		{
-			help.add( queue.poll() );//queueÔÚpollÊ±Æäsize²»¶Ï--
+			help.add( queue.poll() );//queueåœ¨pollæ—¶å…¶sizeä¸æ–­--
 		}
 		int res = queue.poll();
-		help.add(res);//peekÖ»ÊÇ²é¿´Õ»¶¥ÔªËØ£¬²»¸Ä±äÔ­ÓĞÔªËØ
+		help.add(res);//peekåªæ˜¯æŸ¥çœ‹æ ˆé¡¶å…ƒç´ ï¼Œä¸æ”¹å˜åŸæœ‰å…ƒç´ 
 		swap();
 		return res;
 	}
 
-	//½»»»¸¨Öú¶ÓÁĞÓëÔ­Ê¼¶ÓÁĞÒıÓÃ::Ä¿µÄ1-»ñÈ¡µ±Ç°¶ÓÁĞ£¬Ä¿µÄ2-Çå¿Õ¸¨Öú¶ÓÁĞ
+	//äº¤æ¢è¾…åŠ©é˜Ÿåˆ—ä¸åŸå§‹é˜Ÿåˆ—å¼•ç”¨::ç›®çš„1-è·å–å½“å‰é˜Ÿåˆ—ï¼Œç›®çš„2-æ¸…ç©ºè¾…åŠ©é˜Ÿåˆ—
 	public void swap()
 	{
 		Queue<Integer> temp = help;

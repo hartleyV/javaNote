@@ -1,10 +1,10 @@
 import java.util.Stack;
 import java.io.*;
 /**
-*¶ÑÕ»Á·Ï°
-*°¸Àı¡¾1¡¿£ºÒªÇóÔÚÊµÏÖÒ»ÌØÊâÕ»µÄÍ¬Ê±£¬¿ÉÒÔÔÚO(1)Ê±¼äÄÚÇó³öÕ»ÖĞ×îĞ¡Öµ
-*Ë¼Â·£ºÒÔ¿Õ¼ä»»Ê±¼ä£¬Ôö¼ÓÒ»×îĞ¡Õ»£¬Ã¿´Î·ÅÈëµ±Ç°Õ»ÖĞ×îĞ¡µÄÔªËØ
-£¨pushÒ»ÔªËØ»áÓë×îĞ¡Õ»Õ»¶¥ÔªËØ±È½Ï£¬Èô±ÈÆäĞ¡Ôò·ÅÈë×îĞ¡Õ»£¬Èô±ÈÆä´óÔòÖØ¸´·Å×îĞ¡Õ»Õ»¶¥ÔªËØ
+*å †æ ˆç»ƒä¹ 
+*æ¡ˆä¾‹ã€1ã€‘ï¼šè¦æ±‚åœ¨å®ç°ä¸€ç‰¹æ®Šæ ˆçš„åŒæ—¶ï¼Œå¯ä»¥åœ¨O(1)æ—¶é—´å†…æ±‚å‡ºæ ˆä¸­æœ€å°å€¼
+*æ€è·¯ï¼šä»¥ç©ºé—´æ¢æ—¶é—´ï¼Œå¢åŠ ä¸€æœ€å°æ ˆï¼Œæ¯æ¬¡æ”¾å…¥å½“å‰æ ˆä¸­æœ€å°çš„å…ƒç´ 
+ï¼ˆpushä¸€å…ƒç´ ä¼šä¸æœ€å°æ ˆæ ˆé¡¶å…ƒç´ æ¯”è¾ƒï¼Œè‹¥æ¯”å…¶å°åˆ™æ”¾å…¥æœ€å°æ ˆï¼Œè‹¥æ¯”å…¶å¤§åˆ™é‡å¤æ”¾æœ€å°æ ˆæ ˆé¡¶å…ƒç´ 
 
 *@author Hartley
 *@version 1.0.0
@@ -13,7 +13,7 @@ import java.io.*;
 class  StackTest
 {
 
-	//************³ÌĞòÈë¿Ú***************
+	//************ç¨‹åºå…¥å£***************
 	public static void main(String[] args) 
 	{
 		MinStack stack = new MinStack();
@@ -28,11 +28,11 @@ class  StackTest
 	}
 }
 
-//ÊµÏÖÌØÊâÕ»
+//å®ç°ç‰¹æ®Šæ ˆ
 class MinStack
 {
-	private Stack<Integer> stack ;//´´½¨Á½¸öÕ»£¬Ò»¸öÕı³£Ñ¹ÈëÔªËØµÄÕ»
-	private Stack<Integer> minStack;//Ò»¸öÑ¹ÈëÔªËØÕ»ÖĞ×îĞ¡ÖµµÄÕ»
+	private Stack<Integer> stack ;//åˆ›å»ºä¸¤ä¸ªæ ˆï¼Œä¸€ä¸ªæ­£å¸¸å‹å…¥å…ƒç´ çš„æ ˆ
+	private Stack<Integer> minStack;//ä¸€ä¸ªå‹å…¥å…ƒç´ æ ˆä¸­æœ€å°å€¼çš„æ ˆ
 
 	public MinStack()
 	{
@@ -40,41 +40,41 @@ class MinStack
 		minStack = new Stack<>();
 	}
 	
-	//peekÈ¡Õ»¶¥ÔªËØ
+	//peekå–æ ˆé¡¶å…ƒç´ 
 	public Integer peek()
 	{
 		return stack.peek();
 	}
-	//Ñ¹ÈëÔªËØ
+	//å‹å…¥å…ƒç´ 
 	public void push(Integer ele)
 	{
 		stack.push(ele);
-		//ÏòminStack¼Ó
-		if (minStack.isEmpty())//Èç¹û×îĞ¡Õ»»¹Ã»ÓĞÔªËØ---Ö±½Ó¼ÓÔªËØ
+		//å‘minStackåŠ 
+		if (minStack.isEmpty())//å¦‚æœæœ€å°æ ˆè¿˜æ²¡æœ‰å…ƒç´ ---ç›´æ¥åŠ å…ƒç´ 
 		{
 			minStack.push(ele);
 		}else{
-			if ( ele.compareTo( minStack.peek() ) <= 0 )//×îĞ¡Õ»Õ»¶¥ÔªËØ±È ĞÂ¼ÓÈëµÄÔªËØ´óÊ±
+			if ( ele.compareTo( minStack.peek() ) <= 0 )//æœ€å°æ ˆæ ˆé¡¶å…ƒç´ æ¯” æ–°åŠ å…¥çš„å…ƒç´ å¤§æ—¶
 			{
-				minStack.push(ele);//Ñ¹ÈëĞÂ¼ÓÈëµÄÔªËØ
+				minStack.push(ele);//å‹å…¥æ–°åŠ å…¥çš„å…ƒç´ 
 			}else{
-				minStack.push( minStack.peek() );//·ñÔòÑ¹Èë×Ô¼ºµÄÕ»¶¥ÔªËØ
+				minStack.push( minStack.peek() );//å¦åˆ™å‹å…¥è‡ªå·±çš„æ ˆé¡¶å…ƒç´ 
 			}
 		}
 	}
 
-	//µ¯³öÕ»¶¥ÔªËØ
+	//å¼¹å‡ºæ ˆé¡¶å…ƒç´ 
 	public Integer pop() 
 	{
 		if (stack.empty())
 		{
-			throw new IndexOutOfBoundsException("Õ»ÖĞÔªËØÎª¿Õ£¡£¡²»ÄÜÔÙÌÍ¿ÕÁË");
+			throw new IndexOutOfBoundsException("æ ˆä¸­å…ƒç´ ä¸ºç©ºï¼ï¼ä¸èƒ½å†æç©ºäº†");
 		}
 		minStack.pop();
 		return stack.pop();
 	}
 
-	//»ñÈ¡µ±Ç°¶ÑÕ»ÖĞ×îĞ¡Öµ
+	//è·å–å½“å‰å †æ ˆä¸­æœ€å°å€¼
 	public Integer getMin()
 	{
 		return minStack.peek();

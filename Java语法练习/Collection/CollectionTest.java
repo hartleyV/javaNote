@@ -2,91 +2,91 @@ import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;
 /**
-***************************¡¾¼¯ºÏ¡¿*******************************************
-*Collection(Set--TreeSet\HashSet ;  List--ArrayList\LinkedList ; Queue-ArrayDeque\LinedList) --¼¯ºÏÀàËÆÒ»¸öÈÝÆ÷£º
-*1 Ôö¡¢É¾¡¢¸Ä?¡¢²é£¨¼¯ºÏÔªËØ¾ùÎªObjectÀàÐÍ--ºóÃæ¿ÉÓÉ·ºÐÍÔ¼Êø£©
-*2 ¼¯ºÏÔËËã£¨²î¡¢²¢£©
-*3 ±éÀú¼¯ºÏ
+***************************ã€é›†åˆã€‘*******************************************
+*Collection(Set--TreeSet\HashSet ;  List--ArrayList\LinkedList ; Queue-ArrayDeque\LinedList) --é›†åˆç±»ä¼¼ä¸€ä¸ªå®¹å™¨ï¼š
+*1 å¢žã€åˆ ã€æ”¹?ã€æŸ¥ï¼ˆé›†åˆå…ƒç´ å‡ä¸ºObjectç±»åž‹--åŽé¢å¯ç”±æ³›åž‹çº¦æŸï¼‰
+*2 é›†åˆè¿ç®—ï¼ˆå·®ã€å¹¶ï¼‰
+*3 éåŽ†é›†åˆ
 *4 Predicate filter
 *5 Stream
 */
 class  CollectionTest
 {
-	//1 Ôö¡¢É¾¡¢²é--///////////////////////////////////////////////////////////////
+	//1 å¢žã€åˆ ã€æŸ¥--///////////////////////////////////////////////////////////////
 	public static void basicTest(Collection c)
 	{
-		//Ìí¼ÓÔªËØ
+		//æ·»åŠ å…ƒç´ 
 		c.add("AE86");
 		c.add("8");
-		c.add("ÌÙÔ­¶¹¸¯µê×¨ÓÃ");
+		c.add("è—¤åŽŸè±†è…åº—ä¸“ç”¨");
 		c.add("8");
 		
-		println("³õÊ¼¼¯ºÏcµÄ´óÐ¡Îª£º"+c.size()+" ; °üº¬ÔªËØÓÐ£º"+c);
+		println("åˆå§‹é›†åˆcçš„å¤§å°ä¸ºï¼š"+c.size()+" ; åŒ…å«å…ƒç´ æœ‰ï¼š"+c);
 /*
-		//²é---·µ»Ø²¼¶û
+		//æŸ¥---è¿”å›žå¸ƒå°”
 		boolean flag = c.contains("AE86");
-		println("ÊÇ·ñ´æÔÚAE86ÔªËØ£¿" + flag);
+		println("æ˜¯å¦å­˜åœ¨AE86å…ƒç´ ï¼Ÿ" + flag);
 
-		//removeÉ¾---Ö»É¾³ýµÚÒ»¸ö·ûºÏÌõ¼þµÄ~
+		//removeåˆ ---åªåˆ é™¤ç¬¬ä¸€ä¸ªç¬¦åˆæ¡ä»¶çš„~
 		c.remove("8");
-		println("É¾³ýºó¼¯ºÏcµÄ´óÐ¡Îª£º"+c.size()+" ; °üº¬ÔªËØÓÐ£º"+c);
-		//clearÈ«É¾
+		println("åˆ é™¤åŽé›†åˆcçš„å¤§å°ä¸ºï¼š"+c.size()+" ; åŒ…å«å…ƒç´ æœ‰ï¼š"+c);
+		//clearå…¨åˆ 
 		c.clear();
-		println("È«É¾ºó¼¯ºÏcµÄ´óÐ¡Îª£º"+c.size()+" ; °üº¬ÔªËØÓÐ£º"+c);
+		println("å…¨åˆ åŽé›†åˆcçš„å¤§å°ä¸ºï¼š"+c.size()+" ; åŒ…å«å…ƒç´ æœ‰ï¼š"+c);
 */
 	}
 
-	//2 ¼¯ºÏÔËËã///////////////////////////////////////////////////////////////
+	//2 é›†åˆè¿ç®—///////////////////////////////////////////////////////////////
 	public static void calTest( )
 	{
-		//Collection ÊÇ¼¯ºÏ½Ó¿Ú£¬ArrayListÊÇÊµÏÖÀà
+		//Collection æ˜¯é›†åˆæŽ¥å£ï¼ŒArrayListæ˜¯å®žçŽ°ç±»
 		Collection c = new ArrayList();
-		basicTest(c);//Ìí¼ÓÔªËØ--------------------------------
+		basicTest(c);//æ·»åŠ å…ƒç´ --------------------------------
 		Collection num = new ArrayList();
 		num.add("8");
 
-		//********************¡¾½»¼¯ÔËËã¡¿*****************************
+		//********************ã€äº¤é›†è¿ç®—ã€‘*****************************
 
 		c.retainAll(num);
-		println("½»¼¯ÔËËã¼¯ºÏcµÄ´óÐ¡Îª£º"+c.size()+" ; °üº¬ÔªËØÓÐ£º"+c);
+		println("äº¤é›†è¿ç®—é›†åˆcçš„å¤§å°ä¸ºï¼š"+c.size()+" ; åŒ…å«å…ƒç´ æœ‰ï¼š"+c);
 
-		basicTest(c);//Ìí¼ÓÔªËØ-------------------------------
+		basicTest(c);//æ·»åŠ å…ƒç´ -------------------------------
 
-		//********************¡¾²îÔËËã¡¿*****************************
+		//********************ã€å·®è¿ç®—ã€‘*****************************
 
-		c.removeAll(num);//(»á²îµôËùÓÐÓënumÏà½»²¿·Ö£©
-		println("²îÔËËã¼¯ºÏcµÄ´óÐ¡Îª£º"+c.size()+" ; °üº¬ÔªËØÓÐ£º"+c);
+		c.removeAll(num);//(ä¼šå·®æŽ‰æ‰€æœ‰ä¸Žnumç›¸äº¤éƒ¨åˆ†ï¼‰
+		println("å·®è¿ç®—é›†åˆcçš„å¤§å°ä¸ºï¼š"+c.size()+" ; åŒ…å«å…ƒç´ æœ‰ï¼š"+c);
 
 	}
-	//3 ±éÀú///////////////////////////////////////////////////////////////
+	//3 éåŽ†///////////////////////////////////////////////////////////////
 	public static void iterTest( )
 	{
 		Collection c = new ArrayList();
-		basicTest(c); //Ìí¼ÓÔªËØ--------------------------------
+		basicTest(c); //æ·»åŠ å…ƒç´ --------------------------------
 		
-		//********************¡¾Lambda+forEach¡¿*****************************
-		/*Ê¹ÓÃLambda±äÁ¿
-		--ÀûÓÃ½Ó¿ÚIterableÖÐforEach(Consumer action)·½·¨£º»á°ÑÃ¿¸öÔªËØ´«¸øConsumerµÄaccept·½·¨
+		//********************ã€Lambda+forEachã€‘*****************************
+		/*ä½¿ç”¨Lambdaå˜é‡
+		--åˆ©ç”¨æŽ¥å£Iterableä¸­forEach(Consumer action)æ–¹æ³•ï¼šä¼šæŠŠæ¯ä¸ªå…ƒç´ ä¼ ç»™Consumerçš„acceptæ–¹æ³•
 		*/
 
-		print("Lambda±í´ïÊ½ + forEach±éÀúÎª£º");
+		print("Lambdaè¡¨è¾¾å¼ + forEachéåŽ†ä¸ºï¼š");
 		c.forEach(obj->print(obj + " : ") );
 		println("");
 
-		//************************¡¾Iterator¡¿***********************************
-		//java8--Ê¹ÓÃIterator(Iterator onlyÓÃÓÚ±éÀúCollectionÖÐÔªËØ£©
+		//************************ã€Iteratorã€‘***********************************
+		//java8--ä½¿ç”¨Iterator(Iterator onlyç”¨äºŽéåŽ†Collectionä¸­å…ƒç´ ï¼‰
 
 		Iterator it = c.iterator();
-		//hasNext ¡¢next¡¢ remove--it (Ö»ÄÜ±éÀúÊ±Ö»ÄÜÍ¨¹ýµü´úÆ÷É¾³ýÉÏÒ»¸öNext£©¡¢forEachRemaining(Consumer act)
-		print("iterator              ±éÀúÎª£º");
+		//hasNext ã€nextã€ remove--it (åªèƒ½éåŽ†æ—¶åªèƒ½é€šè¿‡è¿­ä»£å™¨åˆ é™¤ä¸Šä¸€ä¸ªNextï¼‰ã€forEachRemaining(Consumer act)
+		print("iterator              éåŽ†ä¸ºï¼š");
 		
-		int flag = 0;//É¾³ýµÚ¶þ¸ö8±ê¼Ç
+		int flag = 0;//åˆ é™¤ç¬¬äºŒä¸ª8æ ‡è®°
 		while (it.hasNext())
 		{		
-			//next·µ»ØÖµÎªString----ÀûÓÃ·ºÐÍ Ôò²»ÐèÒªÇ¿ÖÆ×ª»»
+			//nextè¿”å›žå€¼ä¸ºString----åˆ©ç”¨æ³›åž‹ åˆ™ä¸éœ€è¦å¼ºåˆ¶è½¬æ¢
 			String str = (String)it.next();
 			System.out.print(str + " * ");
-			//×¢Òâ£¡£¡String±È½Ï×Ö·ûÐòÁÐÊÇ·ñÒ»ÖÂÓ¦ÓÃequals!! µÈºÅÖ»±È½ÏÒýÓÃµØÖ·
+			//æ³¨æ„ï¼ï¼Stringæ¯”è¾ƒå­—ç¬¦åºåˆ—æ˜¯å¦ä¸€è‡´åº”ç”¨equals!! ç­‰å·åªæ¯”è¾ƒå¼•ç”¨åœ°å€
 			if (str.equals("8") )
 			{
 				flag++;
@@ -97,10 +97,10 @@ class  CollectionTest
 			}	
 		}
 		println("");
-		println("µü´úÊ±µü´úÆ÷É¾³ýºó--´óÐ¡Îª£º"+c.size()+" ; °üº¬ÔªËØÓÐ£º"+c);
+		println("è¿­ä»£æ—¶è¿­ä»£å™¨åˆ é™¤åŽ--å¤§å°ä¸ºï¼š"+c.size()+" ; åŒ…å«å…ƒç´ æœ‰ï¼š"+c);
 		
-		print("for-each µü´ú£º");
-		//************************¡¾forEach¡¿***********************************
+		print("for-each è¿­ä»£ï¼š");
+		//************************ã€forEachã€‘***********************************
 		for(Object obj : c)
 		{
 			print(obj + " :: ");
@@ -108,10 +108,10 @@ class  CollectionTest
 		println("");
 		
 	}
-	//4 ÀûÓÚPredicate µÄtest·½·¨£¬Í³¼Æ·ûºÏÌõ¼þµÄÔªËØÊýÁ¿/////////////////////////////////
+	//4 åˆ©äºŽPredicate çš„testæ–¹æ³•ï¼Œç»Ÿè®¡ç¬¦åˆæ¡ä»¶çš„å…ƒç´ æ•°é‡/////////////////////////////////
 	public static int predicateTest(Collection c,Predicate p)
 	{
-		//±éÀú¼¯ºÏ + µ÷ÓÃtest·½·¨ 
+		//éåŽ†é›†åˆ + è°ƒç”¨testæ–¹æ³• 
 		int num = 0;
 		for(Object obj:c)
 		{
@@ -123,39 +123,39 @@ class  CollectionTest
 		return num;
 	}
 
-	//5 Stream£¨Ö§³Ö²¢ÐÐºÍ´®ÐÐ£©²Ù×÷/////////////////////////////////////
+	//5 Streamï¼ˆæ”¯æŒå¹¶è¡Œå’Œä¸²è¡Œï¼‰æ“ä½œ/////////////////////////////////////
 	public static void streamTest(Collection c)
 	{
 		Stream s = c.stream();
 		//s.forEach(System.out::println);
 
-		//²ÉÓÃStreamÖÐ£ºÖÐ¼ä·½·¨£¨·µ»ØÁíÒ»¸öÁ÷£©¡¢Ä©¶Ë·½·¨£¬¼«´ó¼ò»¯ÊéÐ´Ð§ÂÊ
-		//***±ÈÈç·µ»Ø·ûºÏÌõ¼þµÄÔªËØÊýÁ¿***
-		println("¼¯ºÏÖÐ×Ö·û³¤¶È´óÓÚ4µÄÔªËØ¸öÊýÎª£º"
+		//é‡‡ç”¨Streamä¸­ï¼šä¸­é—´æ–¹æ³•ï¼ˆè¿”å›žå¦ä¸€ä¸ªæµï¼‰ã€æœ«ç«¯æ–¹æ³•ï¼Œæžå¤§ç®€åŒ–ä¹¦å†™æ•ˆçŽ‡
+		//***æ¯”å¦‚è¿”å›žç¬¦åˆæ¡ä»¶çš„å…ƒç´ æ•°é‡***
+		println("é›†åˆä¸­å­—ç¬¦é•¿åº¦å¤§äºŽ4çš„å…ƒç´ ä¸ªæ•°ä¸ºï¼š"
 			+c.stream()
 				.filter(obj->( ((String)obj).length()>4 ))
 				.count() );
 
-		println("¼¯ºÏÖÐ°üº¬×Ó´®¡°8¡±µÄÔªËØ¸öÊýÎª£º"
+		println("é›†åˆä¸­åŒ…å«å­ä¸²â€œ8â€çš„å…ƒç´ ä¸ªæ•°ä¸ºï¼š"
 			+c.stream()
 				.filter(obj->( ((String)obj).contains("8") ))
 				.count() );
 
-		//¹ý³Ì£º¼¯ºÏ¶ÔÏó ×ª Á÷¶ÔÏó ×ª IntStream £¬×îºóµ÷ÓÃIntStreamµÄforEach·½·¨
+		//è¿‡ç¨‹ï¼šé›†åˆå¯¹è±¡ è½¬ æµå¯¹è±¡ è½¬ IntStream ï¼Œæœ€åŽè°ƒç”¨IntStreamçš„forEachæ–¹æ³•
 		c.stream().mapToInt(obj->((String)obj).length()).forEach(CollectionTest::println);
 	}
 
 	public static void main(String[] args) 
 	{
-		//iterTest( );±éÀú
+		//iterTest( );éåŽ†
 		Collection c = new ArrayList();
 		basicTest(c); 
 
-		//4 ÓÃlambdaÓï¾ä±íÊ¾Predicate filter ÖÐtest·½·¨--¹ýÂËÌõ¼þ
+		//4 ç”¨lambdaè¯­å¥è¡¨ç¤ºPredicate filter ä¸­testæ–¹æ³•--è¿‡æ»¤æ¡ä»¶
 		//c.removeIf(obj->( ( (String)obj).length()>4) );
 		//println(c);
 		/*
-		println("¼¯ºÏÖÐ×Ö·û³¤¶ÈÐ¡ÓÚ5µÄÔªËØ¸öÊý£º"+predicateTest(c,obj->( ((String)obj).length()<5 )) );
+		println("é›†åˆä¸­å­—ç¬¦é•¿åº¦å°äºŽ5çš„å…ƒç´ ä¸ªæ•°ï¼š"+predicateTest(c,obj->( ((String)obj).length()<5 )) );
 		*/
 		//5 stream
 		streamTest(c);

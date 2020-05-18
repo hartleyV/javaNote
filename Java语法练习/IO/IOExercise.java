@@ -1,13 +1,13 @@
 import java.io.*;
 /**
-*IOÁ·Ï°Ìâ
+*IOç»ƒä¹ é¢˜
 *@author Hartley
 *@version 1.0.0
 */
 
 class  IOExercise
 {
-	//************³ÌĞòÈë¿Ú***************
+	//************ç¨‹åºå…¥å£***************
 	public static void main(String[] args) 
 	{
 		String path = "C:\\Users\\workFiles\\studentApi";
@@ -17,15 +17,15 @@ class  IOExercise
 	}
 }
 
-//¶¨Òå¹¤¾ßÀà 
-//¿ÉÒÔÁĞ³öÖ¸¶¨Â·¾¶ÏÂµÄËùÓĞÎÄ¼ş¼°×ÓÄ¿Â¼
-//----¿ÉÒÔÍ³¼ÆÎÄ¼şÊıºÍÄ¿Â¼Êı
-//----ÊµÏÖ¸´ÖÆ¹¦ÄÜ£¬copyÊÇÎÄ¼ş£¬Ôò¸´ÖÆµ½Ö¸¶¨Â·¾¶£»copyÊÇÄ¿Â¼£¬Ôò½«ÆäËùÓĞ×ÓÎÄ¼ş×ÓÄ¿Â¼¸´ÖÆµ½Ö¸¶¨Â·¾¶
+//å®šä¹‰å·¥å…·ç±» 
+//å¯ä»¥åˆ—å‡ºæŒ‡å®šè·¯å¾„ä¸‹çš„æ‰€æœ‰æ–‡ä»¶åŠå­ç›®å½•
+//----å¯ä»¥ç»Ÿè®¡æ–‡ä»¶æ•°å’Œç›®å½•æ•°
+//----å®ç°å¤åˆ¶åŠŸèƒ½ï¼Œcopyæ˜¯æ–‡ä»¶ï¼Œåˆ™å¤åˆ¶åˆ°æŒ‡å®šè·¯å¾„ï¼›copyæ˜¯ç›®å½•ï¼Œåˆ™å°†å…¶æ‰€æœ‰å­æ–‡ä»¶å­ç›®å½•å¤åˆ¶åˆ°æŒ‡å®šè·¯å¾„
 class FileUtils
 {
 	
 
-	//ÁĞ³öÖ¸¶¨Â·¾¶ÏÂµÄÎÄ¼ş & Ä¿Â¼
+	//åˆ—å‡ºæŒ‡å®šè·¯å¾„ä¸‹çš„æ–‡ä»¶ & ç›®å½•
 	public static void list(String path)
 	{
 		File file = new File(path);
@@ -36,7 +36,7 @@ class FileUtils
 		}
 
 	}
-	//·Ö±ğ»ñÈ¡ÎÄ¼ş¡¢Ä¿Â¼ÊıÄ¿
+	//åˆ†åˆ«è·å–æ–‡ä»¶ã€ç›®å½•æ•°ç›®
 	public static void getNum(String path)
 	{
 		int fileCount = 0;
@@ -57,11 +57,11 @@ class FileUtils
 				fileCount++;
 			}
 		}
-		println("ÎÄ¼ş¼ĞÓĞ "+folderCount+" ¸ö");
-		println("ÎÄ¼şÓĞ "+fileCount+" ¸ö");
+		println("æ–‡ä»¶å¤¹æœ‰ "+folderCount+" ä¸ª");
+		println("æ–‡ä»¶æœ‰ "+fileCount+" ä¸ª");
 		
 	}
-	//ÁĞ³öËùÓĞÎÄ¼ş¡¢×ÓÄ¿Â¼---levelÓÃÓÚ´òÓ¡²ã¼¶¹ØÏµ
+	//åˆ—å‡ºæ‰€æœ‰æ–‡ä»¶ã€å­ç›®å½•---levelç”¨äºæ‰“å°å±‚çº§å…³ç³»
 	public static void listAll(String path,int level)
 	{
 		println("here"+level);
@@ -87,7 +87,7 @@ class FileUtils
 		}
 	}
 	
-	//»ñÈ¡µ±Ç°²ã¼¶Ç°ÃæµÄ¿Õ¸ñ
+	//è·å–å½“å‰å±‚çº§å‰é¢çš„ç©ºæ ¼
 	private static String getSpace(int level)
 	{
 		StringBuilder space = new StringBuilder();

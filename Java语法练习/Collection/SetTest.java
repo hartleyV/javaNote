@@ -1,11 +1,11 @@
 import java.util.*;
 /**
-*Set--Àà±ÈÓÚ¹Ş×Ó£¬ÔªËØÎŞĞòÇÒ²»¿ÉÖØ¸´£¡£¡--Ïß³Ì²»°²È«~
-*1 HashSet***ËÙ¶È¿ì£¨¸ù¾İ¹şÏ£ÖµË÷Òı£©--¡¾Ìí¼Ó¡¢²éÑ¯ĞÔÄÜgood¡¿~
-*-LinkedHashSet²ÉÓÃÁ´±í£¬¡¾±éÀú¿ì¡¿~µ«ÒòÎªÁ´±í¿ªÏú=²åÈëÉ¾³ıÂı
-*2 TreeSet***»ùÓÚºìºÚÊ÷Ëã·¨À´±£³Ö´ÎĞò--¼¯ºÏÔªËØĞèÒª¡¾±£³ÖÅÅĞò¡¿Ê±
-*3 EnumSet***SetÊµÏÖÀàÖĞĞÔÄÜ×îºÃ£¬--µ«Ö»ÄÜ±£´æÍ¬Ò»Ã¶¾ÙÀà¡¾Ã¶¾ÙÖµ¡¿
-*@author Hartley¡¢
+*Set--ç±»æ¯”äºç½å­ï¼Œå…ƒç´ æ— åºä¸”ä¸å¯é‡å¤ï¼ï¼--çº¿ç¨‹ä¸å®‰å…¨~
+*1 HashSet***é€Ÿåº¦å¿«ï¼ˆæ ¹æ®å“ˆå¸Œå€¼ç´¢å¼•ï¼‰--ã€æ·»åŠ ã€æŸ¥è¯¢æ€§èƒ½goodã€‘~
+*-LinkedHashSeté‡‡ç”¨é“¾è¡¨ï¼Œã€éå†å¿«ã€‘~ä½†å› ä¸ºé“¾è¡¨å¼€é”€=æ’å…¥åˆ é™¤æ…¢
+*2 TreeSet***åŸºäºçº¢é»‘æ ‘ç®—æ³•æ¥ä¿æŒæ¬¡åº--é›†åˆå…ƒç´ éœ€è¦ã€ä¿æŒæ’åºã€‘æ—¶
+*3 EnumSet***Setå®ç°ç±»ä¸­æ€§èƒ½æœ€å¥½ï¼Œ--ä½†åªèƒ½ä¿å­˜åŒä¸€æšä¸¾ç±»ã€æšä¸¾å€¼ã€‘
+*@author Hartleyã€
 */
 class R implements Comparable
 {
@@ -16,14 +16,14 @@ class R implements Comparable
 		this.age = age;
 	}
 
-	//ÖØĞ´toString
+	//é‡å†™toString
 	@Override
 	public String toString()
 	{
 		return "age = " + this.age;
 	}
 
-	//ÖØĞ´equals·½·¨
+	//é‡å†™equalsæ–¹æ³•
 	public boolean equals(Object obj)
 	{
 		if (this == obj)
@@ -37,14 +37,14 @@ class R implements Comparable
 			return false;
 	}
 
-	//ÖØĞ´hashCode·½·¨
+	//é‡å†™hashCodeæ–¹æ³•
 	@Override
 	public int hashCode()
 	{
-		return this.age;//×¢ÒâÕâÑùÔÚĞŞ¸Ä¶ÔÏó³ÉÔ±±äÁ¿Ê±£¬¿Éµ¼ÖÂ²»Í¬¶ÔÏóÍ¬Ò»¹şÏ£Öµ£¬´æÔÚÍ¬Ò»Í°ÖĞ£¬½µµÍĞÔÄÜ
+		return this.age;//æ³¨æ„è¿™æ ·åœ¨ä¿®æ”¹å¯¹è±¡æˆå‘˜å˜é‡æ—¶ï¼Œå¯å¯¼è‡´ä¸åŒå¯¹è±¡åŒä¸€å“ˆå¸Œå€¼ï¼Œå­˜åœ¨åŒä¸€æ¡¶ä¸­ï¼Œé™ä½æ€§èƒ½
 	}
 
-	//ÖØĞ´Comparable·½·¨£º***×ÔÈ»ÅÅĞò***¡¾¹æÔò¡¿£º½á¹ûÓëequalsÒ»ÖÂ£¬
+	//é‡å†™Comparableæ–¹æ³•ï¼š***è‡ªç„¶æ’åº***ã€è§„åˆ™ã€‘ï¼šç»“æœä¸equalsä¸€è‡´ï¼Œ
 	@Override
 	public int compareTo(Object obj)
 	{
@@ -57,28 +57,28 @@ class SetTest
 	SetTest(){}
 	
 	
-	//****************************************¡¾HashSet¡¿************************************
-	//ÔªËØÅÅÁĞË³Ğò¸ù¾İ¶ÔÏóhashCode¼ÆËãµÄ¹şÏ£Öµ£»ÅĞ¶ÏÖØ¸´¸ù¾İequalsºÍhashCode·½·¨£»¼¯ºÏÖµ¿Énull
+	//****************************************ã€HashSetã€‘************************************
+	//å…ƒç´ æ’åˆ—é¡ºåºæ ¹æ®å¯¹è±¡hashCodeè®¡ç®—çš„å“ˆå¸Œå€¼ï¼›åˆ¤æ–­é‡å¤æ ¹æ®equalså’ŒhashCodeæ–¹æ³•ï¼›é›†åˆå€¼å¯null
 	public static void hashSetTest()
 	{
 		HashSet hs = new HashSet();
 		hs.add( new R(5) );
-		hs.add( new R(-3) );//ÔÚhashSetÖĞÅÅÁĞºóÎª -3 5 6
+		hs.add( new R(-3) );//åœ¨hashSetä¸­æ’åˆ—åä¸º -3 5 6
 		hs.add( new R(6) );
 		Iterator it = hs.iterator();
 		System.out.println(hs);
 		R s1 = (R)it.next();
-		s1.age = 5;//½«µÚÒ»¸ö¶ÔÏó¹şÏ£Öµ¸ÄÎª5 µ«ÆäÊµ¼Ê´æ´¢Î»ÖÃÔÚ-3
+		s1.age = 5;//å°†ç¬¬ä¸€ä¸ªå¯¹è±¡å“ˆå¸Œå€¼æ”¹ä¸º5 ä½†å…¶å®é™…å­˜å‚¨ä½ç½®åœ¨-3
 		System.out.println(hs);
 		hs.remove(new R(5) );//
 		System.out.println(hs);
-		System.out.println("ÊÇ·ñ´æÔÚ5ÔªËØ£º"+hs.contains(new R(5)) );
-		System.out.println("ÊÇ·ñ´æÔÚ-3ÔªËØ£º"+hs.contains(new R(-3)) );
-		//ËùÒÔÕâÑùÒ»À´µÚÒ»¸öÔªËØÎŞ·¨ÕıÈ·µÃÒÔ²Ù×÷
+		System.out.println("æ˜¯å¦å­˜åœ¨5å…ƒç´ ï¼š"+hs.contains(new R(5)) );
+		System.out.println("æ˜¯å¦å­˜åœ¨-3å…ƒç´ ï¼š"+hs.contains(new R(-3)) );
+		//æ‰€ä»¥è¿™æ ·ä¸€æ¥ç¬¬ä¸€ä¸ªå…ƒç´ æ— æ³•æ­£ç¡®å¾—ä»¥æ“ä½œ
 		
 	}
-	//************************************¡¾LinkedHashSet¡¿************************************
-	//ÔªËØÅÅÁĞË³Ğò¼´Îª²åÈëË³Ğò£¨Í¨¹ıÁ´±í£©£»
+	//************************************ã€LinkedHashSetã€‘************************************
+	//å…ƒç´ æ’åˆ—é¡ºåºå³ä¸ºæ’å…¥é¡ºåºï¼ˆé€šè¿‡é“¾è¡¨ï¼‰ï¼›
 	public static void linkedHashSetTest()
 	{
 		LinkedHashSet lhs = new LinkedHashSet();
@@ -90,55 +90,55 @@ class SetTest
 
 
 
-	//*****************************************¡¾TreeSet¡¿**************************************
-	//ÔªËØ°´´óĞ¡ÅÅĞò~£¬£¨·½·¨¶àÁËÖ±½Ó·ÃÎÊµÚÒ»¸ö¡¢×îºóÒ»¸ö¡¢Ç°Ò»¸ö¡¢ºóÒ»¸öµÄ·½·¨£¬ÒÔ¼°½ØÈ¡×ÓtreeSetµÄ·½·¨
-	//²ÉÓÃ ºìºÚÊı Êı¾İ½á¹¹´æ´¢¼¯ºÏÔªËØ
-	//ËùÌí¼Ó¶ÔÏó±ØĞëÊµÏÖcomparable½Ó¿Ú
+	//*****************************************ã€TreeSetã€‘**************************************
+	//å…ƒç´ æŒ‰å¤§å°æ’åº~ï¼Œï¼ˆæ–¹æ³•å¤šäº†ç›´æ¥è®¿é—®ç¬¬ä¸€ä¸ªã€æœ€åä¸€ä¸ªã€å‰ä¸€ä¸ªã€åä¸€ä¸ªçš„æ–¹æ³•ï¼Œä»¥åŠæˆªå–å­treeSetçš„æ–¹æ³•
+	//é‡‡ç”¨ çº¢é»‘æ•° æ•°æ®ç»“æ„å­˜å‚¨é›†åˆå…ƒç´ 
+	//æ‰€æ·»åŠ å¯¹è±¡å¿…é¡»å®ç°comparableæ¥å£
 	public static void treeSetTest()
 	{
 		TreeSet ts = new TreeSet();
 		/*
 		ts.add(5);
-		ts.add(6);//¿ªÊ¼µ÷ÓÃcomparaTo·½·¨(×ÔÈ»ÅÅĞò£©
+		ts.add(6);//å¼€å§‹è°ƒç”¨comparaToæ–¹æ³•(è‡ªç„¶æ’åºï¼‰
 		ts.add(0);
 		ts.add(-3);
-		System.out.println(ts);//×Ô¶¯°´ÔªËØ´óĞ¡ÅÅºÃË³Ğò
-		System.out.println("TreeSetµÚÒ»¸öÔªËØ£º"+ts.first());
-		System.out.println("TreeSet×îºóÒ»¸öÔªËØ£º"+ts.last());
-		System.out.println("TreeSet´óÓÚ5µÄÔªËØ£º"+ts.higher(5) );
-		System.out.println("TreeSetĞ¡ÓÚ0µÄÔªËØ£º"+ts.lower(0) );
-		System.out.println("½ØÈ¡Ğ¡ÓÚ5ÔªËØµÄ×ÓtreeSet£º"+ts.headSet(5));
-		System.out.println("½ØÈ¡´óÓÚµÈÓÚ0ÔªËØµÄ×ÓtreeSet£º"+ts.tailSet(0));
-		System.out.println("½ØÈ¡´óÓÚµÈÓÚ0¡¢Ğ¡ÓÚ6ÔªËØµÄ×ÓtreeSet"+ts.subSet(0,6));
+		System.out.println(ts);//è‡ªåŠ¨æŒ‰å…ƒç´ å¤§å°æ’å¥½é¡ºåº
+		System.out.println("TreeSetç¬¬ä¸€ä¸ªå…ƒç´ ï¼š"+ts.first());
+		System.out.println("TreeSetæœ€åä¸€ä¸ªå…ƒç´ ï¼š"+ts.last());
+		System.out.println("TreeSetå¤§äº5çš„å…ƒç´ ï¼š"+ts.higher(5) );
+		System.out.println("TreeSetå°äº0çš„å…ƒç´ ï¼š"+ts.lower(0) );
+		System.out.println("æˆªå–å°äº5å…ƒç´ çš„å­treeSetï¼š"+ts.headSet(5));
+		System.out.println("æˆªå–å¤§äºç­‰äº0å…ƒç´ çš„å­treeSetï¼š"+ts.tailSet(0));
+		System.out.println("æˆªå–å¤§äºç­‰äº0ã€å°äº6å…ƒç´ çš„å­treeSet"+ts.subSet(0,6));
 		ts.clear();
 		System.out.println(ts);
 		*/
 
-		//ÑİÊ¾¸Ä±ä¹Ø¼üµÄ³ÉÔ±±äÁ¿Öµ£¬É¾³ı¶ÔÓ¦ÔªËØÊ§°Ü~//////////////////////////////////////////////
+		//æ¼”ç¤ºæ”¹å˜å…³é”®çš„æˆå‘˜å˜é‡å€¼ï¼Œåˆ é™¤å¯¹åº”å…ƒç´ å¤±è´¥~//////////////////////////////////////////////
 		ts.add(new R(5) );
 		ts.add(new R(6) );
 		ts.add(new R(7) );		
-		System.out.println(ts);//µ÷ÓÃtoString
+		System.out.println(ts);//è°ƒç”¨toString
 		
-		R first = (R)ts.first();//Õâ¸ö¼ò»¯ÁËÈ¡³öµÚÒ»¸öÔªËØ~~
+		R first = (R)ts.first();//è¿™ä¸ªç®€åŒ–äº†å–å‡ºç¬¬ä¸€ä¸ªå…ƒç´ ~~
 		/*
-		Iterator it = ts.iterator();//´«Í³µü´úÆ÷~~
+		Iterator it = ts.iterator();//ä¼ ç»Ÿè¿­ä»£å™¨~~
 		R first = (R) (it.next() );
 		*/		
-		first.age = 100;//ĞŞ¸Ä¿É±äÔªËØµÄ¹Ø¼ü³ÉÔ±±äÁ¿age
+		first.age = 100;//ä¿®æ”¹å¯å˜å…ƒç´ çš„å…³é”®æˆå‘˜å˜é‡age
 
-		System.out.println(ts);//ĞŞ¸Ä¹Ø¼ü±äÁ¿ºó£¨Ö±½ÓÓ°ÏìhashCode£©	
-		System.out.println("É¾µôĞŞ¸Äºó±äÁ¿µÄÔªËØ£¨5->100£©5£º"+ts.remove(new R(5) ));
-		System.out.println("É¾µôĞŞ¸Äºó±äÁ¿µÄÔªËØ£¨5->100£©100£º"+ts.remove(new R(100) ));
-		System.out.print("É¾µôÔªËØ6£º"+ts.remove(new R(6) ));
-		System.out.println(ts);//ÊÔÍ¼É¾³ı6
+		System.out.println(ts);//ä¿®æ”¹å…³é”®å˜é‡åï¼ˆç›´æ¥å½±å“hashCodeï¼‰	
+		System.out.println("åˆ æ‰ä¿®æ”¹åå˜é‡çš„å…ƒç´ ï¼ˆ5->100ï¼‰5ï¼š"+ts.remove(new R(5) ));
+		System.out.println("åˆ æ‰ä¿®æ”¹åå˜é‡çš„å…ƒç´ ï¼ˆ5->100ï¼‰100ï¼š"+ts.remove(new R(100) ));
+		System.out.print("åˆ æ‰å…ƒç´ 6ï¼š"+ts.remove(new R(6) ));
+		System.out.println(ts);//è¯•å›¾åˆ é™¤6
 
-		//¶¨ÖÆ±È½ÏÆ÷ÅÅĞò£ºlamabda±í´ïÊ½//////////////////////////////////////////////////////////
+		//å®šåˆ¶æ¯”è¾ƒå™¨æ’åºï¼šlamabdaè¡¨è¾¾å¼//////////////////////////////////////////////////////////
 		TreeSet ts1 = new TreeSet( (o1,o2)->
 			{
 				R r1 = (R)o1;
 				R r2 = (R)o2;
-				//return r1.age>r2.age ? -1: r1.age<r2.age ? 1:0;//µ±Ç°±È´ı±È½ÏµÄ´ó·µ»Ø-1¡ª½µĞò£»
+				//return r1.age>r2.age ? -1: r1.age<r2.age ? 1:0;//å½“å‰æ¯”å¾…æ¯”è¾ƒçš„å¤§è¿”å›-1â€”é™åºï¼›
 				return r2.age - r1.age;
 			});
 		ts1.add(new R(-5) ); 
@@ -153,30 +153,30 @@ class SetTest
 	{
 		SPRING,SUMMER,AUTUMN,WINTER;
 	}
-	//´æ·ÅÃ¶¾ÙÀàµÄ¼¯ºÏ==ÒÔÃ¶¾ÙÖµÔÚÄÚ²¿°´ÕÕÎ»ÏòÁ¿ĞÎ³É´æ´¢£¨½ô´Õ¸ßĞ§£©
-	//²»Ğí´ænull==Ö»ÄÜÓÃÀà·½·¨´´½¨EnumSet¶ÔÏó
+	//å­˜æ”¾æšä¸¾ç±»çš„é›†åˆ==ä»¥æšä¸¾å€¼åœ¨å†…éƒ¨æŒ‰ç…§ä½å‘é‡å½¢æˆå­˜å‚¨ï¼ˆç´§å‡‘é«˜æ•ˆï¼‰
+	//ä¸è®¸å­˜null==åªèƒ½ç”¨ç±»æ–¹æ³•åˆ›å»ºEnumSetå¯¹è±¡
 	public static void enumSetTest()
 	{
-		//Àà·½·¨allOf»ñµÃµÄÃ¶¾Ù¼¯ºÏÔªËØ--¼´ÎªSeasonÃ¶¾ÙÀàµÄÈ«²¿Ã¶¾ÙÖµ
+		//ç±»æ–¹æ³•allOfè·å¾—çš„æšä¸¾é›†åˆå…ƒç´ --å³ä¸ºSeasonæšä¸¾ç±»çš„å…¨éƒ¨æšä¸¾å€¼
 		EnumSet es = EnumSet.allOf(Season.class);
 		System.out.println(es);
 
-		//Àà·½·¨noneOf´´½¨µÄÊÇSeasonÃ¶¾ÙÀàµÄ*¿Õ¼¯ºÏ*
+		//ç±»æ–¹æ³•noneOfåˆ›å»ºçš„æ˜¯Seasonæšä¸¾ç±»çš„*ç©ºé›†åˆ*
 		EnumSet es2 = EnumSet.noneOf(Season.class);
 
-		//Ïò¸Ã¿Õ¼¯ºÏÌí¼ÓÔªËØ
+		//å‘è¯¥ç©ºé›†åˆæ·»åŠ å…ƒç´ 
 		es.add(Season.SPRING);
 		System.out.println(es2);
 
-		//ÓÃÃ¶¾ÙÖµ´´½¨Ã¶¾Ù¼¯ºÏ
+		//ç”¨æšä¸¾å€¼åˆ›å»ºæšä¸¾é›†åˆ
 		EnumSet es3 = EnumSet.of(Season.SUMMER,Season.WINTER);
 		System.out.println(es3);
 
-		//¼¯ºÏÔËËã-²îÔËËã£¨×ÜµÄÃ¶¾ÙÖµ Óë es3µÄÃ¶¾ÙÖµ ×ö²î~£©
+		//é›†åˆè¿ç®—-å·®è¿ç®—ï¼ˆæ€»çš„æšä¸¾å€¼ ä¸ es3çš„æšä¸¾å€¼ åšå·®~ï¼‰
 		EnumSet es4 = EnumSet.complementOf(es3);
 		System.out.println(es4);
 		
-		//´ÓÍ¬Ò»Ã¶¾ÙÀàÔªËØµÄCollectionÖĞ¸´ÖÆ
+		//ä»åŒä¸€æšä¸¾ç±»å…ƒç´ çš„Collectionä¸­å¤åˆ¶
 		Collection c = new HashSet();
 		c.add(Season.SPRING);
 		c.add(Season.WINTER);

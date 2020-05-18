@@ -1,15 +1,15 @@
 import java.util.Stack;
 /**
-*°¸Àı£ºÅĞ¶Ï¡¾Á´±í¡¿ÊÇ·ñÎª»ØÎÄĞòÁĞ
-Ê±¼ä¸´ÔÓ¶ÈO(N) ¶îÍâ¿Õ¼äO(1)
-Âß¼­¼òµ¥£¬ÊµÏÖÆğÀ´ºÃÄÑ£¡£¡£¡£¡£¡£¡
+*æ¡ˆä¾‹ï¼šåˆ¤æ–­ã€é“¾è¡¨ã€‘æ˜¯å¦ä¸ºå›æ–‡åºåˆ—
+æ—¶é—´å¤æ‚åº¦O(N) é¢å¤–ç©ºé—´O(1)
+é€»è¾‘ç®€å•ï¼Œå®ç°èµ·æ¥å¥½éš¾ï¼ï¼ï¼ï¼ï¼ï¼
 
-Ë¼Â·£ºÀûÓÃ¿ìÂıÖ¸ÕëÕÒµ½Á´±íÖĞµã£¬È»ºó½«ÓÒ°ë±ßÄæĞò£¬ÒÀ´Î±È¶Ôºó»Ö¸´
-ÄÑµã£ºÁ´±íÊµÏÖÄæĞòµÄ¹ı³Ì
+æ€è·¯ï¼šåˆ©ç”¨å¿«æ…¢æŒ‡é’ˆæ‰¾åˆ°é“¾è¡¨ä¸­ç‚¹ï¼Œç„¶åå°†å³åŠè¾¹é€†åºï¼Œä¾æ¬¡æ¯”å¯¹åæ¢å¤
+éš¾ç‚¹ï¼šé“¾è¡¨å®ç°é€†åºçš„è¿‡ç¨‹
 
   1 ->2->3 ->2 ->1->null
-			  ^    ^    ^             =>   n1->nullºó£¬Òªn2->n1£¬È»ºóÖ¸ÕëÆ½ÒÆ
-			  n1   n2   n3					   n1=n2; n2=n3; n3=n3.next;  ÒÀ´ÎÍù¸´£¬Ö±µ½n3Îªnull
+			  ^    ^    ^             =>   n1->nullåï¼Œè¦n2->n1ï¼Œç„¶åæŒ‡é’ˆå¹³ç§»
+			  n1   n2   n3					   n1=n2; n2=n3; n3=n3.next;  ä¾æ¬¡å¾€å¤ï¼Œç›´åˆ°n3ä¸ºnull
 
 *@author Hartley
 *@version 1.0.0
@@ -17,10 +17,10 @@ import java.util.Stack;
 
 class  IsPalindromeLink
 {
-	//************³ÌĞòÈë¿Ú***************
+	//************ç¨‹åºå…¥å£***************
 	public static void main(String[] args) 
 	{
-		Node node1 = new Node(1);//Á´±íÒ»
+		Node node1 = new Node(1);//é“¾è¡¨ä¸€
 		node1.next = new Node(1);
 		node1.next.next = new Node(2);
 		node1.next.next.next = new Node(1);
@@ -31,10 +31,10 @@ class  IsPalindromeLink
 		//boolean flag = halfStackMethod(node1);
 		boolean flag = isPalindrome(node1);
 
-		System.out.println("this LinkedList is palimdrom£¿"+flag);
+		System.out.println("this LinkedList is palimdromï¼Ÿ"+flag);
 	}
 
-	//´òÓ¡Á´±í
+	//æ‰“å°é“¾è¡¨
 	public static void printLinkedList(Node head)
 	{
 		while (head!=null)
@@ -45,14 +45,14 @@ class  IsPalindromeLink
 		System.out.println("null");
 	}
 
-	//¡¾1¡¿¶îÍâ¿Õ¼äÎªO(N)================================
-	//Ë¼Â·£ºÀûÓÃ¶ÑÕ»ºó½øÏÈ³ö£¬×°Èë¶ÑÕ»ºó£¬ÒÀ´Îµ¯³öÓëÁ´±í±È½Ï
+	//ã€1ã€‘é¢å¤–ç©ºé—´ä¸ºO(N)================================
+	//æ€è·¯ï¼šåˆ©ç”¨å †æ ˆåè¿›å…ˆå‡ºï¼Œè£…å…¥å †æ ˆåï¼Œä¾æ¬¡å¼¹å‡ºä¸é“¾è¡¨æ¯”è¾ƒ
 	public static boolean stackMethod(Node head)
 	{
-		Stack<Node> stack = new Stack<>();//¶îÍâÕ»¿Õ¼ä
+		Stack<Node> stack = new Stack<>();//é¢å¤–æ ˆç©ºé—´
 		Node cur = head;
 
-		while (cur != null)//Ñ¹Õ»µÄ¹ı³Ì
+		while (cur != null)//å‹æ ˆçš„è¿‡ç¨‹
 		{
 			stack.push( cur );
 			cur = cur.next;
@@ -70,28 +70,28 @@ class  IsPalindromeLink
 		return true;
 	}
 
-	//¡¾2¡¿¶îÍâ¿Õ¼äÎªO(N/2)================================
-	//ÓÃÁ½¸ö¿ìÂıÖ¸Õëfast(×ßÁ½²½) slow(×ßÒ»²½)£¬ÕÒµ½Á´±íÖĞµã£¬
-	//°ÑÖĞµãÒÔ¼°Ö®ºóµÄÒ»°ë·Åµ½¶ÑÕ»ÖĞ£¬µ¯³ö±È½Ï
+	//ã€2ã€‘é¢å¤–ç©ºé—´ä¸ºO(N/2)================================
+	//ç”¨ä¸¤ä¸ªå¿«æ…¢æŒ‡é’ˆfast(èµ°ä¸¤æ­¥) slow(èµ°ä¸€æ­¥)ï¼Œæ‰¾åˆ°é“¾è¡¨ä¸­ç‚¹ï¼Œ
+	//æŠŠä¸­ç‚¹ä»¥åŠä¹‹åçš„ä¸€åŠæ”¾åˆ°å †æ ˆä¸­ï¼Œå¼¹å‡ºæ¯”è¾ƒ
 	public static boolean halfStackMethod(Node head)
 	{
 		if (head==null || head.next == null)
 		{
-			return true;//Èç¹ûÎªnull »òÕßÖ»ÓĞÒ»¸öÔªËØ£¬ÊÓÎª»ØÎÄ
+			return true;//å¦‚æœä¸ºnull æˆ–è€…åªæœ‰ä¸€ä¸ªå…ƒç´ ï¼Œè§†ä¸ºå›æ–‡
 		}
 		Node fast = head;
 		Node slow = head;
 		Stack<Node> stack = new Stack<>();
 
-		while (fast.next!=null && fast.next.next!=null)//fastµÄÏÂÒ»²½ÒÔ¼°ÏÂÏÂÒ»²½ÓĞÃ»ÓĞ½Úµã
+		while (fast.next!=null && fast.next.next!=null)//fastçš„ä¸‹ä¸€æ­¥ä»¥åŠä¸‹ä¸‹ä¸€æ­¥æœ‰æ²¡æœ‰èŠ‚ç‚¹
 		{
-			slow = slow.next;//Ñ­»·½áÊøºó£¬slowÎªÁ´±íÖĞµã´¦
+			slow = slow.next;//å¾ªç¯ç»“æŸåï¼Œslowä¸ºé“¾è¡¨ä¸­ç‚¹å¤„
 			fast = fast.next.next;
 		}
 
 		while (slow!=null)
 		{
-			stack.push(slow);//°ÑÖĞµãÔªËØÒÔ¼°ÖĞµãÖ®ºóµÄÔªËØ¶¼Ñ¹ÈëÕ»ÖĞ
+			stack.push(slow);//æŠŠä¸­ç‚¹å…ƒç´ ä»¥åŠä¸­ç‚¹ä¹‹åçš„å…ƒç´ éƒ½å‹å…¥æ ˆä¸­
 			slow = slow.next;
 		}
 
@@ -106,49 +106,49 @@ class  IsPalindromeLink
 		return true;
 	}
 	
-	//¡¾3¡¿¶îÍâ¿Õ¼ä¸´ÔÓ¶ÈÎªO(1)================================
-	//µ÷ÕûÁ´±í£¬Ê¹ÖĞ¼äÎ»ÖÃ´¦µÄ×óÓÒÔªËØ¶¼Ö¸ÏòÖĞ¼äÔªËØ£¬ÖĞ¼äÔªËØÖ¸Ïònull
+	//ã€3ã€‘é¢å¤–ç©ºé—´å¤æ‚åº¦ä¸ºO(1)================================
+	//è°ƒæ•´é“¾è¡¨ï¼Œä½¿ä¸­é—´ä½ç½®å¤„çš„å·¦å³å…ƒç´ éƒ½æŒ‡å‘ä¸­é—´å…ƒç´ ï¼Œä¸­é—´å…ƒç´ æŒ‡å‘null
 	public static boolean isPalindrome(Node head)
 	{
-		printLinkedList(head);//´òÓ¡³õÊ¼Á´±í
+		printLinkedList(head);//æ‰“å°åˆå§‹é“¾è¡¨
 
 		if (head==null || head.next == null)
 		{
 			return true;
 		}
-		Node n1 = head;//ÂıÖ¸Õë
-		Node n2 = head;//¿ìÖ¸Õë
-		//ÕÒÖĞµã
+		Node n1 = head;//æ…¢æŒ‡é’ˆ
+		Node n2 = head;//å¿«æŒ‡é’ˆ
+		//æ‰¾ä¸­ç‚¹
 		while (n2.next!=null && n2.next.next!=null)
 		{
 			n1 = n1.next;
 			n2 = n2.next.next;
 		}
 		
-		n2 = n1.next;//n2¸´ÓÃÎªn1µÄÓÒÔªËØ
-		Node n3 = n2.next;//n3Îªn1µÄÓÒÓÒÔªËØ
+		n2 = n1.next;//n2å¤ç”¨ä¸ºn1çš„å³å…ƒç´ 
+		Node n3 = n2.next;//n3ä¸ºn1çš„å³å³å…ƒç´ 
 
-		n1.next = null;//ÖĞµãn1Ö¸Ïònull
+		n1.next = null;//ä¸­ç‚¹n1æŒ‡å‘null
 
-		//¡¾ÖĞ¼äµãÍùÓÒ¡¿
-		while (n3!=null)//ÒÔn2×÷ÎªÌõ¼ş¿É¼ò»¯´úÂë£¬µ«ÓĞµãÔÎ¡£¡£¡£
+		//ã€ä¸­é—´ç‚¹å¾€å³ã€‘
+		while (n3!=null)//ä»¥n2ä½œä¸ºæ¡ä»¶å¯ç®€åŒ–ä»£ç ï¼Œä½†æœ‰ç‚¹æ™•ã€‚ã€‚ã€‚
 		{
 			
-			n2.next = n1;//¶ÔÓ¦n3ÍÑÀëÁ´±í
-			n1 = n2;//±£´æ×¡n2½ÚµãÎªn1£¬ÓÃÓÚÏÂÒ»´ÎÖ¸ÏòµÄÄ¿±ê½Úµã
-			n2 = n3;//±£´æ×¡ÍÑÀëÁ´±íµÄÍ·n3
+			n2.next = n1;//å¯¹åº”n3è„±ç¦»é“¾è¡¨
+			n1 = n2;//ä¿å­˜ä½n2èŠ‚ç‚¹ä¸ºn1ï¼Œç”¨äºä¸‹ä¸€æ¬¡æŒ‡å‘çš„ç›®æ ‡èŠ‚ç‚¹
+			n2 = n3;//ä¿å­˜ä½è„±ç¦»é“¾è¡¨çš„å¤´n3
 			n3 = n3.next;
 
 		}
-			n2.next = n1;//Íê³ÉÁËÓÒ°ë²àÄæĞòÖ¸Ïò£¬n2ÎªÁ´±í×îÓÒ¶ËµÄÍ·
+			n2.next = n1;//å®Œæˆäº†å³åŠä¾§é€†åºæŒ‡å‘ï¼Œn2ä¸ºé“¾è¡¨æœ€å³ç«¯çš„å¤´
 			n1 = head;
-			n3 = n2;//±£´æºÃn2½Úµã£¬ÓÃÓÚºóĞø »Ö¸´²Ù×÷
+			n3 = n2;//ä¿å­˜å¥½n2èŠ‚ç‚¹ï¼Œç”¨äºåç»­ æ¢å¤æ“ä½œ
 			
-			printLinkedList(head);//"ÄæĞò²Ù×÷ºó£¬×óÁ´±í£º"+
-			printLinkedList(n2);//"ÄæĞò²Ù×÷ºó£¬ÓÒÁ´±í£º"+
+			printLinkedList(head);//"é€†åºæ“ä½œåï¼Œå·¦é“¾è¡¨ï¼š"+
+			printLinkedList(n2);//"é€†åºæ“ä½œåï¼Œå³é“¾è¡¨ï¼š"+
 		boolean flag = true;
-		//×óÓÒÏà±È---
-		while (n1!=null)//1-2-1  1-2-2-1 ,ÖĞ¶¼ÊÇ×óÖ¸ÕëµÄnextÏÈµ½null
+		//å·¦å³ç›¸æ¯”---
+		while (n1!=null)//1-2-1  1-2-2-1 ,ä¸­éƒ½æ˜¯å·¦æŒ‡é’ˆçš„nextå…ˆåˆ°null
 		{
 			if (n1.value != n2.value)
 			{
@@ -158,11 +158,11 @@ class  IsPalindromeLink
 			n2 = n2.next;
 		}
 
-		n1 = n3;//ÔÚ×îÓÒ¶Ë ÅÅÁĞË³ĞòÎª n3 n2 n1
+		n1 = n3;//åœ¨æœ€å³ç«¯ æ’åˆ—é¡ºåºä¸º n3 n2 n1
 		n2 = n3.next;
 		n3 = n2.next;
-		n1.next = null;//Ä©Î²Ö¸Ïònull
-		//·µ»Ø½á¹ûÇ°»Ö¸´Á´±í£º¡¾ÓÒ¶ËÍùÖĞ¼ä¡¿
+		n1.next = null;//æœ«å°¾æŒ‡å‘null
+		//è¿”å›ç»“æœå‰æ¢å¤é“¾è¡¨ï¼šã€å³ç«¯å¾€ä¸­é—´ã€‘
 		while (n3!=null)
 		{
 			n2.next = n1;
@@ -172,7 +172,7 @@ class  IsPalindromeLink
 		}
 		n2.next = n1;
 		
-		printLinkedList(head);//´òÓ¡¸´Î»ºÃµÄÁ´±í
+		printLinkedList(head);//æ‰“å°å¤ä½å¥½çš„é“¾è¡¨
 
 		return flag;
 	}

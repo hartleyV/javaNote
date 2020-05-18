@@ -1,10 +1,10 @@
 import java.net.InetAddress;
 /**
-*ÍøÂç±à³Ì
+*ç½‘ç»œç¼–ç¨‹
 
-Socket: IP + port£¨16Î»ÕûÊı£©
+Socket: IP + portï¼ˆ16ä½æ•´æ•°ï¼‰
 
-IPÀà£ºInetAddress
+IPç±»ï¼šInetAddress
 
 *@author Hartley
 *@version 1.0.0
@@ -12,7 +12,7 @@ IPÀà£ºInetAddress
 
 class  NetTest
 {
-	//IPÀà²âÊÔ
+	//IPç±»æµ‹è¯•
 	public static void inetAddressTest() throws Exception
 	{
 		String baiduHost = "www.baidu.com";
@@ -20,15 +20,15 @@ class  NetTest
 		System.out.println(baiduHost+"'s ip is "+ip);
 
 		InetAddress localIp = InetAddress.getLocalHost();
-		System.out.println(localIp);//·µ»Ø±¾µØÖ÷»ú  £º Ö÷»úÃû/Ö÷»úµØÖ·
+		System.out.println(localIp);//è¿”å›æœ¬åœ°ä¸»æœº  ï¼š ä¸»æœºå/ä¸»æœºåœ°å€
 	
 		String localName = localIp.getHostName();
-		System.out.println("Ö÷»úÃû£º"+localName);
+		System.out.println("ä¸»æœºåï¼š"+localName);
 
 		String localAddress = localIp.getHostAddress();
-		System.out.println("Ö÷»úµØÖ·£º"+localAddress);
+		System.out.println("ä¸»æœºåœ°å€ï¼š"+localAddress);
 	}
-	//************³ÌĞòÈë¿Ú***************
+	//************ç¨‹åºå…¥å£***************
 	public static void main(String[] args) throws Exception
 	{
 		inetAddressTest();

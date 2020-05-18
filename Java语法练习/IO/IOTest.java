@@ -1,103 +1,103 @@
 import java.io.*;
 import java.util.*;
 /**
-*File Àà
-*IOÁ÷
-       |--ÓÅµã£º»º´æÌá¸ßĞ§ÂÊ£¬²Ù×÷±ã½İ£¬Ò»´ÎĞÔ´¦Àí´óÅúÁ¿ÄÚÈİ
-       |--»®·ÖÊäÈëÊä³öÁ÷ÊÇ¸ù¾İ³ÌĞòËùÔÚÄÚ´æ¿¼ÂÇµÄ
-       |--×Ö½ÚÁ÷8Îª£¨»ùÀàInputStream OutputStream);×Ö·ûÁ÷16Î»£¨»ùÀàReader Writer£©
-       |--·ÖÀà£º½ÚµãÁ÷£¨³ÌĞòÖ±½ÓÁ¬½ÓÊı¾İÔ´£©´¦ÀíÁ÷/°ü×°Á÷£¨Í¨¹ı·â×°ºóµÄÁ÷À´ÊµÏÖÊı¾İµÄ¶ÁĞ´£©
-       |--ÊµÏÖÀà£º
-	            |--·ÃÎÊÎÄ¼şFileXX£¬Êı×éByteArrayXX CharArrayXX£¬¹ÜµÀ£¨½ø³Ì¼äÍ¨ĞÅ£©PipedXX
-	            |--´òÓ¡Á÷PrintWriter£¨¼Ì³ĞWriter£©PrintStream£¨¼Ì³ĞOutputStream£©**Çø±ğ£¿£¿*
-	            |--·ÃÎÊ×Ö·û´®StringW/R£¬»º³åÁ÷(Ìá¸ßĞ§ÂÊ£¬ĞèÒªflush£©BufferedXX
-	            |--¶ÔÏóÁ÷£¨¶ÔÏóĞòÁĞ»¯£©ObjectI/O
-	            |--×ª»»Á÷£¨×Ö½Ú×ª×Ö·û£©InputStreamReader OutputStreamWriter
-	            |--ÍÆ»ØÊäÈëÁ÷ PushbackInputStream PushbackReader£¬ÓÃunread´æµ½ÍÆ»Ø»º³åÇøºó£¬
-				    read»áÏÈ´ÓÍÆ»Ø»º³åÇøÈ¥È¡£¬È¡ÍêÔÙ´ÓÔ­ÊäÈëÁ÷ÖĞÈ¡
-	   |--System·½·¨£º
-			    |--ÖØ¶¨Ïò£ºsetIn(InputStream in) setOut(OutputStream out)ÖØ¶¨Ïò±ê×¼ÊäÈëÊä³ö£¨ÒÔJava³ÌĞòÎªÖĞĞÄ£©£¬
-				                  setErr(PrintStream err)ÖØ¶¨Ïò±ê×¼´íÎóÊä³öÁ÷
-*¶ÁÈ¡ÆäËû½ø³ÌÊı¾İ£¨ÒÔJava³ÌĞòÎªÖĞĞÄ£¬·ÖÎöÊÇÊäÈë»¹ÊÇÊä³ö£©£ºgetInputStream/getOutputStream/getErrorStream
-*¡¾RandomAccessFile¡¿ÈÎÒâ·ÃÎÊÎÄ¼ş£¨Ö»ÄÜÊÇÎÄ¼şßæ£¬IOÁ÷²»ĞĞ)
-	   |--¿É¶Á¿ÉĞ´£¨Ö»ÄÜÊÇÎÄ¼şßæ£¬IOÁ÷²»ĞĞ)
-	   |--Ö»¶ÁÈ¡ÎÄ¼şÖĞÖ¸¶¨µÄÄ³Ò»²¿·ÖÊ± Ñ¡ËûÑ¡Ëû~
-	   |--¿ÉÒÔ×ÔÓÉÒÆ¶¯ÎÄ¼ş¼ÇÂ¼Ö¸Õë long getFilePointer·µ»ØÖ¸Õëµ±Ç°Î»ÖÃ£¬seek(long pos)ÒÆµ½Ö¸¶¨Î»ÖÃ
-	   |--Á½¸ö¹¹ÔìÆ÷£º
-			    |--²ÎÊıÒ»£ºString / FileÖ¸¶¨ÎÄ¼ş±¾Éí£»
-			    |--²ÎÊı¶ş£ºmode²ÎÊı== r-Ö»¶Á£¬rw¶ÁĞ´£¨Ã»ÓĞÎÄ¼şÔò×Ô¶¯´´½¨£©£¬
-				                  rws£¨ÎÄ¼şÃ¿¸öÄÚÈİ¡¢ÔªÊı¾İÍ¬²½¸üĞÂµ½µ×²ã´æ´¢£©£¬
-								  rwd£¨ÎÄ¼şÃ¿¸öÄÚÈİÍ¬²½¸úĞÂµ½µ×²ãÊı¾İ£©
-*¶ÔÏó¡¾ĞòÁĞ»¯¡¿
-	   |--ÓÃÍ¾£º°Ñ¶ÔÏóĞòÁĞ»¯Îª×Ö½ÚÎÄ¼ş£¬Í¨¹ı·´ĞòÁĞ»¯»Ö¸´Îª¶ÔÏó£¬Ê¹¶ÔÏóÍÑÀë³ÌĞòÔËĞĞ¶ø¶ÀÁ¢³öÀ´
-	   |--ĞèÒª×¢Òâ£º
-	             ÄÄĞ©»á±»ĞòÁĞ»¯£º¶ÔÏóÀàÃû¡¢ÊµÀı±äÁ¿£¨·½·¨¡¢Àà±äÁ¿¡¢transient±äÁ¿²»»á±»ĞòÁĞ»¯£©
-				 ·´ĞòÁĞ»¯¶ÔÏó£ºĞèÒªÔ­À´¶ÔÏóµÄclassÎÄ¼ş
-				                         ---Í¨¹ıprivate static final long serialVersionUIDÈ·±£²»Í¬°æ±¾classµÄ¼æÈİĞÔ
-				 ¶ÁÈ¡ĞòÁĞ»¯¶ÔÏó£ºĞèÒª°´Ğ´ÈëË³Ğò¶ÁÈ¡
-	   |--ÓÃ·¨£º
-	   	    |--¡¾1¡¿ĞèÒªÏÈÊ¹ÒªĞòÁĞ»¯µÄÀàÊµÏÖSerializable»òExternalizable½Ó¿Ú£¨Ö»ÊÇÒ»¸ö±ê¼Ç£©-- Ã¿¸öJavaBean¶¼ÒªÊµÏÖSerializable
-	   	    |--¡¾2¡¿´´½¨ObjectOutputStream´¦ÀíÁ÷ ¶ÔÏó£¨ĞèÒª½¨Á¢ÔÚ½ÚµãÁ÷Ö®ÉÏ£º¹¹ÔìÆ÷Òª´«Èë½ÚµãÁ÷£©
-	   	    |--¡¾3¡¿µ÷ÓÃObjectOutputStream¶ÔÏóµÄ·½·¨ writeObject(¶ÔÏó)  ½«¶ÔÏóĞ´Èëµ½Êä³öÁ÷
-	   	    |--²»Ïë±»ĞòÁĞ»¯µÄÊµÀı±äÁ¿£º
-			   	    |--	ÓÃ¡¾transient¡¿ĞŞÊÎ	 £¨¶ÔÓ¦³ÉÔ±±äÁ¿ÔÚĞòÁĞ»¯Ê±»á±»¸ôÀë£©  	    
-			   	    |--	×Ô¶¨ÒåĞòÁĞ»¯ 	    
-			   	         |-- ¡¾1¡¿Serializable-ÔÚ´ıĞòÁĞ»¯ÀàÖĞÌí¼ÓÒÔÏÂ·½·¨	    
+*File ç±»
+*IOæµ
+       |--ä¼˜ç‚¹ï¼šç¼“å­˜æé«˜æ•ˆç‡ï¼Œæ“ä½œä¾¿æ·ï¼Œä¸€æ¬¡æ€§å¤„ç†å¤§æ‰¹é‡å†…å®¹
+       |--åˆ’åˆ†è¾“å…¥è¾“å‡ºæµæ˜¯æ ¹æ®ç¨‹åºæ‰€åœ¨å†…å­˜è€ƒè™‘çš„
+       |--å­—èŠ‚æµ8ä¸ºï¼ˆåŸºç±»InputStream OutputStream);å­—ç¬¦æµ16ä½ï¼ˆåŸºç±»Reader Writerï¼‰
+       |--åˆ†ç±»ï¼šèŠ‚ç‚¹æµï¼ˆç¨‹åºç›´æ¥è¿æ¥æ•°æ®æºï¼‰å¤„ç†æµ/åŒ…è£…æµï¼ˆé€šè¿‡å°è£…åçš„æµæ¥å®ç°æ•°æ®çš„è¯»å†™ï¼‰
+       |--å®ç°ç±»ï¼š
+	            |--è®¿é—®æ–‡ä»¶FileXXï¼Œæ•°ç»„ByteArrayXX CharArrayXXï¼Œç®¡é“ï¼ˆè¿›ç¨‹é—´é€šä¿¡ï¼‰PipedXX
+	            |--æ‰“å°æµPrintWriterï¼ˆç»§æ‰¿Writerï¼‰PrintStreamï¼ˆç»§æ‰¿OutputStreamï¼‰**åŒºåˆ«ï¼Ÿï¼Ÿ*
+	            |--è®¿é—®å­—ç¬¦ä¸²StringW/Rï¼Œç¼“å†²æµ(æé«˜æ•ˆç‡ï¼Œéœ€è¦flushï¼‰BufferedXX
+	            |--å¯¹è±¡æµï¼ˆå¯¹è±¡åºåˆ—åŒ–ï¼‰ObjectI/O
+	            |--è½¬æ¢æµï¼ˆå­—èŠ‚è½¬å­—ç¬¦ï¼‰InputStreamReader OutputStreamWriter
+	            |--æ¨å›è¾“å…¥æµ PushbackInputStream PushbackReaderï¼Œç”¨unreadå­˜åˆ°æ¨å›ç¼“å†²åŒºåï¼Œ
+				    readä¼šå…ˆä»æ¨å›ç¼“å†²åŒºå»å–ï¼Œå–å®Œå†ä»åŸè¾“å…¥æµä¸­å–
+	   |--Systemæ–¹æ³•ï¼š
+			    |--é‡å®šå‘ï¼šsetIn(InputStream in) setOut(OutputStream out)é‡å®šå‘æ ‡å‡†è¾“å…¥è¾“å‡ºï¼ˆä»¥Javaç¨‹åºä¸ºä¸­å¿ƒï¼‰ï¼Œ
+				                  setErr(PrintStream err)é‡å®šå‘æ ‡å‡†é”™è¯¯è¾“å‡ºæµ
+*è¯»å–å…¶ä»–è¿›ç¨‹æ•°æ®ï¼ˆä»¥Javaç¨‹åºä¸ºä¸­å¿ƒï¼Œåˆ†ææ˜¯è¾“å…¥è¿˜æ˜¯è¾“å‡ºï¼‰ï¼šgetInputStream/getOutputStream/getErrorStream
+*ã€RandomAccessFileã€‘ä»»æ„è®¿é—®æ–‡ä»¶ï¼ˆåªèƒ½æ˜¯æ–‡ä»¶å“ï¼ŒIOæµä¸è¡Œ)
+	   |--å¯è¯»å¯å†™ï¼ˆåªèƒ½æ˜¯æ–‡ä»¶å“ï¼ŒIOæµä¸è¡Œ)
+	   |--åªè¯»å–æ–‡ä»¶ä¸­æŒ‡å®šçš„æŸä¸€éƒ¨åˆ†æ—¶ é€‰ä»–é€‰ä»–~
+	   |--å¯ä»¥è‡ªç”±ç§»åŠ¨æ–‡ä»¶è®°å½•æŒ‡é’ˆ long getFilePointerè¿”å›æŒ‡é’ˆå½“å‰ä½ç½®ï¼Œseek(long pos)ç§»åˆ°æŒ‡å®šä½ç½®
+	   |--ä¸¤ä¸ªæ„é€ å™¨ï¼š
+			    |--å‚æ•°ä¸€ï¼šString / FileæŒ‡å®šæ–‡ä»¶æœ¬èº«ï¼›
+			    |--å‚æ•°äºŒï¼šmodeå‚æ•°== r-åªè¯»ï¼Œrwè¯»å†™ï¼ˆæ²¡æœ‰æ–‡ä»¶åˆ™è‡ªåŠ¨åˆ›å»ºï¼‰ï¼Œ
+				                  rwsï¼ˆæ–‡ä»¶æ¯ä¸ªå†…å®¹ã€å…ƒæ•°æ®åŒæ­¥æ›´æ–°åˆ°åº•å±‚å­˜å‚¨ï¼‰ï¼Œ
+								  rwdï¼ˆæ–‡ä»¶æ¯ä¸ªå†…å®¹åŒæ­¥è·Ÿæ–°åˆ°åº•å±‚æ•°æ®ï¼‰
+*å¯¹è±¡ã€åºåˆ—åŒ–ã€‘
+	   |--ç”¨é€”ï¼šæŠŠå¯¹è±¡åºåˆ—åŒ–ä¸ºå­—èŠ‚æ–‡ä»¶ï¼Œé€šè¿‡ååºåˆ—åŒ–æ¢å¤ä¸ºå¯¹è±¡ï¼Œä½¿å¯¹è±¡è„±ç¦»ç¨‹åºè¿è¡Œè€Œç‹¬ç«‹å‡ºæ¥
+	   |--éœ€è¦æ³¨æ„ï¼š
+	             å“ªäº›ä¼šè¢«åºåˆ—åŒ–ï¼šå¯¹è±¡ç±»åã€å®ä¾‹å˜é‡ï¼ˆæ–¹æ³•ã€ç±»å˜é‡ã€transientå˜é‡ä¸ä¼šè¢«åºåˆ—åŒ–ï¼‰
+				 ååºåˆ—åŒ–å¯¹è±¡ï¼šéœ€è¦åŸæ¥å¯¹è±¡çš„classæ–‡ä»¶
+				                         ---é€šè¿‡private static final long serialVersionUIDç¡®ä¿ä¸åŒç‰ˆæœ¬classçš„å…¼å®¹æ€§
+				 è¯»å–åºåˆ—åŒ–å¯¹è±¡ï¼šéœ€è¦æŒ‰å†™å…¥é¡ºåºè¯»å–
+	   |--ç”¨æ³•ï¼š
+	   	    |--ã€1ã€‘éœ€è¦å…ˆä½¿è¦åºåˆ—åŒ–çš„ç±»å®ç°Serializableæˆ–Externalizableæ¥å£ï¼ˆåªæ˜¯ä¸€ä¸ªæ ‡è®°ï¼‰-- æ¯ä¸ªJavaBeanéƒ½è¦å®ç°Serializable
+	   	    |--ã€2ã€‘åˆ›å»ºObjectOutputStreamå¤„ç†æµ å¯¹è±¡ï¼ˆéœ€è¦å»ºç«‹åœ¨èŠ‚ç‚¹æµä¹‹ä¸Šï¼šæ„é€ å™¨è¦ä¼ å…¥èŠ‚ç‚¹æµï¼‰
+	   	    |--ã€3ã€‘è°ƒç”¨ObjectOutputStreamå¯¹è±¡çš„æ–¹æ³• writeObject(å¯¹è±¡)  å°†å¯¹è±¡å†™å…¥åˆ°è¾“å‡ºæµ
+	   	    |--ä¸æƒ³è¢«åºåˆ—åŒ–çš„å®ä¾‹å˜é‡ï¼š
+			   	    |--	ç”¨ã€transientã€‘ä¿®é¥°	 ï¼ˆå¯¹åº”æˆå‘˜å˜é‡åœ¨åºåˆ—åŒ–æ—¶ä¼šè¢«éš”ç¦»ï¼‰  	    
+			   	    |--	è‡ªå®šä¹‰åºåˆ—åŒ– 	    
+			   	         |-- ã€1ã€‘Serializable-åœ¨å¾…åºåˆ—åŒ–ç±»ä¸­æ·»åŠ ä»¥ä¸‹æ–¹æ³•	    
 			   	                 |-- private void writeObject(java.io.ObjectOutputStream out) throws IOException
-								      ¿ØÖÆĞ´ÈëÄÄĞ©ÊµÀı±äÁ¿£¬ÈçºÎ¼ÓÃÜ£¬ÈçºÎĞ´Èë£¨ÎŞ´Ë·½·¨Ä¬ÈÏ»áµ÷ÓÃout.defaultWriterObject
+								      æ§åˆ¶å†™å…¥å“ªäº›å®ä¾‹å˜é‡ï¼Œå¦‚ä½•åŠ å¯†ï¼Œå¦‚ä½•å†™å…¥ï¼ˆæ— æ­¤æ–¹æ³•é»˜è®¤ä¼šè°ƒç”¨out.defaultWriterObject
 			   	                 |-- private void readObject(java.io.ObjectInputStream in) throws IOException,ClassNotFoundException
-								      Ö´ĞĞÓëÉÏÊöÏà·´µÄ²Ù×÷
+								      æ‰§è¡Œä¸ä¸Šè¿°ç›¸åçš„æ“ä½œ
 								 |-- private void readObjectNoData() throws ObjectStreamException
-								      µ±ĞòÁĞÁ÷²»ÍêÕûÊ±£¨°æ±¾²îÒì£¬±»´Û¸Ä£©£¬»áµ÷ÓÃËüÀ´³õÊ¼»¯·´ĞòÁĞµÄ¶ÔÏó
+								      å½“åºåˆ—æµä¸å®Œæ•´æ—¶ï¼ˆç‰ˆæœ¬å·®å¼‚ï¼Œè¢«ç¯¡æ”¹ï¼‰ï¼Œä¼šè°ƒç”¨å®ƒæ¥åˆå§‹åŒ–ååºåˆ—çš„å¯¹è±¡
 								 |-- private Object readResolve() throws ObjectStreamException
-								      ÔÚreadObject·½·¨ºóÖ´ĞĞ£¬·µ»ØÖµ»áÌæ»»Ô­À´µÄ·´ĞòÁĞ»¯¶ÔÏó£¬
-									  ¶ÔĞòÁĞ»¯µ¥ÀıÀà¡¢Ã¶¾ÙÀà³¬¼¶ÓĞÓÃ£¨ÒÔÃâ´´½¨ĞÂµÄÆäËû¶ÔÏó£©
-			   	         |-- ¡¾2¡¿Externalizable-  ³ÌĞòÔ±¾ö¶¨´æ´¢ÄÄĞ©ĞÅÏ¢ £¬ĞÔÄÜÂÔºÃ£¬µ«±à³Ì¸´ÔÓ	
+								      åœ¨readObjectæ–¹æ³•åæ‰§è¡Œï¼Œè¿”å›å€¼ä¼šæ›¿æ¢åŸæ¥çš„ååºåˆ—åŒ–å¯¹è±¡ï¼Œ
+									  å¯¹åºåˆ—åŒ–å•ä¾‹ç±»ã€æšä¸¾ç±»è¶…çº§æœ‰ç”¨ï¼ˆä»¥å…åˆ›å»ºæ–°çš„å…¶ä»–å¯¹è±¡ï¼‰
+			   	         |-- ã€2ã€‘Externalizable-  ç¨‹åºå‘˜å†³å®šå­˜å‚¨å“ªäº›ä¿¡æ¯ ï¼Œæ€§èƒ½ç•¥å¥½ï¼Œä½†ç¼–ç¨‹å¤æ‚	
 						 
-			|--´ıĞòÁĞ»¯¶ÔÏóµÄÖ±½Ó»ò¼ä½Ó¸¸ÀàÒªÃ´ÓĞÎŞ²Î¹¹ÔìÆ÷£¬ÒªÃ´ÊµÏÖĞòÁĞ»¯½Ó¿Ú£¬·ñÔòInvalidClassException
-			    ÇÒµ±¸¸Àà²»¿ÉĞòÁĞ¡¢ÓĞÎŞ²Î¹¹ÔìÆ÷Ê±£¬¸¸ÀàÖĞµÄ³ÉÔ±±äÁ¿Öµ²»»áĞòÁĞ»¯µ½¶ş½øÖÆÎÄ¼şÖĞ
-				ÇÒµ±³ÉÔ±±äÁ¿ÓĞÒıÓÃÀàĞÍÊ±£¬ÆäÒıÓÃÀàĞèÒªÒ²ÊÇ¿ÉĞòÁĞ»¯µÄ£¬·ñÔò¸ÃÀàÎŞ·¨ĞòÁĞ»¯
-	   	    |--¶à´ÎĞòÁĞ»¯Í¬Ò»¸ö¶ÔÏó£¬Ö»ÓĞµÚÒ»´ÎwriteObject²Å»á½«¶ÔÏóĞòÁĞ»¯×Ö½ÚĞòÁĞ²¢Êä³ö£¬
-				ºóÃæÔÙĞòÁĞ»¯¸Ã¶ÔÏó£¬Ö»ÊÇÊä³öÒ»¸öĞòÁĞ»¯±àºÅ£¨ËùÒÔµÚÒ»´ÎÖ®ºóÎŞÂÛ¶ÔÏóÊµÀı±äÁ¿ÈçºÎ±ä»¯£¬ÊµÀı±äÁ¿Ò²²»»á±»Êä³ö£©
-*¶ÔÏó¡¾·´ĞòÁĞ»¯¡¿
-	   |--ÌØµã£ºÎŞĞè¹¹ÔìÆ÷³õÊ¼»¯¶ÔÏó£¬¶à¸öĞòÁĞ»¯¶ÔÏóÔÚ¶ÁÈ¡Ê±Ğè°´Ë³Ğò
+			|--å¾…åºåˆ—åŒ–å¯¹è±¡çš„ç›´æ¥æˆ–é—´æ¥çˆ¶ç±»è¦ä¹ˆæœ‰æ— å‚æ„é€ å™¨ï¼Œè¦ä¹ˆå®ç°åºåˆ—åŒ–æ¥å£ï¼Œå¦åˆ™InvalidClassException
+			    ä¸”å½“çˆ¶ç±»ä¸å¯åºåˆ—ã€æœ‰æ— å‚æ„é€ å™¨æ—¶ï¼Œçˆ¶ç±»ä¸­çš„æˆå‘˜å˜é‡å€¼ä¸ä¼šåºåˆ—åŒ–åˆ°äºŒè¿›åˆ¶æ–‡ä»¶ä¸­
+				ä¸”å½“æˆå‘˜å˜é‡æœ‰å¼•ç”¨ç±»å‹æ—¶ï¼Œå…¶å¼•ç”¨ç±»éœ€è¦ä¹Ÿæ˜¯å¯åºåˆ—åŒ–çš„ï¼Œå¦åˆ™è¯¥ç±»æ— æ³•åºåˆ—åŒ–
+	   	    |--å¤šæ¬¡åºåˆ—åŒ–åŒä¸€ä¸ªå¯¹è±¡ï¼Œåªæœ‰ç¬¬ä¸€æ¬¡writeObjectæ‰ä¼šå°†å¯¹è±¡åºåˆ—åŒ–å­—èŠ‚åºåˆ—å¹¶è¾“å‡ºï¼Œ
+				åé¢å†åºåˆ—åŒ–è¯¥å¯¹è±¡ï¼Œåªæ˜¯è¾“å‡ºä¸€ä¸ªåºåˆ—åŒ–ç¼–å·ï¼ˆæ‰€ä»¥ç¬¬ä¸€æ¬¡ä¹‹åæ— è®ºå¯¹è±¡å®ä¾‹å˜é‡å¦‚ä½•å˜åŒ–ï¼Œå®ä¾‹å˜é‡ä¹Ÿä¸ä¼šè¢«è¾“å‡ºï¼‰
+*å¯¹è±¡ã€ååºåˆ—åŒ–ã€‘
+	   |--ç‰¹ç‚¹ï¼šæ— éœ€æ„é€ å™¨åˆå§‹åŒ–å¯¹è±¡ï¼Œå¤šä¸ªåºåˆ—åŒ–å¯¹è±¡åœ¨è¯»å–æ—¶éœ€æŒ‰é¡ºåº
 	                 
-	   |--ÓÃ·¨£º
-	   	    |--¡¾1¡¿´´½¨ObjectInputStream¶ÔÏó
-	   	    |--¡¾2¡¿µ÷ÓÃreadObject·½·¨£¬·µ»ØObjectÀàĞÍ¶ÔÏó£¬ĞèÒª°ÑËûÇ¿ĞĞ×ª»»ÎªÕæÊµÀàĞÍ
-			    ÓÉÊı¾İ»Ö¸´µ½¶ÔÏó»¹ĞèÒª¶ÔÓ¦Àà£¬·ñÔòÒı·¢ClassNotFoundExceptionÒì³£
-*NIOĞÂµÄIOÀà
+	   |--ç”¨æ³•ï¼š
+	   	    |--ã€1ã€‘åˆ›å»ºObjectInputStreamå¯¹è±¡
+	   	    |--ã€2ã€‘è°ƒç”¨readObjectæ–¹æ³•ï¼Œè¿”å›Objectç±»å‹å¯¹è±¡ï¼Œéœ€è¦æŠŠä»–å¼ºè¡Œè½¬æ¢ä¸ºçœŸå®ç±»å‹
+			    ç”±æ•°æ®æ¢å¤åˆ°å¯¹è±¡è¿˜éœ€è¦å¯¹åº”ç±»ï¼Œå¦åˆ™å¼•å‘ClassNotFoundExceptionå¼‚å¸¸
+*NIOæ–°çš„IOç±»
 *@author Hartley
 *@version 1.0.0
 */
 
 class  IOTest
 {
-	//FileÀàµÄ»ù±¾²Ù×÷
+	//Fileç±»çš„åŸºæœ¬æ“ä½œ
 	public static void fileTest()
 	{
-		File file = new File(".");//ÒÔµ±Ç°Â·¾¶´´½¨ÎÄ¼ş¶ÔÏó,£¨ .±íÊ¾µ±Ç°Ä¿Â¼£©×¢£º¾ø¶ÔÂ·¾¶Ê±Òª \\ »òÕß /
-		System.out.println(file.getName() + " ¶ÔÏóÊÇ·ñ´æÔÚ£º"+file.exists());//·µ»Øtrue
+		File file = new File(".");//ä»¥å½“å‰è·¯å¾„åˆ›å»ºæ–‡ä»¶å¯¹è±¡,ï¼ˆ .è¡¨ç¤ºå½“å‰ç›®å½•ï¼‰æ³¨ï¼šç»å¯¹è·¯å¾„æ—¶è¦ \\ æˆ–è€… /
+		System.out.println(file.getName() + " å¯¹è±¡æ˜¯å¦å­˜åœ¨ï¼š"+file.exists());//è¿”å›true
 		System.out.println(file.getName());
-		System.out.println(file.getParent());//»ñÈ¡Ïà¶Ô¸¸Â·¾¶£¨»á³ö´í·µ»Ønull£©
-		System.out.println(file.getAbsoluteFile().getParent());//»ñÈ¡ÉÏÒ»¼¶Â·¾¶£¨Ïà¶Ô¸¸Â·¾¶£©
-		System.out.println(file.getAbsoluteFile());//»ñÈ¡¾ø¶ÔÂ·¾¶
+		System.out.println(file.getParent());//è·å–ç›¸å¯¹çˆ¶è·¯å¾„ï¼ˆä¼šå‡ºé”™è¿”å›nullï¼‰
+		System.out.println(file.getAbsoluteFile().getParent());//è·å–ä¸Šä¸€çº§è·¯å¾„ï¼ˆç›¸å¯¹çˆ¶è·¯å¾„ï¼‰
+		System.out.println(file.getAbsoluteFile());//è·å–ç»å¯¹è·¯å¾„
 		
 		File newFile = new File(System.currentTimeMillis()+".lhs");
 		
 		try
 		{
-			newFile.createNewFile();//ÒÔfile¶ÔÏó´´½¨ÎÄ¼ş
-			System.out.println(newFile.mkdir());//´´½¨Ä¿Â¼£¬Ç°Ãæ´´½¨ÎÄ¼şÁË£¬ËùÒÔ·µ»Øfalse
+			newFile.createNewFile();//ä»¥fileå¯¹è±¡åˆ›å»ºæ–‡ä»¶
+			System.out.println(newFile.mkdir());//åˆ›å»ºç›®å½•ï¼Œå‰é¢åˆ›å»ºæ–‡ä»¶äº†ï¼Œæ‰€ä»¥è¿”å›false
 
-			System.out.println("==µ±Ç°Â·¾¶ÏÂËùÓĞÎÄ¼şºÍÂ·¾¶==");
-			String[] fileLists = file.list();//µ±Ç°Â·¾¶ÏÂËùÓĞÎÄ¼şºÍÂ·¾¶
-			for (String list : fileLists )//±éÀú
+			System.out.println("==å½“å‰è·¯å¾„ä¸‹æ‰€æœ‰æ–‡ä»¶å’Œè·¯å¾„==");
+			String[] fileLists = file.list();//å½“å‰è·¯å¾„ä¸‹æ‰€æœ‰æ–‡ä»¶å’Œè·¯å¾„
+			for (String list : fileLists )//éå†
 			{
 				System.out.println(list);
 			}
 			
-			System.out.println("==ËùÓĞ´ÅÅÌ¸ùÂ·¾¶==");
+			System.out.println("==æ‰€æœ‰ç£ç›˜æ ¹è·¯å¾„==");
 			File[] roots = File.listRoots();
 			for (File root : roots )
 			{
@@ -105,8 +105,8 @@ class  IOTest
 			}
 
 
-			File tmpFile = File.createTempFile("temp",null);//´´½¨ÁÙÊ±ÎÄ¼ş,Ãû×ÖÎªtemp£¬null¶ÔÓ¦Ä¬ÈÏºó×ºtmp£¬ÔÚfileÂ·¾¶ÏÂ
-			tmpFile.deleteOnExit();//×ö¸öÉ¾³ı¹³×Ó£¬ÍË³öJVMºóÁÙÊ±ÎÄ¼ş×Ô¶¯É¾³ı
+			File tmpFile = File.createTempFile("temp",null);//åˆ›å»ºä¸´æ—¶æ–‡ä»¶,åå­—ä¸ºtempï¼Œnullå¯¹åº”é»˜è®¤åç¼€tmpï¼Œåœ¨fileè·¯å¾„ä¸‹
+			tmpFile.deleteOnExit();//åšä¸ªåˆ é™¤é’©å­ï¼Œé€€å‡ºJVMåä¸´æ—¶æ–‡ä»¶è‡ªåŠ¨åˆ é™¤
 
 			
 		}
@@ -117,11 +117,11 @@ class  IOTest
 		
 	}
 
-	//File¹ıÂËÆ÷-º¯Êı½Ó¿ÚFileNameFilterÀï***accept(File dir,String name)***	
+	//Fileè¿‡æ»¤å™¨-å‡½æ•°æ¥å£FileNameFilteré‡Œ***accept(File dir,String name)***	
 	public static void filterTest()
 	{
-		File file = new File(".");//µ±Ç°Ä¿Â¼
-		//ÁĞ³öµ±Ç°Ä¿Â¼ÏÂ .javaÎÄ¼ş£¬ÒÔ¼°×ÓÄ¿Â¼
+		File file = new File(".");//å½“å‰ç›®å½•
+		//åˆ—å‡ºå½“å‰ç›®å½•ä¸‹ .javaæ–‡ä»¶ï¼Œä»¥åŠå­ç›®å½•
 		String[] lists = file.list( (dir,name)->name.endsWith(".java") || new File(name).isDirectory() );
 		for (String list : lists )
 		{
@@ -129,24 +129,24 @@ class  IOTest
 		}
 	}
 
-	//ÓÃ¶ÁÈ¡ÎÄ¼şµÄÊäÈëÁ÷FileInputStream¶ÁÈ¡ÎÄ¼ş£¨¶ÁÈ¡×Ö½Ú/×Ö·û + ½ÚµãÁ÷£©
+	//ç”¨è¯»å–æ–‡ä»¶çš„è¾“å…¥æµFileInputStreamè¯»å–æ–‡ä»¶ï¼ˆè¯»å–å­—èŠ‚/å­—ç¬¦ + èŠ‚ç‚¹æµï¼‰
 	public static void fileInputStreamTest()
 	{
 		FileInputStream fis = null;
-		byte[] buffer = new byte[1024];//1024¸ö×Ö½Ú==1KB
+		byte[] buffer = new byte[1024];//1024ä¸ªå­—èŠ‚==1KB
 		/*FileReader fis = null;
-		char[] buffer = new char[1024];//1024¸ö×Ö·û == 2KB
+		char[] buffer = new char[1024];//1024ä¸ªå­—ç¬¦ == 2KB
 		*/
-		int len=0;//Êµ¼Ê¶ÁÈ¡µÄ³¤¶È
+		int len=0;//å®é™…è¯»å–çš„é•¿åº¦
 
 		try
 		{
-			 fis = new FileInputStream("tt.txt");//×Ö½Ú
-				//fis = new FileReader("tt.txt");//×Ö·û
-			//Ñ­»·ÓÃÒ»ÅÅ1024³¤¶ÈµÄÖñÍ²È¡Ë®£¬Ã¿¸öÖñÍ²·Å1¸ö×Ö½Ú£¬È¡µ½Ã»ÓĞË®ÁË·µ»Ø-1
+			 fis = new FileInputStream("tt.txt");//å­—èŠ‚
+				//fis = new FileReader("tt.txt");//å­—ç¬¦
+			//å¾ªç¯ç”¨ä¸€æ’1024é•¿åº¦çš„ç«¹ç­’å–æ°´ï¼Œæ¯ä¸ªç«¹ç­’æ”¾1ä¸ªå­—èŠ‚ï¼Œå–åˆ°æ²¡æœ‰æ°´äº†è¿”å›-1
 			while( (len = fis.read(buffer) ) != -1)
 		{
-			System.out.println( new String(buffer,0,len));//lenÊÇ×ª»»³É×Ö·û´®µÄ³¤¶È
+			System.out.println( new String(buffer,0,len));//lenæ˜¯è½¬æ¢æˆå­—ç¬¦ä¸²çš„é•¿åº¦
 		}
 
 		}
@@ -158,7 +158,7 @@ class  IOTest
 		{
 			try
 			{
-				fis.close();//¹Ø±Õ×ÊÔ´
+				fis.close();//å…³é—­èµ„æº
 			}
 			catch (IOException ioe)
 			{
@@ -169,17 +169,17 @@ class  IOTest
 		
 	}
 
-	//ÓÃÊä³öÁ÷FileOutputStreamÊä³öÎÄ¼ş£¨¶ÁÈ¡×Ö½Ú/×Ö·û + ½ÚµãÁ÷£©
+	//ç”¨è¾“å‡ºæµFileOutputStreamè¾“å‡ºæ–‡ä»¶ï¼ˆè¯»å–å­—èŠ‚/å­—ç¬¦ + èŠ‚ç‚¹æµï¼‰
 	public static void fileOutputStreamTest()
 	{
-		FileReader fis = null;//´´½¨ÊäÈëÁ÷¶ÁÈ¡ÎÄ¼ş
-		FileWriter fos = null;//Êä³öÁ÷
+		FileReader fis = null;//åˆ›å»ºè¾“å…¥æµè¯»å–æ–‡ä»¶
+		FileWriter fos = null;//è¾“å‡ºæµ
 		
 		File source = new File("tt.txt");
 		File sink = new File("new_tt.txt");
 
-		char[] buffer = new char[32];//×Ö·û»º´æ
-		int len;//Êµ¼Ê¶ÁÈ¡³¤¶È
+		char[] buffer = new char[32];//å­—ç¬¦ç¼“å­˜
+		int len;//å®é™…è¯»å–é•¿åº¦
 
 		try
 		{
@@ -193,7 +193,7 @@ class  IOTest
 
 			fos = new FileWriter(sink);
 			
-			fos.write("Ö±½ÓÓÃ×Ö·û´®Ğ´µÄ \r\n");//winÏÂ»»ĞĞ·ûÊÇ\r\n , LinuxÏÂÊÇ\n
+			fos.write("ç›´æ¥ç”¨å­—ç¬¦ä¸²å†™çš„ \r\n");//winä¸‹æ¢è¡Œç¬¦æ˜¯\r\n , Linuxä¸‹æ˜¯\n
 			while( (len = fis.read(buffer) ) != -1 )
 			{
 				fos.write(buffer,0,len);
@@ -208,7 +208,7 @@ class  IOTest
 			try
 			{
 				fis.close();
-				fos.close();//»á×Ô¶¯Ö´ĞĞflush·½·¨£¬°Ñ»º´æÈ«²¿Êä³öµ½ÎÄ¼ş
+				fos.close();//ä¼šè‡ªåŠ¨æ‰§è¡Œflushæ–¹æ³•ï¼ŒæŠŠç¼“å­˜å…¨éƒ¨è¾“å‡ºåˆ°æ–‡ä»¶
 			}
 			catch (IOException ioe)
 			{
@@ -217,18 +217,18 @@ class  IOTest
 		}
 	}
 
-	//¼ò»¯Á÷³Ì ´¦ÀíÁ÷printStream£¨´¦ÀíÊäÈëÊä³ö³¬¼¶¼òµ¥ + Ö´ĞĞĞ§ÂÊ¸ß£©
+	//ç®€åŒ–æµç¨‹ å¤„ç†æµprintStreamï¼ˆå¤„ç†è¾“å…¥è¾“å‡ºè¶…çº§ç®€å• + æ‰§è¡Œæ•ˆç‡é«˜ï¼‰
 	public static void printStreamTest()
 	{
 		FileOutputStream fos = null;
-		PrintStream ps = null;//ÓÃÀ´°ü×°ÊäÈë/Êä³öÁ÷µÄ´¦ÀíÁ÷PrintStream
+		PrintStream ps = null;//ç”¨æ¥åŒ…è£…è¾“å…¥/è¾“å‡ºæµçš„å¤„ç†æµPrintStream
 
 		try
 		{
 			fos = new FileOutputStream("new_tt.txt");
 			ps = new PrintStream( fos );
-			ps.println("´¦ÀíÁ÷Ö±½Ó¸ã");//Ğ´Èë×Ö·û´®ºó ×Ô¶¯¼ÓÈë»»ĞĞ·û
-			ps.println(new File("hh") );//Ò²¿É´«¶ÔÏó£¬Êä³öµÄÊÇtoString×Ö·û´®--ÀàÃû@¹şÏ££¿
+			ps.println("å¤„ç†æµç›´æ¥æ");//å†™å…¥å­—ç¬¦ä¸²å è‡ªåŠ¨åŠ å…¥æ¢è¡Œç¬¦
+			ps.println(new File("hh") );//ä¹Ÿå¯ä¼ å¯¹è±¡ï¼Œè¾“å‡ºçš„æ˜¯toStringå­—ç¬¦ä¸²--ç±»å@å“ˆå¸Œï¼Ÿ
 		}
 		catch (IOException ioe)
 		{
@@ -236,29 +236,29 @@ class  IOTest
 		}
 		finally
 		{
-			ps.close(); //Ö±½Ó¹Ø±Õ¶¥²ãµÄ·â×°Àà¼´¿É£¬¼´¿É»á×Ô¶¯¹Ø±ÕÆäËûÁ÷
+			ps.close(); //ç›´æ¥å…³é—­é¡¶å±‚çš„å°è£…ç±»å³å¯ï¼Œå³å¯ä¼šè‡ªåŠ¨å…³é—­å…¶ä»–æµ
 		}
 
 	}
 
-	//×¨ÃÅ´¦Àí×Ö·û´®µÄ StringReader StringWriter
+	//ä¸“é—¨å¤„ç†å­—ç¬¦ä¸²çš„ StringReader StringWriter
 	public static void stringRWTest()
 	{
-		String src = "´ÓÃ÷ÌìÆğ×ö¸öĞÒ¸£µÄÈË\n"
-				+ "Î¹Âí£¬Åü²ñ£¬ÖÜÓÎÊÀ½ç\r\n"
-				+ "´ÓÃ÷ÌìÆğ£¬¹ØĞÄÁ¸Ê³ºÍÊß²Ë\r\n"
-				+ "ÎÒÓĞÒ»Ëù·¿×Ó£¬Ãæ³¯´óº££¬´ºÅ¯»¨¿ª\r\n"
-				+ "´ÓÃ÷ÌìÆğ£¬¸úÃ¿¸öÇ×ÈËÍ¨ĞÅ\r\n"
-				+ "¸æËßËûÃÇÎÒµÄĞÒ¸£\n";
+		String src = "ä»æ˜å¤©èµ·åšä¸ªå¹¸ç¦çš„äºº\n"
+				+ "å–‚é©¬ï¼ŒåŠˆæŸ´ï¼Œå‘¨æ¸¸ä¸–ç•Œ\r\n"
+				+ "ä»æ˜å¤©èµ·ï¼Œå…³å¿ƒç²®é£Ÿå’Œè”¬èœ\r\n"
+				+ "æˆ‘æœ‰ä¸€æ‰€æˆ¿å­ï¼Œé¢æœå¤§æµ·ï¼Œæ˜¥æš–èŠ±å¼€\r\n"
+				+ "ä»æ˜å¤©èµ·ï¼Œè·Ÿæ¯ä¸ªäº²äººé€šä¿¡\r\n"
+				+ "å‘Šè¯‰ä»–ä»¬æˆ‘çš„å¹¸ç¦\n";
 		int len = 0;
 		char[] buffer = new char[32];
 		
-		System.out.println("===×Ö·û´®ÊäÈëÁ÷===");
-		try( StringReader sr = new StringReader(src) )//ÔöÇ¿°ætryÓï¾ä
+		System.out.println("===å­—ç¬¦ä¸²è¾“å…¥æµ===");
+		try( StringReader sr = new StringReader(src) )//å¢å¼ºç‰ˆtryè¯­å¥
 		{
 			while ( (len = sr.read(buffer) ) != -1)
 			{
-				System.out.print(new String(buffer,0,len) );//ÓÃbufferÊı×é¶Á³ö
+				System.out.print(new String(buffer,0,len) );//ç”¨bufferæ•°ç»„è¯»å‡º
 			}
 		}
 		catch (IOException ioe)
@@ -266,11 +266,11 @@ class  IOTest
 			ioe.printStackTrace();
 		}
 		
-		System.out.println("===×Ö·û´®Êä³öÁ÷===");
-		try(StringWriter sw = new StringWriter() )//´´½¨µÄStringWriterÊµ¼ÊÉÏÊÇÓÃ³¤¶È20µÄStringBuffer×÷ÎªÊä³ö½Úµã
+		System.out.println("===å­—ç¬¦ä¸²è¾“å‡ºæµ===");
+		try(StringWriter sw = new StringWriter() )//åˆ›å»ºçš„StringWriterå®é™…ä¸Šæ˜¯ç”¨é•¿åº¦20çš„StringBufferä½œä¸ºè¾“å‡ºèŠ‚ç‚¹
 		{
-			sw.write(src);//write·½·¨½«×Ö·û´®Ğ´Èë×Ö·û´®Êä³öÁ÷
-			System.out.println(sw.toString() );//µ÷ÓÃswµÄtoStringÒ»´ÎĞÔÊä³öÆäÖĞÄÚÈİ
+			sw.write(src);//writeæ–¹æ³•å°†å­—ç¬¦ä¸²å†™å…¥å­—ç¬¦ä¸²è¾“å‡ºæµ
+			System.out.println(sw.toString() );//è°ƒç”¨swçš„toStringä¸€æ¬¡æ€§è¾“å‡ºå…¶ä¸­å†…å®¹
 		}
 		catch (IOException ioe)
 		{
@@ -278,19 +278,19 @@ class  IOTest
 		}
 	}
 	
-	//×ª»»Á÷²âÊÔ£¬±ÈÈç¼üÅÌÊäÈëSystem.in ÊÇInputStreamÊµÀı£¬¿ÉÒÔÍ¨¹ıInputStreamReader×ª»»Îª×Ö·ûÊäÈëÁ÷
+	//è½¬æ¢æµæµ‹è¯•ï¼Œæ¯”å¦‚é”®ç›˜è¾“å…¥System.in æ˜¯InputStreamå®ä¾‹ï¼Œå¯ä»¥é€šè¿‡InputStreamReaderè½¬æ¢ä¸ºå­—ç¬¦è¾“å…¥æµ
 	public static void transTest()
 	{
 		try(InputStreamReader isr = new InputStreamReader(System.in);
-			//ÔÙ·â×°Îª»º´æÀàĞÍÊäÈëÁ÷
+			//å†å°è£…ä¸ºç¼“å­˜ç±»å‹è¾“å…¥æµ
 			BufferedReader br = new BufferedReader(isr))
 		{
 			String line = null;
-			while ( (line = br.readLine() ) != null)//ÖğĞĞ¶ÁÈ¡£¬ÒÔ»»ĞĞ·ûÎª±êÖ¾
+			while ( (line = br.readLine() ) != null)//é€è¡Œè¯»å–ï¼Œä»¥æ¢è¡Œç¬¦ä¸ºæ ‡å¿—
 			{
-				if(line.equals("exit") )//×Ö·û´®±È½Ï×Ö·ûÊÇ·ñÒ»ÖÂ£¬ÒªÓÃequals£¡
+				if(line.equals("exit") )//å­—ç¬¦ä¸²æ¯”è¾ƒå­—ç¬¦æ˜¯å¦ä¸€è‡´ï¼Œè¦ç”¨equalsï¼
 				{
-					System.exit(1);//ÉùÃ÷ÍË³ö³ÌĞòÌõ¼ş
+					System.exit(1);//å£°æ˜é€€å‡ºç¨‹åºæ¡ä»¶
 				}
 				System.out.println(line);
 			}
@@ -303,7 +303,7 @@ class  IOTest
 
 	}
 
-	//ÍÆ»ØÊäÈëÁ÷£¬¶ÁÈ¡¶ÔÓ¦Æ¥Åä×Ö·û´®Ö®Ç°µÄ×Ö·û´®
+	//æ¨å›è¾“å…¥æµï¼Œè¯»å–å¯¹åº”åŒ¹é…å­—ç¬¦ä¸²ä¹‹å‰çš„å­—ç¬¦ä¸²
 	public static void pushbackReaderTest()
 	{
 		String targetStr = "iam_target";
@@ -311,31 +311,31 @@ class  IOTest
 		String lastContent = null;
 		char[] buffer = new char[32];
 		int len = 0;
-		try(PushbackReader pbr = new PushbackReader(new FileReader(file),64) )//¶¨ÒåÍÆ»Ø»º³åÇø´óĞ¡?¸ù¾İºóÃæ×î´óÍÆ»ØµÄ×Ö·ûÊı£¬¼û¡¾1¡¿
+		try(PushbackReader pbr = new PushbackReader(new FileReader(file),64) )//å®šä¹‰æ¨å›ç¼“å†²åŒºå¤§å°?æ ¹æ®åé¢æœ€å¤§æ¨å›çš„å­—ç¬¦æ•°ï¼Œè§ã€1ã€‘
 		{
-			while ( (len = pbr.read(buffer)) != -1)//Ã¿´Î¶ÁÈ¡bufferµÄ³¤¶È£º32¸ö×Ö·û
+			while ( (len = pbr.read(buffer)) != -1)//æ¯æ¬¡è¯»å–bufferçš„é•¿åº¦ï¼š32ä¸ªå­—ç¬¦
 			{
-				String content = new String(buffer,0,len);//¶ÁÈ¡µ½µÄ×ª»»Îª×Ö·û´®
+				String content = new String(buffer,0,len);//è¯»å–åˆ°çš„è½¬æ¢ä¸ºå­—ç¬¦ä¸²
 				int index = 0;
-				if ( (index = (lastContent + content).indexOf(targetStr)) !=-1)//Èç¹ûµ±Ç°contentº¬targetStr
+				if ( (index = (lastContent + content).indexOf(targetStr)) !=-1)//å¦‚æœå½“å‰contentå«targetStr
 				{
-					//½«±¾´ÎºÍÖ®Ç°µÄ×Ö·û´®Í¬Ê±ÍÆ»Ø»º³åÇø£¨×Ö·û´®Òª×ª³É×Ö·ûÊı×é£©,³¬³öÍÆ»Ø»º³åÇø´óĞ¡»áÅ×³öÒì³£
-					pbr.unread( (lastContent + content).toCharArray() );//¡¾1¡¿´Ë´¦lastContent ¼ÓÉÏ content×î´ó³¤¶ÈÎª32+32 = 64
-					//Èç¹ûbuffer³¤¶È²»¹»£¬ÔòÖØĞÂ·ÖÅäÒ»¸öindex³¤µÄbuffer
+					//å°†æœ¬æ¬¡å’Œä¹‹å‰çš„å­—ç¬¦ä¸²åŒæ—¶æ¨å›ç¼“å†²åŒºï¼ˆå­—ç¬¦ä¸²è¦è½¬æˆå­—ç¬¦æ•°ç»„ï¼‰,è¶…å‡ºæ¨å›ç¼“å†²åŒºå¤§å°ä¼šæŠ›å‡ºå¼‚å¸¸
+					pbr.unread( (lastContent + content).toCharArray() );//ã€1ã€‘æ­¤å¤„lastContent åŠ ä¸Š contentæœ€å¤§é•¿åº¦ä¸º32+32 = 64
+					//å¦‚æœbufferé•¿åº¦ä¸å¤Ÿï¼Œåˆ™é‡æ–°åˆ†é…ä¸€ä¸ªindexé•¿çš„buffer
 					if (index > buffer.length)
 					{
 						buffer = new char[index];
 					}
-					//¶ÁÈ¡Æ¥Åä×Ö·û´®Ö®Ç°µÄÄÚÈİµ½»º´æÇøbuffer
+					//è¯»å–åŒ¹é…å­—ç¬¦ä¸²ä¹‹å‰çš„å†…å®¹åˆ°ç¼“å­˜åŒºbuffer
 					pbr.read(buffer,0,index);
 
-					//´òÓ¡£¬£¬ÍË³ö
+					//æ‰“å°ï¼Œï¼Œé€€å‡º
 					System.out.print( new String(buffer,0,index) );
 					System.exit(0);
 				}else{
-					//´òÓ¡ÉÏ´Î¶ÁÈ¡ÄÚÈİ
+					//æ‰“å°ä¸Šæ¬¡è¯»å–å†…å®¹
 					System.out.print(lastContent);
-					//¸üĞÂlastContentÎªµ±Ç°
+					//æ›´æ–°lastContentä¸ºå½“å‰
 					lastContent = content;
 				}
 			}
@@ -346,15 +346,15 @@ class  IOTest
 		}
 	}
 
-	//ÖØ¶¨Ïò±ê×¼ÊäÈëÊä³ö
+	//é‡å®šå‘æ ‡å‡†è¾“å…¥è¾“å‡º
 	public static void redirectTest()
 	{
 		/*
-		//ÖØ¶¨Ïò±ê×¼Êä³ö£¨°Ñ´Ó´òÓ¡µ½ÆÁÄ»×ªÒÆµ½Êä³öÁ÷ÖĞ£©
+		//é‡å®šå‘æ ‡å‡†è¾“å‡ºï¼ˆæŠŠä»æ‰“å°åˆ°å±å¹•è½¬ç§»åˆ°è¾“å‡ºæµä¸­ï¼‰
 		File file_out = new File("new_tt.txt");
-		try(PrintStream ps_out = new PrintStream(new FileOutputStream(file_out)))//´´½¨PrintStreamÊä³öÁ÷
+		try(PrintStream ps_out = new PrintStream(new FileOutputStream(file_out)))//åˆ›å»ºPrintStreamè¾“å‡ºæµ
 		{
-			//½«±ê×¼Êä³öSystem.out´ÓÆÁÄ»£¬µ½Ö¸¶¨µÄÊä³öÁ÷
+			//å°†æ ‡å‡†è¾“å‡ºSystem.outä»å±å¹•ï¼Œåˆ°æŒ‡å®šçš„è¾“å‡ºæµ
 			System.setOut(ps_out);
 
 			System.out.println("Can you see me>?");
@@ -366,19 +366,19 @@ class  IOTest
 			ioe.printStackTrace();
 		}
 		*/
-		//ÖØ¶¨Ïò±ê×¼ÊäÈë£¨°Ñ´Ó¼üÅÌÊäÈë×ªÒÆÎªÊäÈëÁ÷£©
+		//é‡å®šå‘æ ‡å‡†è¾“å…¥ï¼ˆæŠŠä»é”®ç›˜è¾“å…¥è½¬ç§»ä¸ºè¾“å…¥æµï¼‰
 		File file_in = new File("tt.txt");
 
 		try(FileInputStream fis = (new FileInputStream(file_in)))
 		{
-			//ÖØ¶¨Ïò±ê×¼ÊäÈë
+			//é‡å®šå‘æ ‡å‡†è¾“å…¥
 			System.setIn(fis);
 			Scanner sc = new Scanner(System.in);
-			sc.useDelimiter("\n");//ÓÃ»»ĞĞ·û×÷Îª·Ö¸ô·û
+			sc.useDelimiter("\n");//ç”¨æ¢è¡Œç¬¦ä½œä¸ºåˆ†éš”ç¬¦
 
 			while (sc.hasNext() )
 			{
-				System.out.println("±ê×¼ÊäÈëÄÚÈİÎª£º"+sc.next() );
+				System.out.println("æ ‡å‡†è¾“å…¥å†…å®¹ä¸ºï¼š"+sc.next() );
 			}
 		}
 		catch (IOException ioe)
@@ -387,13 +387,13 @@ class  IOTest
 		}
 	}
 
-	//¶ÁÈ¡ÆäËû½ø³ÌµÄÊä³öĞÅÏ¢--¶ÔÓ¦Java³ÌĞòÊÇÊäÈëÁ÷
+	//è¯»å–å…¶ä»–è¿›ç¨‹çš„è¾“å‡ºä¿¡æ¯--å¯¹åº”Javaç¨‹åºæ˜¯è¾“å…¥æµ
 	public static void processReadTest()
 	{
 		Process p = null;
 		try
 		{
-			p = Runtime.getRuntime().exec("javac");//Ö´ĞĞjavac³ÌĞò£¬²¢»ñÈ¡Æä½ø³Ì
+			p = Runtime.getRuntime().exec("javac");//æ‰§è¡Œjavacç¨‹åºï¼Œå¹¶è·å–å…¶è¿›ç¨‹
 		}
 		catch (IOException ioe)
 		{
@@ -402,7 +402,7 @@ class  IOTest
 
 		try(
 			BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream()))
-			//»ñÈ¡javac½ø³ÌµÄ´íÎóÁ÷Í¨¹ı×ª»»Á÷±äÎª×Ö·ûÁ÷£¬²¢×°ÊÎÎª»º´æÁ÷
+			//è·å–javacè¿›ç¨‹çš„é”™è¯¯æµé€šè¿‡è½¬æ¢æµå˜ä¸ºå­—ç¬¦æµï¼Œå¹¶è£…é¥°ä¸ºç¼“å­˜æµ
 			)
 		{
 			String line = null;
@@ -417,7 +417,7 @@ class  IOTest
 		}
 	}
 
-	//ÏòÆäËû³ÌĞòĞ´ÈëĞÅÏ¢--¶ÔJava³ÌĞòÀ´½²ÊÇÊä³öÁ÷
+	//å‘å…¶ä»–ç¨‹åºå†™å…¥ä¿¡æ¯--å¯¹Javaç¨‹åºæ¥è®²æ˜¯è¾“å‡ºæµ
 	public static void processWriteTest()
 	{
 		Process p = null;
@@ -430,45 +430,45 @@ class  IOTest
 			ioe.printStackTrace();
 		}
 */
-		try(PrintStream ps = new PrintStream( p.getOutputStream() )//²»»áÅ×³öIOException£¬»áÓĞNullPointerException
+		try(PrintStream ps = new PrintStream( p.getOutputStream() )//ä¸ä¼šæŠ›å‡ºIOExceptionï¼Œä¼šæœ‰NullPointerException
 			//BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()) ) 
 			)
 		{
 			ps.println("i am IOTest class, i will give you some message\n");
-			ps.println("ÎÒÊÇIOTestÀà£¬¸øÄãÒ»µãĞ¡µÀÏûÏ¢~");
+			ps.println("æˆ‘æ˜¯IOTestç±»ï¼Œç»™ä½ ä¸€ç‚¹å°é“æ¶ˆæ¯~");
 			/*
 			bw.write("i am IOTest class, i will give you some message\n");
-			bw.write("ÎÒÊÇIOTestÀà£¬¸øÄãÒ»µãĞ¡µÀÏûÏ¢~");
+			bw.write("æˆ‘æ˜¯IOTestç±»ï¼Œç»™ä½ ä¸€ç‚¹å°é“æ¶ˆæ¯~");
 			*/
 		}
 		
 	}
 
-	//ÈÎÒâ¶ÁÈ¡ÎÄ¼şÖ¸¶¨Î»ÖÃ
+	//ä»»æ„è¯»å–æ–‡ä»¶æŒ‡å®šä½ç½®
 	public static void randomReadTest()
 	{
-		String src = "´ÓÃ÷ÌìÆğ×ö¸öĞÒ¸£µÄÈË\n"
-				+ "Î¹Âí£¬Åü²ñ£¬ÖÜÓÎÊÀ½ç\r\n"
-				+ "´ÓÃ÷ÌìÆğ£¬¹ØĞÄÁ¸Ê³ºÍÊß²Ë\r\n"
-				+ "ÎÒÓĞÒ»Ëù·¿×Ó£¬Ãæ³¯´óº££¬´ºÅ¯»¨¿ª\r\n"
-				+ "´ÓÃ÷ÌìÆğ£¬¸úÃ¿¸öÇ×ÈËÍ¨ĞÅ\r\n"
-				+ "¸æËßËûÃÇÎÒµÄĞÒ¸£\n";
+		String src = "ä»æ˜å¤©èµ·åšä¸ªå¹¸ç¦çš„äºº\n"
+				+ "å–‚é©¬ï¼ŒåŠˆæŸ´ï¼Œå‘¨æ¸¸ä¸–ç•Œ\r\n"
+				+ "ä»æ˜å¤©èµ·ï¼Œå…³å¿ƒç²®é£Ÿå’Œè”¬èœ\r\n"
+				+ "æˆ‘æœ‰ä¸€æ‰€æˆ¿å­ï¼Œé¢æœå¤§æµ·ï¼Œæ˜¥æš–èŠ±å¼€\r\n"
+				+ "ä»æ˜å¤©èµ·ï¼Œè·Ÿæ¯ä¸ªäº²äººé€šä¿¡\r\n"
+				+ "å‘Šè¯‰ä»–ä»¬æˆ‘çš„å¹¸ç¦\n";
 
 		byte[] buffer = new byte[1024];
 		int len = 0;
 		File file = new File("random_access.txt");
 
-		try( RandomAccessFile raf = new RandomAccessFile(file, "rws" ) )//²ÎÊırw--¿É¶Á¿ÉĞ´£¬ÎÄ¼şÃ»ÓĞ¾Í´´½¨
+		try( RandomAccessFile raf = new RandomAccessFile(file, "rws" ) )//å‚æ•°rw--å¯è¯»å¯å†™ï¼Œæ–‡ä»¶æ²¡æœ‰å°±åˆ›å»º
 		{
-			raf.seek(23);//¼ÇÂ¼Ö¸ÕëÒÆ¶¯µ½Ö¸¶¨Î»ÖÃ£»
+			raf.seek(23);//è®°å½•æŒ‡é’ˆç§»åŠ¨åˆ°æŒ‡å®šä½ç½®ï¼›
 			while ( (len = raf.read(buffer) ) != -1)
 			{
 				System.out.print(new String(buffer,0,len));
 			}
-			//raf.write(src.getBytes() );//Ğ´
-			System.out.println("µ±Ç°¼ÇÂ¼Ö¸ÕëµÄÎ»ÖÃ"+ raf.getFilePointer() );
-			raf.seek( raf.length() );//½«¼ÇÂ¼Ö¸ÕëÒÆ¶¯µ½ÎÄ¼şÄ©Î²£¡£¡
-			raf.write( "ÕâÊÇ×·¼ÓµÄcontent".getBytes() );
+			//raf.write(src.getBytes() );//å†™
+			System.out.println("å½“å‰è®°å½•æŒ‡é’ˆçš„ä½ç½®"+ raf.getFilePointer() );
+			raf.seek( raf.length() );//å°†è®°å½•æŒ‡é’ˆç§»åŠ¨åˆ°æ–‡ä»¶æœ«å°¾ï¼ï¼
+			raf.write( "è¿™æ˜¯è¿½åŠ çš„content".getBytes() );
 		}
 		catch (IOException e)
 		{
@@ -476,45 +476,45 @@ class  IOTest
 		}
 	}
 
-	//**************************¡¾´ÓÈÎÒâÎ»ÖÃ²åÈëÊı¾İ¡¿******************************
-	//Ë¼Â·£º¼ÇÂ¼Ö¸Õëµ½Ö¸¶¨Î»ÖÃ£¬¶ÁÈ¡Ö¸ÕëºóµÄÄÚÈİµ½ÁÙÊ±ÎÄ¼ş£¬Ìî³ä²åÈëÊı¾İ£¬ÔÙ°ÑÁÙÊ±´æ´¢µÄ½ÓÔÚºóÃæ
+	//**************************ã€ä»ä»»æ„ä½ç½®æ’å…¥æ•°æ®ã€‘******************************
+	//æ€è·¯ï¼šè®°å½•æŒ‡é’ˆåˆ°æŒ‡å®šä½ç½®ï¼Œè¯»å–æŒ‡é’ˆåçš„å†…å®¹åˆ°ä¸´æ—¶æ–‡ä»¶ï¼Œå¡«å……æ’å…¥æ•°æ®ï¼Œå†æŠŠä¸´æ—¶å­˜å‚¨çš„æ¥åœ¨åé¢
 	public static void insertTest()
 	{
 		byte[] buffer = new byte[1024];
 		int len = 0;
 		File file = new File("tt.txt");
-		String insert_contet = "**************ÎÒÊÇ²åÈëµÄÄÚÈİ**************";
-		int pos = 24;//´ı²åÈëµÄÎ»ÖÃ
+		String insert_contet = "**************æˆ‘æ˜¯æ’å…¥çš„å†…å®¹**************";
+		int pos = 24;//å¾…æ’å…¥çš„ä½ç½®
 		
 		File tempfile = null;
 
 		try
 		{
-			//´´½¨ÁÙÊ±ÎÄ¼ş
+			//åˆ›å»ºä¸´æ—¶æ–‡ä»¶
 			tempfile = File.createTempFile("temp",null);
-			tempfile.deleteOnExit();//É¾³ı¹³×Ó
+			tempfile.deleteOnExit();//åˆ é™¤é’©å­
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
-		//´´½¨ÈÎÒâ·ÃÎÊ¶ÁÈ¡Á÷¡¢ÁÙÊ±ÊäÈëÊä³öÁ÷
+		//åˆ›å»ºä»»æ„è®¿é—®è¯»å–æµã€ä¸´æ—¶è¾“å…¥è¾“å‡ºæµ
 		try(RandomAccessFile raf = new RandomAccessFile(file,"rw");
 			 FileOutputStream fos = new FileOutputStream(tempfile);
 			 FileInputStream fis = new FileInputStream(tempfile) )
 		{
-			raf.seek(pos);//¼ÇÂ¼Ö¸Õë²¦¶¯µ½Ö¸¶¨Î»ÖÃ
-			//´æ´¢Ö®ºóµÄÄÚÈİµ½ÁÙÊ±ÎÄ¼ş
-			while ( (len = raf.read(buffer) ) != -1)//raf ´ÓÔ´ÎÄ¼şÖĞ¶Á
+			raf.seek(pos);//è®°å½•æŒ‡é’ˆæ‹¨åŠ¨åˆ°æŒ‡å®šä½ç½®
+			//å­˜å‚¨ä¹‹åçš„å†…å®¹åˆ°ä¸´æ—¶æ–‡ä»¶
+			while ( (len = raf.read(buffer) ) != -1)//raf ä»æºæ–‡ä»¶ä¸­è¯»
 			{
-				fos.write(buffer,0,len);//Êä³öÁ÷½«¶Áµ½µÄÄÚÈİÊä³öµ½ÁÙÊ±ÎÄ¼ş
+				fos.write(buffer,0,len);//è¾“å‡ºæµå°†è¯»åˆ°çš„å†…å®¹è¾“å‡ºåˆ°ä¸´æ—¶æ–‡ä»¶
 			}
 			
-			//¼ÇÂ¼Ö¸ÕëºóÄÚÈİ±¸·İÍê±Ï£¬¾Í¿ÉÒÔÎªËùÓûÎªµÄÍùºó¼Ó¶«Î÷ÁË
+			//è®°å½•æŒ‡é’ˆåå†…å®¹å¤‡ä»½å®Œæ¯•ï¼Œå°±å¯ä»¥ä¸ºæ‰€æ¬²ä¸ºçš„å¾€ååŠ ä¸œè¥¿äº†
 			raf.seek(pos);
 			raf.write( insert_contet.getBytes() );
 
-			//È»ºóÔÚµ±Ç°¼ÇÂ¼Ö¸ÕëºóÃæ¼ÓÉÏ±¸·İµÄÄÚÈİ
+			//ç„¶ååœ¨å½“å‰è®°å½•æŒ‡é’ˆåé¢åŠ ä¸Šå¤‡ä»½çš„å†…å®¹
 			while( (len = fis.read(buffer)) != -1)
 			{
 				raf.write(buffer,0,len);
@@ -526,14 +526,14 @@ class  IOTest
 		}
 	}
 
-	//ĞòÁĞ»¯
+	//åºåˆ—åŒ–
 	public static void writeObjTest()
 	{
 		Person p = new Person("jerry",32);
 		File file = new File("tmp");
 		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file)))
 		{
-			oos.writeObject(p);//¶ÔÏóĞòÁĞ»¯~½«¶ÔÏóĞ´ÈëÊä³öÁ÷
+			oos.writeObject(p);//å¯¹è±¡åºåˆ—åŒ–~å°†å¯¹è±¡å†™å…¥è¾“å‡ºæµ
 		}
 		catch (IOException ioe)
 		{
@@ -541,14 +541,14 @@ class  IOTest
 		}
 	}
 
-	//·´ĞòÁĞ»¯
+	//ååºåˆ—åŒ–
 	public static void readObjTest()
 	{
-		File src = new File("tmp");//ĞòÁĞ»¯¶ÔÏóµÄÊı¾İ
+		File src = new File("tmp");//åºåˆ—åŒ–å¯¹è±¡çš„æ•°æ®
 		
 		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(src)) )
 		{
-			//ÓÉÊı¾İ»Ö¸´µ½¶ÔÏó»¹ĞèÒª¶ÔÓ¦Àà£¬·ñÔòÒı·¢ClassNotFoundExceptionÒì³£
+			//ç”±æ•°æ®æ¢å¤åˆ°å¯¹è±¡è¿˜éœ€è¦å¯¹åº”ç±»ï¼Œå¦åˆ™å¼•å‘ClassNotFoundExceptionå¼‚å¸¸
 			Object p = ois.readObject();
 			((Person)p).getInfo();
 			/**/
@@ -559,7 +559,7 @@ class  IOTest
 		}
 	}
 
-	//************³ÌĞòÈë¿Ú***************
+	//************ç¨‹åºå…¥å£***************
 	public static void main(String[] args) throws Exception
 	{
 		//fileTest();
@@ -585,8 +585,8 @@ class  IOTest
 	}
 }
 
-//±»ÔËĞĞ£¬ÇÒ±»ÊäÈëÊı¾İµÄjava³ÌĞò
-//¸Ã³ÌĞò¿ÉÒÔ½ÓÊÕ±ê×¼ÊäÈë + Êä³öÎÄ±¾ÎÄ¼ş
+//è¢«è¿è¡Œï¼Œä¸”è¢«è¾“å…¥æ•°æ®çš„javaç¨‹åº
+//è¯¥ç¨‹åºå¯ä»¥æ¥æ”¶æ ‡å‡†è¾“å…¥ + è¾“å‡ºæ–‡æœ¬æ–‡ä»¶
 class ReadStandard
 {
 	public static void main(String[] args)
@@ -599,7 +599,7 @@ class ReadStandard
 		{
 			while (sc.hasNext() )
 			{
-				ps.println("¼üÈëÄÚÈİÎª£º"+ sc.next() );
+				ps.println("é”®å…¥å†…å®¹ä¸ºï¼š"+ sc.next() );
 			}
 			
 		}
@@ -610,7 +610,7 @@ class ReadStandard
 	}
 }
 
-//ÓÃÓÚĞòÁĞ»¯µÄ¶«¶« + ×Ô¶¨ÒåĞòÁĞ»¯£¨»¹¿É ×ªĞòÁĞ»¯ÆäËû¶ÔÏó£¬·´ĞòÁĞ»¯Ê±·µ»ØÕâ¸öÆäËû¶ÔÏó£©
+//ç”¨äºåºåˆ—åŒ–çš„ä¸œä¸œ + è‡ªå®šä¹‰åºåˆ—åŒ–ï¼ˆè¿˜å¯ è½¬åºåˆ—åŒ–å…¶ä»–å¯¹è±¡ï¼Œååºåˆ—åŒ–æ—¶è¿”å›è¿™ä¸ªå…¶ä»–å¯¹è±¡ï¼‰
 class Person implements Serializable
 {
 	private String name;
@@ -627,22 +627,22 @@ class Person implements Serializable
 		System.out.println(name+" : "+age);
 	}
 
-	//×Ô¶¨ÒåĞòÁĞ»¯
+	//è‡ªå®šä¹‰åºåˆ—åŒ–
 	private void writeObject( java.io.ObjectOutputStream out) throws IOException
 	{
-		//½«×Ö·û´®´æµ½StringBuilder£¬²¢·´×ª¼ÓÃÜ
+		//å°†å­—ç¬¦ä¸²å­˜åˆ°StringBuilderï¼Œå¹¶åè½¬åŠ å¯†
 		out.writeObject( new StringBuffer(this.name).reverse() );
 		out.writeInt( this.age );
 	}
 	private void readObject(java.io.ObjectInputStream in) throws IOException,ClassNotFoundException
 	{
 		
-		//¶ÁÈ¡µÄ´ÎĞòÒª°´ÕÕĞ´ÈëµÄ´ÎĞò
+		//è¯»å–çš„æ¬¡åºè¦æŒ‰ç…§å†™å…¥çš„æ¬¡åº
 		this.name = ( (StringBuffer)in.readObject()).reverse().toString();
 		this.age = in.readInt();
 	}
 
-	//Ã¿´ÎĞòÁĞ»¯Ç°µ÷ÓÃ¸Ã·½·¨
+	//æ¯æ¬¡åºåˆ—åŒ–å‰è°ƒç”¨è¯¥æ–¹æ³•
 	public Object writeReplace() throws ObjectStreamException
 	{
 		List<Object> list = new ArrayList<>();

@@ -1,48 +1,48 @@
 import java.util.*;
 /**
-*·ºĞÍ£ºÎªÁËÈÃ¼¯ºÏ¼Ç×¡ÆäÊı¾İÀàĞÍ~£¨´«ÈëÀàĞÍÊµ²Î--Ïàµ±ÓÚ¶à¸öÂß¼­×ÓÀà£© 
-*ÓÃÍ¾£ºÏŞÖÆ¶ª½øµÄÔªËØÀàĞÍ£¨±àÒëÊ±¼´¿É·¢ÏÖ£©&È¡³ö²»ĞèÇ¿ÖÆ×ª»»--´úÂë¸ü¼ò½à½¡×³
-*ÓÃ·¨£º
-*-|| ¶¨ÒåÔÚ¡¾Àà¡¢½Ó¿Ú¡¿
-*-----|| ¡¾ÀàÃû<T>¡¿ £¨ÀàÃûÈÔÈ»²»±ä£¬Ö»ÊÇµ÷ÓÃ¹¹ÔìÆ÷ -new ÀàÃû<>() ¶àÁË¸ö¡°ÁâĞÎ¡±£©
-*-----|| ×ÓÀà¼Ì³Ğ·ºĞÍÀàÊ±£¬Òª¸ø³ö¸Ã·ºĞÍÀàµÄÀàĞÍÊµ²Î ¡¾class x entends y<String>¡¿;ÇÒÖØĞ´Ê¹ÓÃ·ºĞÍµÄ·½·¨Ê±Ò²ÓĞĞ´Ã÷
-*-----|| Ã»ÓĞ·ºĞÍÀà£¬ËùÒÔ²»¿ÉÒÔÔÚ¾²Ì¬³ÉÔ±£¨Àà±äÁ¿£©´¦Ê¹ÓÃ·ºĞÍ
-*-----|| List<Object> ÓëList<Integer>Í¬ÊôÒ»¸öclass£¬ÇÒÁ½ÕßÃ»ÓĞ¼Ì³Ğ¹ØÏµ£¡²»¿ÉÏà»¥¸³Öµ£¨ÒÔÃâÔÚ×ÓÀàÓë¸¸Àà²îÒì´¦²Ù×÷²úÉú´íÎó£©Number num = new Integer(); num=0.1;//error
-*-----|| ÀàĞÍÍ¨Åä·û£¨Áé»î×ÓÀà»¯£©List<?>-ÈÎÒâ·ºĞÍList¸¸Àà£¡£¡¡¾×¢Òâ£¿ÎªÀàĞÍÊµ²Î¡¿£¨Í¬String¡¢IntegerÒ»Ñù£©
-*--------|| ¿ÉÒÔ´«ÈëÈÎºÎÀàĞÍÊµ²Î£¬Ïàµ±¶ÔÆäÏòÉÏ×ªĞÍÎªObject£¬×¢ÒâÎŞ·¨È·¶¨¼¯ºÏÀàĞÍ£¬²»ÄÜÌí¼ÓÔªËØ£¨Java²»Ğí½«¶ÔÏó·ÅÈëÒ»¸öÎ»ÖÃÀàĞÍµÄ¼¯ºÏÖĞ£©
-*-----------|| £¨add·½·¨Ê¹ÓÃÁË·ºĞÍE×÷Îª¼¯ºÏÔªËØÀàĞÍ£¬ĞèÒªÃ÷È·ºó²Å¿ÉÌí¼Ó£¬³ıÁËnull£©
-*-----------|| £¨get()·µ»ØµÄÊÇObjectÀàĞÍ£¬Ëì¿ÉÒÔ
-*--------|| ÉÏÏŞÍ¨Åä·û¡¾List<? entends String & Comparable>¡¿£¨Ö®¶àÒ»¸ö¸¸ÀàÉÏÏß£¬¶à¸ö½Ó¿ÚÉÏÏŞ£¬Ë³Ğò£©:ÏŞÖÆ´«ÈëµÄÀàĞÍÊµ²Î
-*--------|| ÏÂÏŞÍ¨Åä·û¡¾List<? super T> list¡¿±íÊ¾ÀàĞÍ²ÎÊıÎªT»òTµÄ¸¸Àà
-*-|| ¶¨ÒåÔÚ¡¾·½·¨¡¿
-*-----|| ·ºĞÍ·½·¨£¨²»Í¬µ÷ÓÃµã£¬´«Èë²»Í¬ÀàĞÍÊµ²Î£©£º¡¾ĞŞÊÎ·û<T,E> ·µ»ØÖµÀàĞÍ method(List<T> list)¡¿--/--<T,E extends Shape>
-*--------|| Ê²Ã´Ê±ºòÊ¹ÓÃ·ºĞÍ·½·¨ORÍ¨Åä·û->ÀàĞÍĞÎ²ÎÖ»ÔÚ´«ÈëÊ±Ê¹ÓÃ£¨ÆäËû²ÎÊı¡¢·µ»ØÖµ²»ÒÀÀµËü£©:Í¨Åä·û
-*-----|| ·ºĞÍ¹¹ÔìÆ÷ ¡¾ĞŞÊÎ·û<T> ÀàÃû(T xx)¡¿,¿ÉÒÔÁé»î´«Èë²»Í¬ÀàĞÍµÄÀàĞÍÊµ²ÎÀ´¹¹Ôì¶ÔÏó
-*--------|| ´´½¨¹¹ÔìÆ÷£ºÒşÊ½- new Shape(5); ÏÔÊ¾- new <Integer> Shape(5);
-*-|| ÀàĞÍÍÆ¶Ï£¬²»ÒıÆğÆçÒåÏÂ¿ÉÒÔ×Ô¶¯ÅĞ¶ÏÀàĞÍ
-*-|| ²Á³ıºÍ×ª»»£º
-*-----||²Á³ıList<String> list ¸³Öµ¸øList2 l£¬»á²Á³ıµôÀàĞÍÊµ²Î£»
-*-----||×ª»»£ºList list2¸³Öµ¸øList<String> list½Ğ×ª»»£¨×¢Òâlist2ÔÚ¸³ÖµÇ°£¬Ìí¼ÓµÄÔªËØÓ¦ÎªString£¬·ñÔòÓÃlist²Ù×÷ÔªËØµÄÊ±ºò»áÒòÀàĞÍ²»Æ¥Åä±¨´í£©
-*-|| ·ºĞÍÊı×é£º£¨²»Ö§³Ö£©
-*-----|| ·ºĞÍÉè¼ÆÔ­Ôò£º±àÒëÊ±Ã»ÓĞunchecked¾¯¸æ£¬ÔËĞĞÊ±¾Í²»»á³öÏÖClassCastExceptionÒì³£
-*-----|| ²»ÔÊĞíÊı×éÔªËØ°üº¬ÀàĞÍ±äÁ¿/ĞÎ²Î£¨Í¨Åä·û¿ÉÒÔ£©-ËùÒÔ²»ÄÜnew List<String>[10]£¬ÄÜÉùÃ÷List<String>[] lists = new List[10];//»áÓĞunchecked¾¯¸æ
+*æ³›å‹ï¼šä¸ºäº†è®©é›†åˆè®°ä½å…¶æ•°æ®ç±»å‹~ï¼ˆä¼ å…¥ç±»å‹å®å‚--ç›¸å½“äºå¤šä¸ªé€»è¾‘å­ç±»ï¼‰ 
+*ç”¨é€”ï¼šé™åˆ¶ä¸¢è¿›çš„å…ƒç´ ç±»å‹ï¼ˆç¼–è¯‘æ—¶å³å¯å‘ç°ï¼‰&å–å‡ºä¸éœ€å¼ºåˆ¶è½¬æ¢--ä»£ç æ›´ç®€æ´å¥å£®
+*ç”¨æ³•ï¼š
+*-|| å®šä¹‰åœ¨ã€ç±»ã€æ¥å£ã€‘
+*-----|| ã€ç±»å<T>ã€‘ ï¼ˆç±»åä»ç„¶ä¸å˜ï¼Œåªæ˜¯è°ƒç”¨æ„é€ å™¨ -new ç±»å<>() å¤šäº†ä¸ªâ€œè±å½¢â€ï¼‰
+*-----|| å­ç±»ç»§æ‰¿æ³›å‹ç±»æ—¶ï¼Œè¦ç»™å‡ºè¯¥æ³›å‹ç±»çš„ç±»å‹å®å‚ ã€class x entends y<String>ã€‘;ä¸”é‡å†™ä½¿ç”¨æ³›å‹çš„æ–¹æ³•æ—¶ä¹Ÿæœ‰å†™æ˜
+*-----|| æ²¡æœ‰æ³›å‹ç±»ï¼Œæ‰€ä»¥ä¸å¯ä»¥åœ¨é™æ€æˆå‘˜ï¼ˆç±»å˜é‡ï¼‰å¤„ä½¿ç”¨æ³›å‹
+*-----|| List<Object> ä¸List<Integer>åŒå±ä¸€ä¸ªclassï¼Œä¸”ä¸¤è€…æ²¡æœ‰ç»§æ‰¿å…³ç³»ï¼ä¸å¯ç›¸äº’èµ‹å€¼ï¼ˆä»¥å…åœ¨å­ç±»ä¸çˆ¶ç±»å·®å¼‚å¤„æ“ä½œäº§ç”Ÿé”™è¯¯ï¼‰Number num = new Integer(); num=0.1;//error
+*-----|| ç±»å‹é€šé…ç¬¦ï¼ˆçµæ´»å­ç±»åŒ–ï¼‰List<?>-ä»»æ„æ³›å‹Listçˆ¶ç±»ï¼ï¼ã€æ³¨æ„ï¼Ÿä¸ºç±»å‹å®å‚ã€‘ï¼ˆåŒStringã€Integerä¸€æ ·ï¼‰
+*--------|| å¯ä»¥ä¼ å…¥ä»»ä½•ç±»å‹å®å‚ï¼Œç›¸å½“å¯¹å…¶å‘ä¸Šè½¬å‹ä¸ºObjectï¼Œæ³¨æ„æ— æ³•ç¡®å®šé›†åˆç±»å‹ï¼Œä¸èƒ½æ·»åŠ å…ƒç´ ï¼ˆJavaä¸è®¸å°†å¯¹è±¡æ”¾å…¥ä¸€ä¸ªä½ç½®ç±»å‹çš„é›†åˆä¸­ï¼‰
+*-----------|| ï¼ˆaddæ–¹æ³•ä½¿ç”¨äº†æ³›å‹Eä½œä¸ºé›†åˆå…ƒç´ ç±»å‹ï¼Œéœ€è¦æ˜ç¡®åæ‰å¯æ·»åŠ ï¼Œé™¤äº†nullï¼‰
+*-----------|| ï¼ˆget()è¿”å›çš„æ˜¯Objectç±»å‹ï¼Œé‚å¯ä»¥
+*--------|| ä¸Šé™é€šé…ç¬¦ã€List<? entends String & Comparable>ã€‘ï¼ˆä¹‹å¤šä¸€ä¸ªçˆ¶ç±»ä¸Šçº¿ï¼Œå¤šä¸ªæ¥å£ä¸Šé™ï¼Œé¡ºåºï¼‰:é™åˆ¶ä¼ å…¥çš„ç±»å‹å®å‚
+*--------|| ä¸‹é™é€šé…ç¬¦ã€List<? super T> listã€‘è¡¨ç¤ºç±»å‹å‚æ•°ä¸ºTæˆ–Tçš„çˆ¶ç±»
+*-|| å®šä¹‰åœ¨ã€æ–¹æ³•ã€‘
+*-----|| æ³›å‹æ–¹æ³•ï¼ˆä¸åŒè°ƒç”¨ç‚¹ï¼Œä¼ å…¥ä¸åŒç±»å‹å®å‚ï¼‰ï¼šã€ä¿®é¥°ç¬¦<T,E> è¿”å›å€¼ç±»å‹ method(List<T> list)ã€‘--/--<T,E extends Shape>
+*--------|| ä»€ä¹ˆæ—¶å€™ä½¿ç”¨æ³›å‹æ–¹æ³•ORé€šé…ç¬¦->ç±»å‹å½¢å‚åªåœ¨ä¼ å…¥æ—¶ä½¿ç”¨ï¼ˆå…¶ä»–å‚æ•°ã€è¿”å›å€¼ä¸ä¾èµ–å®ƒï¼‰:é€šé…ç¬¦
+*-----|| æ³›å‹æ„é€ å™¨ ã€ä¿®é¥°ç¬¦<T> ç±»å(T xx)ã€‘,å¯ä»¥çµæ´»ä¼ å…¥ä¸åŒç±»å‹çš„ç±»å‹å®å‚æ¥æ„é€ å¯¹è±¡
+*--------|| åˆ›å»ºæ„é€ å™¨ï¼šéšå¼- new Shape(5); æ˜¾ç¤º- new <Integer> Shape(5);
+*-|| ç±»å‹æ¨æ–­ï¼Œä¸å¼•èµ·æ­§ä¹‰ä¸‹å¯ä»¥è‡ªåŠ¨åˆ¤æ–­ç±»å‹
+*-|| æ“¦é™¤å’Œè½¬æ¢ï¼š
+*-----||æ“¦é™¤List<String> list èµ‹å€¼ç»™List2 lï¼Œä¼šæ“¦é™¤æ‰ç±»å‹å®å‚ï¼›
+*-----||è½¬æ¢ï¼šList list2èµ‹å€¼ç»™List<String> listå«è½¬æ¢ï¼ˆæ³¨æ„list2åœ¨èµ‹å€¼å‰ï¼Œæ·»åŠ çš„å…ƒç´ åº”ä¸ºStringï¼Œå¦åˆ™ç”¨listæ“ä½œå…ƒç´ çš„æ—¶å€™ä¼šå› ç±»å‹ä¸åŒ¹é…æŠ¥é”™ï¼‰
+*-|| æ³›å‹æ•°ç»„ï¼šï¼ˆä¸æ”¯æŒï¼‰
+*-----|| æ³›å‹è®¾è®¡åŸåˆ™ï¼šç¼–è¯‘æ—¶æ²¡æœ‰uncheckedè­¦å‘Šï¼Œè¿è¡Œæ—¶å°±ä¸ä¼šå‡ºç°ClassCastExceptionå¼‚å¸¸
+*-----|| ä¸å…è®¸æ•°ç»„å…ƒç´ åŒ…å«ç±»å‹å˜é‡/å½¢å‚ï¼ˆé€šé…ç¬¦å¯ä»¥ï¼‰-æ‰€ä»¥ä¸èƒ½new List<String>[10]ï¼Œèƒ½å£°æ˜List<String>[] lists = new List[10];//ä¼šæœ‰uncheckedè­¦å‘Š
 *@author Hartley
 *@version 1.0.0
 */
 
 class  GenericTest
 {
-	//»ù±¾ÓÃ·¨
+	//åŸºæœ¬ç”¨æ³•
 	public static void test1()
 	{
-		List<Integer> list = new ArrayList<>();//ÓÒ¶ËÊ¡ÂÔĞ´·¨~Ö»Ğ´Ò»¸ö¡°ÁâĞÎ¡±<>
+		List<Integer> list = new ArrayList<>();//å³ç«¯çœç•¥å†™æ³•~åªå†™ä¸€ä¸ªâ€œè±å½¢â€<>
 		list.add(3);
 		list.add(7);
 		list.add(4);
 		System.out.println(list);
-		list.forEach(tmp->System.out.println(tmp+1));//Ê¹ÓÃ·ºĞÍºó£¬ÔÙÒ²²»ÓÃÇ¿ÖÆ×ª»»À²
+		list.forEach(tmp->System.out.println(tmp+1));//ä½¿ç”¨æ³›å‹åï¼Œå†ä¹Ÿä¸ç”¨å¼ºåˆ¶è½¬æ¢å•¦
 		
-		//·ºĞÍ**¿ÉÒÔÌ×ÍŞ**~
+		//æ³›å‹**å¯ä»¥å¥—å¨ƒ**~
 		Map<String,List<String>> courseInfo = new HashMap<>();
 		List<String> jackCourse = new ArrayList<>();
 		jackCourse.add("Chinese");
@@ -52,20 +52,20 @@ class  GenericTest
 
 		System.out.println(courseInfo );
 	}
-	//·ºĞÍ·½·¨
+	//æ³›å‹æ–¹æ³•
 	public static <T>  T genericMethod(T[] arr,List<T> list)
 	{
 		for (T ele:arr )
 		{
 			list.add(ele);
 		}
-		return arr[arr.length-1];//·µ»Ø×îºóÒ»¸öÔªËØ
+		return arr[arr.length-1];//è¿”å›æœ€åä¸€ä¸ªå…ƒç´ 
 	}
-	//¸´ÖÆ¼¯ºÏÔªËØ,È¡³ö×îºóÒ»¸öÔªËØ
+	//å¤åˆ¶é›†åˆå…ƒç´ ,å–å‡ºæœ€åä¸€ä¸ªå…ƒç´ 
 	public static <T> T copyOf(Collection<? super T> dst,Collection<? extends T> src)
 	{
-		T last = null;//ÔÚ·½·¨ÖĞÊ¹ÓÃ±äÁ¿Ç°ĞèÒª³õÊ¼»¯
-		//Í¨Åä·ûÉÏÏŞ~
+		T last = null;//åœ¨æ–¹æ³•ä¸­ä½¿ç”¨å˜é‡å‰éœ€è¦åˆå§‹åŒ–
+		//é€šé…ç¬¦ä¸Šé™~
 		for (T tmp:src )
 		{
 			last = tmp;
@@ -74,12 +74,12 @@ class  GenericTest
 		return last;
 	}
 
-	//treeSetÓÃµÄcomparator½Ó¿Ú¼´ÎªÍ¨Åä·ûÏÂÏŞÔ¼Êø£¬¿ÉÒÔµ÷ÓÃ»ù±¾·½·¨£¬Ôö¼ÓÁé»îĞÔ~
+	//treeSetç”¨çš„comparatoræ¥å£å³ä¸ºé€šé…ç¬¦ä¸‹é™çº¦æŸï¼Œå¯ä»¥è°ƒç”¨åŸºæœ¬æ–¹æ³•ï¼Œå¢åŠ çµæ´»æ€§~
 	public void treeSetTest()
 	{
-		//´´½¨¶¨ÖÆÅÅĞòµÄtreeSet
+		//åˆ›å»ºå®šåˆ¶æ’åºçš„treeSet
 		Set<String> id = new TreeSet<>(
-			new Comparator<String>()//¶ÔÓ¦¶¨ÒåÎªcomparator<? extends T>,¼È¿É±È½ÏString£¬Ò²¿ÉObject£¿
+			new Comparator<String>()//å¯¹åº”å®šä¹‰ä¸ºcomparator<? extends T>,æ—¢å¯æ¯”è¾ƒStringï¼Œä¹Ÿå¯Objectï¼Ÿ
 		{
 			public int compare(String first,String second)
 			{
@@ -87,28 +87,28 @@ class  GenericTest
 			}
 		});
 	}
-	//×Ô¶¯ÍÆ¶Ï
+	//è‡ªåŠ¨æ¨æ–­
 	public static void assertTest()
 	{
-		Test<String> t1 = new Test<>(5);//ÓÒ¶Ë¾ùÒş²Ø
-		Test<String> t2 = new <Integer>Test<String>(6);//ÓÒ¶ËÀàĞÍ¾ùÏÔÊ¾
-		Test<String> t3 = new Test<String>(7);//¹¹ÔìÆ÷ÒşÊ½
-		//Test<String> t4 = new <Integer>Test<>(8);//¹¹ÔìÆ÷ÏÔÊ¾+ÁâĞÎ-->²»¿ÉÍÆ¶Ï³öTestµÄÀàĞÍ²ÎÊı
+		Test<String> t1 = new Test<>(5);//å³ç«¯å‡éšè—
+		Test<String> t2 = new <Integer>Test<String>(6);//å³ç«¯ç±»å‹å‡æ˜¾ç¤º
+		Test<String> t3 = new Test<String>(7);//æ„é€ å™¨éšå¼
+		//Test<String> t4 = new <Integer>Test<>(8);//æ„é€ å™¨æ˜¾ç¤º+è±å½¢-->ä¸å¯æ¨æ–­å‡ºTestçš„ç±»å‹å‚æ•°
 	}
 
-	//·ºĞÍÊı×é
+	//æ³›å‹æ•°ç»„
 	public static void genericArrayTest()
 	{
-		//List<String>[] lists = new List<String>[10];//´íÎóµÄĞ´·¨,²»»áÍ¨¹ı±àÒë£ºÎ¥±³·ºĞÍÊı×éÉè¼ÆÔ­Ôò
+		//List<String>[] lists = new List<String>[10];//é”™è¯¯çš„å†™æ³•,ä¸ä¼šé€šè¿‡ç¼–è¯‘ï¼šè¿èƒŒæ³›å‹æ•°ç»„è®¾è®¡åŸåˆ™
 		List<String>[] lists = new List[10];//unchecked warnning
-		Object[] obj = lists;//£¿£¿£¿¡¾1¡¿
-		List<Integer> ele = new ArrayList<Integer>();//ÔªËØÀàĞÍÎªInteger
+		Object[] obj = lists;//ï¼Ÿï¼Ÿï¼Ÿã€1ã€‘
+		List<Integer> ele = new ArrayList<Integer>();//å…ƒç´ ç±»å‹ä¸ºInteger
 		ele.add(4);
-		obj[1] = ele;//£¿£¿£¿
-		String str = lists[1].get(0);//ÔËĞĞÊ±»á²úÉúClassCastExceptionÒì³£
+		obj[1] = ele;//ï¼Ÿï¼Ÿï¼Ÿ
+		String str = lists[1].get(0);//è¿è¡Œæ—¶ä¼šäº§ç”ŸClassCastExceptionå¼‚å¸¸
 	}
 
-	//³ÌĞòÈë¿Ú
+	//ç¨‹åºå…¥å£
 	public static void main(String[] args) 
 	{
 		List<String> list = new ArrayList<>();
@@ -121,22 +121,22 @@ class  GenericTest
 		src.add(23);
 		src.add(99);
 		src.add(48);
-		List<Number> copy = new ArrayList<>();//IntegerµÄ¸¸Àà
+		List<Number> copy = new ArrayList<>();//Integerçš„çˆ¶ç±»
 		Integer last = copyOf(copy,src);
-		System.out.println("the last element: "+last+" the copy list is£º"+copy);
+		System.out.println("the last element: "+last+" the copy list isï¼š"+copy);
 
 		
 		List list2 = new ArrayList();
-		list2.add(6);//Ìí¼ÓµÄÔªËØÀàĞÍÎªInteger
-		//System.out.println( (String) list2.get(0));//´Ë´¦Éæ¼°°ÑIntegerÀàĞÍÇ¿×ªÎªString£¬»á±¨´í£¡
+		list2.add(6);//æ·»åŠ çš„å…ƒç´ ç±»å‹ä¸ºInteger
+		//System.out.println( (String) list2.get(0));//æ­¤å¤„æ¶‰åŠæŠŠIntegerç±»å‹å¼ºè½¬ä¸ºStringï¼Œä¼šæŠ¥é”™ï¼
 		genericArrayTest();
 	}
 }
 
-//·ºĞÍÀà
+//æ³›å‹ç±»
 class Test <E>
 {
-	//·ºĞÍ¹¹ÔìÆ÷
+	//æ³›å‹æ„é€ å™¨
 	public <T> Test(T t)
 	{
 		System.out.println(t);

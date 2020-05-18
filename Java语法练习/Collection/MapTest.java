@@ -1,17 +1,17 @@
 import java.util.*;
 import java.io.*;
 /**
-*Map¼¯ºÏ½Ó¿Ú
-*Ô´ÂëÉÏÏÈÊµÏÖMap£¬SetÔÚÆä»ù´¡ÉÏ½«valueÈ«²¿ÖÃÎªnull
-*key-value±»·â×°ÔÚ¼¯ºÏµÄEntryÄÚ²¿ÀàÖĞ£¬¿ÉÒÔ½«value¿´×÷keyµÄ¸½Ó¹
-*--|| HashMap×î¿ì£¨ÅĞ¶ÏkeyÊÇ·ñÏàÍ¬¡úÍ¨¹ıequals+hashCode£¬ÅĞ¶Ïvalue¡úequalsÅĞ¶Ï£©--ÔÊĞí·Ånullµ½k/v£¨¸ºÔØ¼«ÏŞ3/4£©
-*-----|| Hashtable(Ïß³Ì°²È«£¬µ«¹ıÓÚ¹ÅÀÏ¾¡Á¿±ÜÃâÊ¹ÓÃ--²»ÔÊĞí·Ånullµ½key/value
-*--------|| Properties(Hashtable×ÓÀà£¬ÓÃÓÚ´¦ÀíÊôĞÔÎÄ¼ş)
-*--|| LinkedHashMap£ºÒÔË«ÏòÁ´±í½á¹¹Î¬»¤ÔªËØ´ÎĞò£¨°´²åÈë´ÎĞò£©
-*--|| TreeMap(ÊµÏÖÁËStoreMap½Ó¿Ú£¬ÓĞĞò£¬ÓÃ·¨keySet->toArray->ÓĞĞòµÄkeyÊı×é£©»ùÓÚºìºÚÊ÷½á¹¹¶ÔkeyÅÅĞò£¨·ÖÎª×ÔÈ»ÅÅĞò-ĞèÒª¶ÔkeyÊµÏÖcomparable½Ó¿Ú£»¶¨ÖÆÅÅĞò-ÎŞÒªÇó£©
-*--|| WeakHashMap(HashMapµÄkey±£ÁôÁË¶ÔÏóµÄÇ¿ÒıÓÃ==¸Ãmap¼¯ºÏ²»Ïú»Ù£¬¶ÔÏó¾Í²»»á±»»ØÊÕ£©ÈõÒıÓÃ-±ÈÈçÄäÃû¶ÔÏó
-*--|| IdentityHashMap(±È½ÏkeyÊÇ·ñÏàÍ¬£¬ÊÇ¸ù¾İkey1==key2£©
-*--|| EnumMapĞÔÄÜ×îºÃ£¨ÄÚ²¿ÓÃÊı×é´æ´¢£©key²»Ğínull£¨value¿É£©´´½¨Ê±ĞèÒªÖ¸¶¨Ã¶¾ÙÀà
+*Mapé›†åˆæ¥å£
+*æºç ä¸Šå…ˆå®ç°Mapï¼ŒSetåœ¨å…¶åŸºç¡€ä¸Šå°†valueå…¨éƒ¨ç½®ä¸ºnull
+*key-valueè¢«å°è£…åœ¨é›†åˆçš„Entryå†…éƒ¨ç±»ä¸­ï¼Œå¯ä»¥å°†valueçœ‹ä½œkeyçš„é™„åº¸
+*--|| HashMapæœ€å¿«ï¼ˆåˆ¤æ–­keyæ˜¯å¦ç›¸åŒâ†’é€šè¿‡equals+hashCodeï¼Œåˆ¤æ–­valueâ†’equalsåˆ¤æ–­ï¼‰--å…è®¸æ”¾nullåˆ°k/vï¼ˆè´Ÿè½½æé™3/4ï¼‰
+*-----|| Hashtable(çº¿ç¨‹å®‰å…¨ï¼Œä½†è¿‡äºå¤è€å°½é‡é¿å…ä½¿ç”¨--ä¸å…è®¸æ”¾nullåˆ°key/value
+*--------|| Properties(Hashtableå­ç±»ï¼Œç”¨äºå¤„ç†å±æ€§æ–‡ä»¶)
+*--|| LinkedHashMapï¼šä»¥åŒå‘é“¾è¡¨ç»“æ„ç»´æŠ¤å…ƒç´ æ¬¡åºï¼ˆæŒ‰æ’å…¥æ¬¡åºï¼‰
+*--|| TreeMap(å®ç°äº†StoreMapæ¥å£ï¼Œæœ‰åºï¼Œç”¨æ³•keySet->toArray->æœ‰åºçš„keyæ•°ç»„ï¼‰åŸºäºçº¢é»‘æ ‘ç»“æ„å¯¹keyæ’åºï¼ˆåˆ†ä¸ºè‡ªç„¶æ’åº-éœ€è¦å¯¹keyå®ç°comparableæ¥å£ï¼›å®šåˆ¶æ’åº-æ— è¦æ±‚ï¼‰
+*--|| WeakHashMap(HashMapçš„keyä¿ç•™äº†å¯¹è±¡çš„å¼ºå¼•ç”¨==è¯¥mapé›†åˆä¸é”€æ¯ï¼Œå¯¹è±¡å°±ä¸ä¼šè¢«å›æ”¶ï¼‰å¼±å¼•ç”¨-æ¯”å¦‚åŒ¿åå¯¹è±¡
+*--|| IdentityHashMap(æ¯”è¾ƒkeyæ˜¯å¦ç›¸åŒï¼Œæ˜¯æ ¹æ®key1==key2ï¼‰
+*--|| EnumMapæ€§èƒ½æœ€å¥½ï¼ˆå†…éƒ¨ç”¨æ•°ç»„å­˜å‚¨ï¼‰keyä¸è®¸nullï¼ˆvalueå¯ï¼‰åˆ›å»ºæ—¶éœ€è¦æŒ‡å®šæšä¸¾ç±»
 *@author Hartley
 *@version 1.0.0
 */
@@ -21,48 +21,48 @@ class  MapTest
 	public static void mapTest()
 	{
 		Map mt = new HashMap();
-		//Ìí¼Ókey-value
-		mt.put(1,"¶ßÀ²AÃÎ");
-		mt.put(2,"À¯±ÊĞ¡ĞÂ");
-		mt.put(3,"ÎåÁùÆß");
+		//æ·»åŠ key-value
+		mt.put(1,"å“†å•¦Aæ¢¦");
+		mt.put(2,"èœ¡ç¬”å°æ–°");
+		mt.put(3,"äº”å…­ä¸ƒ");
 		println(mt);
-		//key²»¿ÉÖØ£¬¸²¸Ç»á·µ»Ø±»¸²¸ÇµÄvalue
+		//keyä¸å¯é‡ï¼Œè¦†ç›–ä¼šè¿”å›è¢«è¦†ç›–çš„value
 		println(mt.put(3,null));
-		//value¿ÉÒÔËæ±ãÖØ¸´,²»¸²¸ÇÊ±·µ»ØÎªnull
-		println( mt.put(4,"À¯±ÊĞ¡ĞÂ")  );
+		//valueå¯ä»¥éšä¾¿é‡å¤,ä¸è¦†ç›–æ—¶è¿”å›ä¸ºnull
+		println( mt.put(4,"èœ¡ç¬”å°æ–°")  );
 		println(mt);
 
-		//ÅĞ¶ÏÊÇ·ñ°üº¬¶ÔÓ¦key/value
-		println("ÊÇ·ñ°üº¬keyÎª2£º"+mt.containsKey(2));
-		println("ÊÇ·ñ°üº¬valueÎªÀ¯±ÊĞ¡ĞÂ£º"+mt.containsValue("À¯±ÊĞ¡ĞÂ"));
+		//åˆ¤æ–­æ˜¯å¦åŒ…å«å¯¹åº”key/value
+		println("æ˜¯å¦åŒ…å«keyä¸º2ï¼š"+mt.containsKey(2));
+		println("æ˜¯å¦åŒ…å«valueä¸ºèœ¡ç¬”å°æ–°ï¼š"+mt.containsValue("èœ¡ç¬”å°æ–°"));
 
-		//for-each±éÀú--ÏÈÈ¡³ökeyµÄ¼¯ºÏ
+		//for-eachéå†--å…ˆå–å‡ºkeyçš„é›†åˆ
 		for(Object key:mt.keySet() )
 		{
 			println("||"+mt.get(key));
 		}
 
-		//¸ù¾İkeyÉ¾³ıÔªËØ
+		//æ ¹æ®keyåˆ é™¤å…ƒç´ 
 		mt.remove(1);
 		println(mt);
 
-		//ĞÂÌí¼ÓµÄÄ¬ÈÏ·½·¨
-		//replace--µ±key²»´æÔÚÊ±£¬²»»á¸Ä±ä
-		mt.replace(4,"·ÉÌìĞ¡Å®¾¯");
+		//æ–°æ·»åŠ çš„é»˜è®¤æ–¹æ³•
+		//replace--å½“keyä¸å­˜åœ¨æ—¶ï¼Œä¸ä¼šæ”¹å˜
+		mt.replace(4,"é£å¤©å°å¥³è­¦");
 		println(mt);
-		//merge--¶ÔÓ¦keyµÄvalueÎªnullÊ±Ö±½Ó»»ÎªÖ¸¶¨Öµ£¬·ñÔòÓÃkeyÍ¨¹ıBiFunction remappingFunction¼ÆËã
-		mt.merge(2,"Ò°Ô­ĞÂÖ®Öú",(old,cur)->((String)old).length()+"¸ö"+(String)cur );
+		//merge--å¯¹åº”keyçš„valueä¸ºnullæ—¶ç›´æ¥æ¢ä¸ºæŒ‡å®šå€¼ï¼Œå¦åˆ™ç”¨keyé€šè¿‡BiFunction remappingFunctionè®¡ç®—
+		mt.merge(2,"é‡åŸæ–°ä¹‹åŠ©",(old,cur)->((String)old).length()+"ä¸ª"+(String)cur );
 		println(mt);
 		
-		//¼ÆËãvalueÖµ
-		//Èç¹ûÔ­À´valueÎªnull£¬ÔòÓÃBiFunction½Ó¿Ú¼ÆËãĞÂµÄvalue(´«Èë²ÎÊıÎªµ±Ç°key£©
+		//è®¡ç®—valueå€¼
+		//å¦‚æœåŸæ¥valueä¸ºnullï¼Œåˆ™ç”¨BiFunctionæ¥å£è®¡ç®—æ–°çš„value(ä¼ å…¥å‚æ•°ä¸ºå½“å‰keyï¼‰
 		mt.computeIfAbsent(3,key-> " this key is: " + key );
 		println(mt);
-		//Èç¹ûÔ­À´value²»Îªnull£¬ÓÃkey-valueÍ¨¹ıÓÃremappingFunction¼ÆËã¼ÆËãĞÂµÄvalue
-		mt.computeIfPresent(2,(key,value)-> " this key is: " + (Integer)key+" && the value is£º"+(String)value );
+		//å¦‚æœåŸæ¥valueä¸ä¸ºnullï¼Œç”¨key-valueé€šè¿‡ç”¨remappingFunctionè®¡ç®—è®¡ç®—æ–°çš„value
+		mt.computeIfPresent(2,(key,value)-> " this key is: " + (Integer)key+" && the value isï¼š"+(String)value );
 		println(mt);
 	}
-	//************************¡¾HashMap¡¿*****************************
+	//************************ã€HashMapã€‘*****************************
 	public static void hashMapTest()
 	{
 		HashMap hm = new HashMap();
@@ -70,44 +70,44 @@ class  MapTest
 		hm.put(new A(2),new A(3));
 		println(hm);
 
-		//°üº¬value£¿Í¨¹ıequalsÅĞ¶Ï--Ö»Òªµ÷ÓÃµÄequals·µ»Øture¼´ÈÏÎª°üº¬value
-		println("ÊÇ·ñ´æÔÚA(5)Õâ¸öÖµ£¿"+ hm.containsValue(new A(5)));
-		//°üº¬key£¿equals & hashCodeÍ¬Ê±ÅĞ¶Ï
-		println("ÊÇ·ñ´æÔÚA(2)Õâ¸ö¼ü£¿" + hm.containsKey(new A(2)));
+		//åŒ…å«valueï¼Ÿé€šè¿‡equalsåˆ¤æ–­--åªè¦è°ƒç”¨çš„equalsè¿”å›tureå³è®¤ä¸ºåŒ…å«value
+		println("æ˜¯å¦å­˜åœ¨A(5)è¿™ä¸ªå€¼ï¼Ÿ"+ hm.containsValue(new A(5)));
+		//åŒ…å«keyï¼Ÿequals & hashCodeåŒæ—¶åˆ¤æ–­
+		println("æ˜¯å¦å­˜åœ¨A(2)è¿™ä¸ªé”®ï¼Ÿ" + hm.containsKey(new A(2)));
 
 	}
 
-	//************************¡¾LinkedHashMap¡¿*****************************
+	//************************ã€LinkedHashMapã€‘*****************************
 	public static void linkedHashMapTest()
 	{
 		LinkedHashMap lhm = new LinkedHashMap();
 		lhm.put(1,"xx");
 		lhm.put(4,"YY");
 		lhm.put(3,"VV");
-		//foreach±éÀú
+		//foreachéå†
 		lhm.forEach( (key,value)->System.out.println("Key-> "+key+" Value-> "+value));
 		
 	}
 
-	//************************¡¾Properties¡¿*****************************
+	//************************ã€Propertiesã€‘*****************************
 	public static void propertiesTest() throws Exception
 	{
 		Properties prop = new Properties();
-		//Ìí¼ÓÊôĞÔ
+		//æ·»åŠ å±æ€§
 		prop.setProperty("name","Hartley");
 		prop.setProperty("age","24");
-		//½«ÊôĞÔĞ´Èëµ½ÎÄ¼ş£¨³Ö¾Ã»¯£©
+		//å°†å±æ€§å†™å…¥åˆ°æ–‡ä»¶ï¼ˆæŒä¹…åŒ–ï¼‰
 		prop.store(new FileOutputStream("config.ini"),"note: author Info");
 
-		//´ÓÎÄ¼ş¶ÁÈ¡ÊôĞÔ
+		//ä»æ–‡ä»¶è¯»å–å±æ€§
 		Properties prop2 = new Properties();
 		prop2.load(new FileInputStream("config.ini"));
 		println(prop2);
 
 	}
 
-	//************************¡¾treeMap¡¿*****************************
-	//ÒòÎªÊ÷µÄkeyÓĞĞò£¬ËùÒÔ»áÓĞÒ»Ğ©Î»ÖÃÏà¹ØµÄ·½·¨£¨µÚÒ»¸ö¡¢×îºóÒ»¸ö¡¢Ç°Ò»¸ö¡£¡£¡££©
+	//************************ã€treeMapã€‘*****************************
+	//å› ä¸ºæ ‘çš„keyæœ‰åºï¼Œæ‰€ä»¥ä¼šæœ‰ä¸€äº›ä½ç½®ç›¸å…³çš„æ–¹æ³•ï¼ˆç¬¬ä¸€ä¸ªã€æœ€åä¸€ä¸ªã€å‰ä¸€ä¸ªã€‚ã€‚ã€‚ï¼‰
 	public static void treeMapTest()
 	{
 		TreeMap tm = new TreeMap();
@@ -116,54 +116,54 @@ class  MapTest
 		tm.put(new A(8),3);
 		println(tm);
 
-		//»ñÈ¡µÚÒ»¸ö£¨key×îĞ¡µÄ£©Entry¶ÔÏó£¨¼üÖµ¶Ô£©
+		//è·å–ç¬¬ä¸€ä¸ªï¼ˆkeyæœ€å°çš„ï¼‰Entryå¯¹è±¡ï¼ˆé”®å€¼å¯¹ï¼‰
 		println(  ((A)(tm.firstEntry().getKey())).count);
-		//»ñÈ¡µÚÒ»¸ökey
+		//è·å–ç¬¬ä¸€ä¸ªkey
 		println(tm.firstKey());
-		//»ñÈ¡MapÖĞ±ÈÖ¸¶¨key´óµÄÒ»¸ökey
+		//è·å–Mapä¸­æ¯”æŒ‡å®škeyå¤§çš„ä¸€ä¸ªkey
 		println(tm.higherKey(new A(0) ) );
-		//»ñÈ¡MapÖĞ±ÈÖ¸¶¨key´óµÄÒ»¸öEntry
+		//è·å–Mapä¸­æ¯”æŒ‡å®škeyå¤§çš„ä¸€ä¸ªEntry
 		println(tm.higherEntry(new A(3)));
-		//½ØÈ¡keyÖµÔÚÁ½Ö¸¶¨keyÖ®¼äµÄmap×Ó¼¯ºÏ£¬Ä¬ÈÏ°üº¬from ²»°üº¬to
+		//æˆªå–keyå€¼åœ¨ä¸¤æŒ‡å®škeyä¹‹é—´çš„mapå­é›†åˆï¼Œé»˜è®¤åŒ…å«from ä¸åŒ…å«to
 		//println(tm.subMap(new A(0),true,new A(8),true ));
 		println(tm.subMap(new A(3),new A(8) ));
 	}
 
-	//************************¡¾WeakHashMap¡¿*****************************
+	//************************ã€WeakHashMapã€‘*****************************
 	public static void weakHashMapTest()
 	{
 		WeakHashMap whm = new WeakHashMap();
-		whm.put(new A(1),3);//ÄäÃû¶ÔÏó--ÈõÒıÓÃ
+		whm.put(new A(1),3);//åŒ¿åå¯¹è±¡--å¼±å¼•ç”¨
 		whm.put(new A(2),3);
-		whm.put("String",3);//ÏµÍ³»º´æµÄ×Ö·û´®¶ÔÏó--Ç¿ÒıÓÃ
+		whm.put("String",3);//ç³»ç»Ÿç¼“å­˜çš„å­—ç¬¦ä¸²å¯¹è±¡--å¼ºå¼•ç”¨
 		println(whm);
 
-		System.gc();//Í¨ÖªÏµÍ³»ØÊÕ
-		println(whm);//Ö»Ê£ÏÂÇ¿ÒıÓÃµÄkey-value
+		System.gc();//é€šçŸ¥ç³»ç»Ÿå›æ”¶
+		println(whm);//åªå‰©ä¸‹å¼ºå¼•ç”¨çš„key-value
 
 	}
-	//************************¡¾IdentityHashMap¡¿*****************************
+	//************************ã€IdentityHashMapã€‘*****************************
 	public static void identityHashMapTest()
 	{
 		IdentityHashMap ihm = new IdentityHashMap();
 		ihm.put(new String("English"),66);
-		ihm.put(new String("English"),76);//ÒòÎªÓÃkey1==key2µÄ·½Ê½£¬ËùÒÔ¿ÉÒÔÌí¼Ó
+		ihm.put(new String("English"),76);//å› ä¸ºç”¨key1==key2çš„æ–¹å¼ï¼Œæ‰€ä»¥å¯ä»¥æ·»åŠ 
 		ihm.put("English",86);
-		ihm.put("English",96);//ÓëÉÏÒ»¸ökey==£¬ËùÒÔÌí¼ÓÊ±»á½«ºó¸ö¸²¸ÇÇ°¸ö
+		ihm.put("English",96);//ä¸ä¸Šä¸€ä¸ªkey==ï¼Œæ‰€ä»¥æ·»åŠ æ—¶ä¼šå°†åä¸ªè¦†ç›–å‰ä¸ª
 		println(ihm);
 
 	}
 
-	//************************¡¾EnumMap¡¿*****************************
+	//************************ã€EnumMapã€‘*****************************
 	public static void enumMapTest()
 	{
-		EnumMap em = new EnumMap(Season.class);//´Ë´ÎÖ»ÊÇÖ¸¶¨Ã¶¾Ù¼¯ºÏkeyµÄÀàĞÍ
-		//Ìí¼ÓÃ¶¾ÙMapÔªËØ
-		em.put(Season.SPRING,"ÎÂÈáµÄ´º");
-		em.put(Season.SUMMER,"¿ñÒ°µÄÏÄ");
+		EnumMap em = new EnumMap(Season.class);//æ­¤æ¬¡åªæ˜¯æŒ‡å®šæšä¸¾é›†åˆkeyçš„ç±»å‹
+		//æ·»åŠ æšä¸¾Mapå…ƒç´ 
+		em.put(Season.SPRING,"æ¸©æŸ”çš„æ˜¥");
+		em.put(Season.SUMMER,"ç‹‚é‡çš„å¤");
 		println(em);
 	}
-	//³ÌĞòÈë¿Ú
+	//ç¨‹åºå…¥å£
 	public static void main(String[] args)  throws Exception
 	{
 		//mapTest();
@@ -182,7 +182,7 @@ class  MapTest
 	}
 }
 
-//ÓÃ×÷keyĞèÒªÊµÏÖComparable½Ó¿Ú
+//ç”¨ä½œkeyéœ€è¦å®ç°Comparableæ¥å£
 class A implements Comparable
 {
 	public int count;
@@ -190,17 +190,17 @@ class A implements Comparable
 	{
 		this.count = count;
 	}
-	//ÊµÏÖcompareTo·½·¨
+	//å®ç°compareToæ–¹æ³•
 	public int compareTo(Object obj)
 	{
 		return this.count - ( (A)obj).count;
 	}
-	//ÖØĞ´toString
+	//é‡å†™toString
 	public String toString()
 	{
-		return "[count£º"+this.count+"]";
+		return "[countï¼š"+this.count+"]";
 	}
-	//ÖØĞ´equals
+	//é‡å†™equals
 	public boolean equals(Object obj)
 	{
 		/*
@@ -214,17 +214,17 @@ class A implements Comparable
 		}
 		return false;
 		*/
-		return true;//equals·½·¨Ò»Ö±·µ»Ø Í¬
+		return true;//equalsæ–¹æ³•ä¸€ç›´è¿”å› åŒ
 	}
-	//ÖØĞ´hashCode
+	//é‡å†™hashCode
 	public int hashCode()
 	{
-		//return this.count;//¹şÏ£ÖµÖ»ÓëcountÏà¹Ø
-		return this.count * (int)(Math.random() *100);//¹şÏ£Öµ-²»Í¬ÊµÀı¶ÔÏó¹şÏ£²»Í¬
+		//return this.count;//å“ˆå¸Œå€¼åªä¸countç›¸å…³
+		return this.count * (int)(Math.random() *100);//å“ˆå¸Œå€¼-ä¸åŒå®ä¾‹å¯¹è±¡å“ˆå¸Œä¸åŒ
 	}
 }
 
-//ËÄ¼¾ Ã¶¾ÙÀà
+//å››å­£ æšä¸¾ç±»
 enum Season
 {
 	SPRING,SUMMER,AUTUMN,WINTER;

@@ -3,29 +3,29 @@ import java.util.concurrent.locks.*;
 //import java.util.concurrent.*;
 //import java.util.concurrent.locks.*;
 /**
-*Ïß³ÌÍ¨ĞÅÁ·Ï°¶ş£º
-°¸Àı£ºÒøĞĞÕË»§--´æÇ®ºóÁ¢¼´È¡³ö£¬²»ÄÜÁ¬Ğø´æÈ¡£¨Éú²úÕßÏû·ÑÕßÄ£ĞÍ£©
-		  ²ÉÓÃSynchronized·½·¨--Í¬²½¼àÊÓÆ÷µ÷ÓÃ »òÕß Lock--Condition¶ÔÏóµ÷ÓÃ¡£¡£
+*çº¿ç¨‹é€šä¿¡ç»ƒä¹ äºŒï¼š
+æ¡ˆä¾‹ï¼šé“¶è¡Œè´¦æˆ·--å­˜é’±åç«‹å³å–å‡ºï¼Œä¸èƒ½è¿ç»­å­˜å–ï¼ˆç”Ÿäº§è€…æ¶ˆè´¹è€…æ¨¡å‹ï¼‰
+		  é‡‡ç”¨Synchronizedæ–¹æ³•--åŒæ­¥ç›‘è§†å™¨è°ƒç”¨ æˆ–è€… Lock--Conditionå¯¹è±¡è°ƒç”¨ã€‚ã€‚
 
-*ÎÊÌâ£º»á¶ÂÈû×¡£¿£¿----ÊÇ¶àÏß³Ì¼ÙËÀÏÖÏó
-ÒòÎªÉú²úÕßÓ¦¸Ã»½ĞÑÏû·ÑÕß£¬È´Ö»»½ĞÑÁËÉú²úÕß¡£¡£¡£¿ÉÒÔÓÃnotifyAll»òÕßBlockingQueue½â¾ö
+*é—®é¢˜ï¼šä¼šå µå¡ä½ï¼Ÿï¼Ÿ----æ˜¯å¤šçº¿ç¨‹å‡æ­»ç°è±¡
+å› ä¸ºç”Ÿäº§è€…åº”è¯¥å”¤é†’æ¶ˆè´¹è€…ï¼Œå´åªå”¤é†’äº†ç”Ÿäº§è€…ã€‚ã€‚ã€‚å¯ä»¥ç”¨notifyAllæˆ–è€…BlockingQueueè§£å†³
 *@author Hartley
 *@version 1.0.0
 */
 
 class  ThreadExercise2 
 {
-	//************³ÌĞòÈë¿Ú***************
+	//************ç¨‹åºå…¥å£***************
 	public static void main(String[] args) 
 	{
 		Account jack = new Account("687",0);
-		new DrawThread("È¡Ç® ",jack,300).start();//È¡10´Î
-		new DepositThread("´æÇ®",jack,300).start();//´æ10´Ë
-		//new DepositThread("´æÇ®Ğ¡ÂÌ",jack,300).start();
-		//Èç¹ûÁ½¸ö´æÇ®Õß´æÇ®£¬Ò»¸öÈ¡Ç®£¬»áÒıÆğ×èÈû--²¢·ÇËÀËø£¡
+		new DrawThread("å–é’± ",jack,300).start();//å–10æ¬¡
+		new DepositThread("å­˜é’±",jack,300).start();//å­˜10æ­¤
+		//new DepositThread("å­˜é’±å°ç»¿",jack,300).start();
+		//å¦‚æœä¸¤ä¸ªå­˜é’±è€…å­˜é’±ï¼Œä¸€ä¸ªå–é’±ï¼Œä¼šå¼•èµ·é˜»å¡--å¹¶éæ­»é”ï¼
 	}
 }
-//È¡Ç®Ïß³Ì
+//å–é’±çº¿ç¨‹
 class DrawThread extends Thread
 {
 	private Account account;
@@ -37,7 +37,7 @@ class DrawThread extends Thread
 		this.draw = draw;
 	}
 
-	//Run·½·¨
+	//Runæ–¹æ³•
 	public void run()
 	{
 		for (int i=0;i<10 ;i++ )
@@ -47,7 +47,7 @@ class DrawThread extends Thread
 	}
 }
 
-//´æÇ®Ïß³Ì
+//å­˜é’±çº¿ç¨‹
 class DepositThread extends Thread
 {
 	private Account account;
@@ -59,7 +59,7 @@ class DepositThread extends Thread
 		this.deposit = deposit;
 	}
 
-	//Run·½·¨
+	//Runæ–¹æ³•
 	public void run()
 	{
 		for (int i=0;i<10 ;i++ )
@@ -68,16 +68,16 @@ class DepositThread extends Thread
 		}
 	}
 }
-//ÕË»§Àà
+//è´¦æˆ·ç±»
 class Account
 {
 	//==================================================
-	private final Lock lock = new ReentrantLock();//ÏÔÊ¾´´½¨¿ÉÖØÈëËø
-	private final Condition condition = lock.newCondition();//»ñµÃÖ¸¶¨Lock¶ÔÏó¶ÔÓ¦µÄCondition
+	private final Lock lock = new ReentrantLock();//æ˜¾ç¤ºåˆ›å»ºå¯é‡å…¥é”
+	private final Condition condition = lock.newCondition();//è·å¾—æŒ‡å®šLockå¯¹è±¡å¯¹åº”çš„Condition
 	//==================================================
 
 	private String ID;
-	private boolean flag;//ÓÃÀ´±ê¼ÇÊÇ·ñ´æÇ®ÁË
+	private boolean flag;//ç”¨æ¥æ ‡è®°æ˜¯å¦å­˜é’±äº†
 	private double balance;
 	public Account(String ID,double balance)
 	{
@@ -87,20 +87,20 @@ class Account
 		this.balance = balance;
 	}
 
-	//´æÇ®µÄÍ¬²½·½·¨
+	//å­˜é’±çš„åŒæ­¥æ–¹æ³•
 	//public synchronized void deposit(double deposit)
 	public  void deposit(double deposit)
 	{	
-		System.out.println("´æÇ®´¦±êÖ¾"+Thread.currentThread().getName()+" "+flag);
+		System.out.println("å­˜é’±å¤„æ ‡å¿—"+Thread.currentThread().getName()+" "+flag);
 		
-		lock.lock();//¼ÓËø
+		lock.lock();//åŠ é”
 
-		if (flag == true)//ÒÑ¾­´æÇ®Ò»´ÎÁË
+		if (flag == true)//å·²ç»å­˜é’±ä¸€æ¬¡äº†
 		{
 			try
 			{
-				condition.await();//ÈÃµ±Ç°Ïß³ÌµÈ´ı£¨ÔÚlock¶ÔÏóÉÏ£¿£¿£©£¬ÊÍ·Åcondition¶ÔÏó£¿£¿£¿
-				//wait();//ÈÃµ±Ç°Ïß³Ì½øÈë¶ÔÏóµÈ´ı³ØÖĞ£¬²¢ÊÍ·ÅÍ¬²½¼àÊÓÆ÷--Account¶ÔÏó
+				condition.await();//è®©å½“å‰çº¿ç¨‹ç­‰å¾…ï¼ˆåœ¨lockå¯¹è±¡ä¸Šï¼Ÿï¼Ÿï¼‰ï¼Œé‡Šæ”¾conditionå¯¹è±¡ï¼Ÿï¼Ÿï¼Ÿ
+				//wait();//è®©å½“å‰çº¿ç¨‹è¿›å…¥å¯¹è±¡ç­‰å¾…æ± ä¸­ï¼Œå¹¶é‡Šæ”¾åŒæ­¥ç›‘è§†å™¨--Accountå¯¹è±¡
 			}
 			catch (InterruptedException e)
 			{
@@ -108,37 +108,37 @@ class Account
 			}
 			finally
 			{
-				lock.unlock();//³ÌĞò½áÊøºóÒªÊÍ·ÅËø
+				lock.unlock();//ç¨‹åºç»“æŸåè¦é‡Šæ”¾é”
 			}
 			
 		}else{
-			//Ã»´æÈ¡ÄØ»¹
+			//æ²¡å­˜å–å‘¢è¿˜
 			balance += deposit;
-			System.out.println("¹§Ï²Äã "+Thread.currentThread().getName()+"£¬³É¹¦´æÁË "+deposit+"$");
-			System.out.println("ÄşµÄÓà¶îÎª "+balance+"$");
+			System.out.println("æ­å–œä½  "+Thread.currentThread().getName()+"ï¼ŒæˆåŠŸå­˜äº† "+deposit+"$");
+			System.out.println("å®çš„ä½™é¢ä¸º "+balance+"$");
 
-			flag =true;//ÖÃ±ê¼ÇÎªÒÑ´æÇ®
+			flag =true;//ç½®æ ‡è®°ä¸ºå·²å­˜é’±
 
-			condition.signalAll();//»½ĞÑÆäËûÔÚlock¶ÔÏóÉÏµÈ´ıµÄ½ø³Ì
+			condition.signalAll();//å”¤é†’å…¶ä»–åœ¨lockå¯¹è±¡ä¸Šç­‰å¾…çš„è¿›ç¨‹
 
-			//notify();//»áµ¼ÖÂ×Ô¼º»½ĞÑ×Ô¼º¡£¡£¼ÙËÀ
-			//notifyAll();//²¢Í¨Öª¿ÉÒÔÈ¡Ç®À²--Ê¹½øÈë¶ÔÏóµÈ´ı³ØµÄÏß³Ì½øÈëËø±êÖ¾µÈ´ı³Ø
-			//¸ÃÏß³Ì½áÊø--ÊÍ·ÅËø---Í¨ÖªµÄ½ø³Ì¿ÉÒÔÔËĞĞÁË~
+			//notify();//ä¼šå¯¼è‡´è‡ªå·±å”¤é†’è‡ªå·±ã€‚ã€‚å‡æ­»
+			//notifyAll();//å¹¶é€šçŸ¥å¯ä»¥å–é’±å•¦--ä½¿è¿›å…¥å¯¹è±¡ç­‰å¾…æ± çš„çº¿ç¨‹è¿›å…¥é”æ ‡å¿—ç­‰å¾…æ± 
+			//è¯¥çº¿ç¨‹ç»“æŸ--é‡Šæ”¾é”---é€šçŸ¥çš„è¿›ç¨‹å¯ä»¥è¿è¡Œäº†~
 			
 		}
 	}
 
-	//È¡Ç®µÄÍ¬²½·½·¨
+	//å–é’±çš„åŒæ­¥æ–¹æ³•
 	public synchronized void draw(double draw)
 	{	
 		lock.lock();
-		System.out.println("È¡Ç®´¦±êÖ¾"+Thread.currentThread().getName()+" "+flag);
-		if(flag == false)//±íÊ¾»¹Ã»´æÇ®ÄØ
+		System.out.println("å–é’±å¤„æ ‡å¿—"+Thread.currentThread().getName()+" "+flag);
+		if(flag == false)//è¡¨ç¤ºè¿˜æ²¡å­˜é’±å‘¢
 		{
 			try
 			{
 				condition.await();
-				//wait();//È¡Ç®ÏÈµÈ´ı£¬µÈ´æÍêÔÙËµ
+				//wait();//å–é’±å…ˆç­‰å¾…ï¼Œç­‰å­˜å®Œå†è¯´
 			}
 			catch (InterruptedException e)
 			{
@@ -150,14 +150,14 @@ class Account
 			}
 		}else{
 			balance -= draw;
-			System.out.println("¹§Ï²Äã "+Thread.currentThread().getName()+"£¬³É¹¦È¡ÁË "+draw+"$");
-			System.out.println("ÄşµÄÓà¶îÎª "+balance+"$");
+			System.out.println("æ­å–œä½  "+Thread.currentThread().getName()+"ï¼ŒæˆåŠŸå–äº† "+draw+"$");
+			System.out.println("å®çš„ä½™é¢ä¸º "+balance+"$");
 			
-			flag = false;//¸üĞÂflag
+			flag = false;//æ›´æ–°flag
 
 			condition.signalAll();
 
-			//notifyAll();//»½ĞÑ´æÈ¡½ø³Ì
+			//notifyAll();//å”¤é†’å­˜å–è¿›ç¨‹
 		}
 
 	}

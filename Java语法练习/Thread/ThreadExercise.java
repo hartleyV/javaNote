@@ -1,18 +1,20 @@
-import java.util.concurrent.locks.ReentrantLock;//ReetrantLock¿ÉÖØÈëËø//Í¬Ò»¸öÏß³Ì¿ÉÖØ¸´½øÈë
+package Thread;
+
+import java.util.concurrent.locks.ReentrantLock;//ReetrantLockå¯é‡å…¥é”//åŒä¸€ä¸ªçº¿ç¨‹å¯é‡å¤è¿›å…¥
 /**
-*Í¬²½¾­µä°¸Àı£º¶àÏß³ÌÈ¡Ç®
+*åŒæ­¥ç»å…¸æ¡ˆä¾‹ï¼šå¤šçº¿ç¨‹å–é’±
 *@author Hartley
 *@version 1.0.0
 */
 
 class  ThreadExercise
 {
-	//************³ÌĞòÈë¿Ú***************
+	//************ç¨‹åºå…¥å£***************
 	public static void main(String[] args) 
 	{
-		Account jack = new Account("007",100);
-		DrawMoneyThread a = new DrawMoneyThread("Ğ¡Ã÷",jack,80);
-		DrawMoneyThread b = new DrawMoneyThread("Ğ¡ÂÌ",jack,80);
+		Account1 jack = new Account1("007",100);
+		DrawMoneyThread a = new DrawMoneyThread("å°æ˜",jack,80);
+		DrawMoneyThread b = new DrawMoneyThread("å°ç»¿",jack,80);
 		b.setPriority(Thread.MAX_PRIORITY);
 		b.start();
 		a.start();
@@ -20,29 +22,29 @@ class  ThreadExercise
 	}
 }
 
-//È¡Ç®µÄÏß³ÌÀà£ºÕË»§¶ÔÏó£¬È¡Ç®Êı¶î
-//Âß¼­£ºµ±Ç®ÉÙÓÚµ±Ç°ÊÖÀïÇ®Ê±£¬È¡Ç®Ê§°Ü
+//å–é’±çš„çº¿ç¨‹ç±»ï¼šè´¦æˆ·å¯¹è±¡ï¼Œå–é’±æ•°é¢
+//é€»è¾‘ï¼šå½“é’±å°‘äºå½“å‰æ‰‹é‡Œé’±æ—¶ï¼Œå–é’±å¤±è´¥
 class DrawMoneyThread extends Thread
 {
-	private Account account;
+	private Account1 account;
 	private int draw;
-	public DrawMoneyThread(String name,Account account,int draw)
+	public DrawMoneyThread(String name,Account1 account,int draw)
 	{
-		super(name);//ÃüÃûÏß³Ì
+		super(name);//å‘½åçº¿ç¨‹
 		this.account = account;
 		this.draw = draw;
 	}
-	//Ïß³ÌÖ´ĞĞÌå
+	//çº¿ç¨‹æ‰§è¡Œä½“
 	public void run() 
 	{
-		//µ÷ÓÃÕË»§µÄÍ¬²½·½·¨draw--½«this×÷ÎªÍ¬²½¼àÊÓÆ÷£¬»áËø¶¨µ±Ç°µ÷ÓÃµÄÕË»§¶ÔÏó
+		//è°ƒç”¨è´¦æˆ·çš„åŒæ­¥æ–¹æ³•draw--å°†thisä½œä¸ºåŒæ­¥ç›‘è§†å™¨ï¼Œä¼šé”å®šå½“å‰è°ƒç”¨çš„è´¦æˆ·å¯¹è±¡
 		account.draw(draw);
 		/*
 		synchronized(account)
 		{
 			if (draw<=account.getBalance() )
 		{
-			System.out.println("¸ø "+getName()+" ÍÂ³ö£º"+draw+" $");
+			System.out.println("ç»™ "+getName()+" åå‡ºï¼š"+draw+" $");
 			/*
 			try
 			{
@@ -54,24 +56,24 @@ class DrawMoneyThread extends Thread
 			*/
 			/*
 			account.setBalance(account.getBalance() - draw);
-			System.out.println("µ±Ç°jackÓà¶îÎª£º"+account.getBalance());
+			System.out.println("å½“å‰jackä½™é¢ä¸ºï¼š"+account.getBalance());
 		}else{
-			System.out.println("ÇîB "+getName()+" ¶àÈ¥°á×©ÔÙÀ´°Ñ~");
-			//System.out.println("µ±Ç°jackÓà¶îÎª£º"+account.getBalance());
+			System.out.println("ç©·B "+getName()+" å¤šå»æ¬ç –å†æ¥æŠŠ~");
+			//System.out.println("å½“å‰jackä½™é¢ä¸ºï¼š"+account.getBalance());
 		}	
 	}*/
 		}
 		
 }
 
-//ÕË»§Àà£ºÓÃ»§ID¡¢Óà¶î
-class Account
+//è´¦æˆ·ç±»ï¼šç”¨æˆ·IDã€ä½™é¢
+class Account1
 {
 	private String accountID;
 	private double balance;
-	//Ê×ÏÈ»ñÈ¡Lock¶ÔÏó£¬true±íÊ¾¹«Æ½Ëø
+	//é¦–å…ˆè·å–Lockå¯¹è±¡ï¼Œtrueè¡¨ç¤ºå…¬å¹³é”
 	private final ReentrantLock lock = new ReentrantLock(true);
-	public Account(String accountID,double balance)
+	public Account1(String accountID, double balance)
 	{
 		this.accountID = accountID;
 		this.balance = balance;
@@ -83,37 +85,37 @@ class Account
 	}
 
 /*
-//¶àÏß³ÌÏÂ²»°²È«£¬ÆúÓÃ
+//å¤šçº¿ç¨‹ä¸‹ä¸å®‰å…¨ï¼Œå¼ƒç”¨
 	public void setBalance(double balance)
 	{
 		this.balance = balance;
 	}
 */
-	//Ôö¼ÓÈ¡¿î·½·¨£¬²¢½«ÆäÉùÃ÷ÎªÍ¬²½·½·¨£¨ÒşÊ½Ëø¶¨µ÷ÓÃ¶ÔÏó£©
+	//å¢åŠ å–æ¬¾æ–¹æ³•ï¼Œå¹¶å°†å…¶å£°æ˜ä¸ºåŒæ­¥æ–¹æ³•ï¼ˆéšå¼é”å®šè°ƒç”¨å¯¹è±¡ï¼‰
 	//public synchronized void draw(double draw)
 	public  void draw(double draw)
 	{
-		lock.lock();//ÓÃÍ¬²½ËøËø¶¨ 
+		lock.lock();//ç”¨åŒæ­¥é”é”å®š 
 
 		try
 		{
 			if (balance - draw >=1e-6)
 			{
-				System.out.println("¸ø "+Thread.currentThread().getName()+" ÍÂ³ö£º"+draw+" $");
+				System.out.println("ç»™ "+Thread.currentThread().getName()+" åå‡ºï¼š"+draw+" $");
 				balance -=draw; 
-				System.out.println("µ±Ç°ÕË»§Óà¶îÎª£º"+balance );
+				System.out.println("å½“å‰è´¦æˆ·ä½™é¢ä¸ºï¼š"+balance );
 			}else{
-				System.out.println("ÄãÌ«ÇîÁË "+Thread.currentThread().getName()+" ¶àÈ¥°á×©ÔÙÀ´°Ñ~");
+				System.out.println("ä½ å¤ªç©·äº† "+Thread.currentThread().getName()+" å¤šå»æ¬ç –å†æ¥æŠŠ~");
 			}		
 		}
 		finally
 		{
-			lock.unlock();//ĞŞ¸ÄÍê³É£¬½âËø
+			lock.unlock();//ä¿®æ”¹å®Œæˆï¼Œè§£é”
 		}
 		
 	}
 
-	//ÓĞÕËºÅµÄID¹şÏ£ÖµÇø·Ö²»Í¬¶ÔÏó
+	//æœ‰è´¦å·çš„IDå“ˆå¸Œå€¼åŒºåˆ†ä¸åŒå¯¹è±¡
 	public int hashCode()
 	{
 		return accountID.hashCode();
@@ -124,9 +126,9 @@ class Account
 		{
 			return true;
 		}
-		if(obj!=null && obj.getClass() == Account.class )
+		if(obj!=null && obj.getClass() == Account1.class )
 		{
-			Account tmp = (Account) obj;
+			Account1 tmp = (Account1) obj;
 			return this.hashCode() == tmp.hashCode();
 		}
 		

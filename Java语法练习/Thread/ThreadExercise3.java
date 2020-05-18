@@ -1,31 +1,31 @@
 //import java.util.*;
 import java.util.concurrent.*;
 /**
-*×èÈû¶ÓÁĞ°¸Àı£ºÏû·ÑÕß-Éú²úÕß
-È¡¿Õ¶ÓÁĞÊ±£º»á×èÈûµ±Ç°Ïß³Ì£¬µÈ´ı¶ÓÁĞÖĞ¼ÓÈëÔªËØÔÙ¼ÌĞøÈ¡³ö
-·ÅÂú¶ÓÁĞÊ±£ºÒ²»á×èÈûµ±Ç°Ïß³Ì£¬µÈ´ı¶ÓÁĞÖĞÈ¡³öÔªËØÔÙ¼ÌĞø·ÅÈë
+*é˜»å¡é˜Ÿåˆ—æ¡ˆä¾‹ï¼šæ¶ˆè´¹è€…-ç”Ÿäº§è€…
+å–ç©ºé˜Ÿåˆ—æ—¶ï¼šä¼šé˜»å¡å½“å‰çº¿ç¨‹ï¼Œç­‰å¾…é˜Ÿåˆ—ä¸­åŠ å…¥å…ƒç´ å†ç»§ç»­å–å‡º
+æ”¾æ»¡é˜Ÿåˆ—æ—¶ï¼šä¹Ÿä¼šé˜»å¡å½“å‰çº¿ç¨‹ï¼Œç­‰å¾…é˜Ÿåˆ—ä¸­å–å‡ºå…ƒç´ å†ç»§ç»­æ”¾å…¥
 *@author Hartley
 *@version 1.0.0
 */
 
 class  ThreadExercise3
 {
-	//************³ÌĞòÈë¿Ú***************
+	//************ç¨‹åºå…¥å£***************
 	public static void main(String[] args) throws InterruptedException
 	{
-		BlockingQueue<String> bq = new ArrayBlockingQueue<>(1);//´´½¨´óĞ¡Îª1µÄ×èÈû¶ÓÁĞ£¬ÇÒÉú²úÏû·Ñ¹²Ïí
-		new Consumer("Ïû·ÑÕßĞ¡ÕÅ",bq).start();
-		//new Consumer("Ïû·ÑÕßĞ¡Àî",bq).start();
-		new Producer("Éú²úÕß°¢ÂÌ",bq).start();
+		BlockingQueue<String> bq = new ArrayBlockingQueue<>(1);//åˆ›å»ºå¤§å°ä¸º1çš„é˜»å¡é˜Ÿåˆ—ï¼Œä¸”ç”Ÿäº§æ¶ˆè´¹å…±äº«
+		new Consumer("æ¶ˆè´¹è€…å°å¼ ",bq).start();
+		//new Consumer("æ¶ˆè´¹è€…å°æ",bq).start();
+		new Producer("ç”Ÿäº§è€…é˜¿ç»¿",bq).start();
 		/*
-		BlockingQueue<Integer> que = new ArrayBlockingQueue<>(1);//¶¨Òå´óĞ¡Îª1µÄ×èÈû¶ÓÁĞ
+		BlockingQueue<Integer> que = new ArrayBlockingQueue<>(1);//å®šä¹‰å¤§å°ä¸º1çš„é˜»å¡é˜Ÿåˆ—
 		que.put(2);
-		que.put(2);//»á×èÈû½ø³Ì
+		que.put(2);//ä¼šé˜»å¡è¿›ç¨‹
 		*/
 	}
 }
 
-//Ïû·ÑÕß
+//æ¶ˆè´¹è€…
 class Consumer extends Thread
 {
 	BlockingQueue<String> bq;
@@ -41,9 +41,9 @@ class Consumer extends Thread
 		{
 			try
 			{
-				//Thread.sleep(200);//·½±ã¹Û¿´
+				//Thread.sleep(200);//æ–¹ä¾¿è§‚çœ‹
 				String ele = bq.take();
-				System.out.println(getName()+" Ïû·ÑÁË "+ele);
+				System.out.println(getName()+" æ¶ˆè´¹äº† "+ele);
 			}
 			catch (InterruptedException e)
 			{
@@ -56,7 +56,7 @@ class Consumer extends Thread
 
 }
 
-//Éú²úÕß
+//ç”Ÿäº§è€…
 class Producer extends Thread
 {
 	BlockingQueue<String> bq;
@@ -68,16 +68,16 @@ class Producer extends Thread
 
 	public void run()
 	{
-		String[] src = {"¶«ÆÂÖâ×Ó","ÉÕ¼¦","ĞÜÕÆ"};
+		String[] src = {"ä¸œå¡è‚˜å­","çƒ§é¸¡","ç†ŠæŒ"};
 
 		for (int i=0;i<200 ;i++ )
 		{
-			String cur = src[i%3];//Ñ­»·Íù¸´
+			String cur = src[i%3];//å¾ªç¯å¾€å¤
 			try
 			{
 				//Thread.sleep(200);
 				bq.put(cur);
-				System.out.println(getName()+" Éú²úÁË "+cur);
+				System.out.println(getName()+" ç”Ÿäº§äº† "+cur);
 			}
 			catch (InterruptedException e)
 			{

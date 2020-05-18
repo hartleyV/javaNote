@@ -1,17 +1,17 @@
 import java.util.HashMap;
 import java.util.Random;
 /**
-*Éè¼ÆÒ»¸ö½á¹¹£º--Ê±¼ä¸´ÔÓ¶ÈO(1)
-		insert(key) Ìí¼ÓÔªËØ²»ÖØ
+*è®¾è®¡ä¸€ä¸ªç»“æ„ï¼š--æ—¶é—´å¤æ‚åº¦O(1)
+		insert(key) æ·»åŠ å…ƒç´ ä¸é‡
 		delete(key)
-		getRandom() µÈ¸ÅÂÊ»ñÈ¡key
+		getRandom() ç­‰æ¦‚ç‡è·å–key
 *@author Hartley
 *@version 1.0.0
 */
 
 class  RandomKeyTest
 {
-	//************³ÌĞòÈë¿Ú***************
+	//************ç¨‹åºå…¥å£***************
 	public static void main(String[] args) 
 	{
 		RandomStructure<String> rand = new RandomStructure<>();
@@ -28,11 +28,11 @@ class  RandomKeyTest
 	}
 }
 
-//¸Ã×Ô¶¨Òå½á¹¹
+//è¯¥è‡ªå®šä¹‰ç»“æ„
 class RandomStructure<K>
 {
-	private HashMap<K,Integer> keyIndexMap ;//ÓÃÓÚinsert
-	private HashMap<Integer,K> indexKeyMap ;//ÓÃÓÚ»ñÈ¡Ëæ»úkey£¨Í¨¹ıindex£©
+	private HashMap<K,Integer> keyIndexMap ;//ç”¨äºinsert
+	private HashMap<Integer,K> indexKeyMap ;//ç”¨äºè·å–éšæœºkeyï¼ˆé€šè¿‡indexï¼‰
 	private int index;
 
 	public RandomStructure()
@@ -42,38 +42,38 @@ class RandomStructure<K>
 		index = 0;
 	}
 
-	//Ìí¼ÓÔªËØ
+	//æ·»åŠ å…ƒç´ 
 	public void insert(K key)
 	{
-		if (!keyIndexMap.containsKey(key) )//Èç¹û¼üÖµkeyµÄmapÖĞÃ»ÓĞĞÂÌí¼ÓµÄkey
+		if (!keyIndexMap.containsKey(key) )//å¦‚æœé”®å€¼keyçš„mapä¸­æ²¡æœ‰æ–°æ·»åŠ çš„key
 		{
-			keyIndexMap.put(key,index);//mapÖĞÃ»ÓĞkeyµÄÊ±ºò·µ»Ønull
+			keyIndexMap.put(key,index);//mapä¸­æ²¡æœ‰keyçš„æ—¶å€™è¿”å›null
 			indexKeyMap.put(index , key);
 			index++;
-		}//ÖØ¸´Ôò²»Ìí¼Ó~		
+		}//é‡å¤åˆ™ä¸æ·»åŠ ~		
 	}
 
-	//É¾³ıÔªËØ
+	//åˆ é™¤å…ƒç´ 
 	public void remove(K key)
 	{
-		if (keyIndexMap.containsKey(key) )//Ê×ÏÈ½á¹¹ÖĞĞèÒªÓĞ¸Ãkey
+		if (keyIndexMap.containsKey(key) )//é¦–å…ˆç»“æ„ä¸­éœ€è¦æœ‰è¯¥key
 		{
-			Integer deleteIndex = keyIndexMap.get(key);//»ñÈ¡¶ÔÓ¦keyµÄindex
-			K lastKey = indexKeyMap.get(--index);//»ñÈ¡Ä©Î²ÔªËØ£¬²¢¼õindex
+			Integer deleteIndex = keyIndexMap.get(key);//è·å–å¯¹åº”keyçš„index
+			K lastKey = indexKeyMap.get(--index);//è·å–æœ«å°¾å…ƒç´ ï¼Œå¹¶å‡index
 
-			keyIndexMap.remove(key);//key-index É¾³ıÏàÓ¦keyÔªËØ
-			keyIndexMap.put(lastKey,deleteIndex);//²¢°ÑÄ©Î²keyµÄindexÉèÖÃÎªÉ¾³ıkeyµÄindex
+			keyIndexMap.remove(key);//key-index åˆ é™¤ç›¸åº”keyå…ƒç´ 
+			keyIndexMap.put(lastKey,deleteIndex);//å¹¶æŠŠæœ«å°¾keyçš„indexè®¾ç½®ä¸ºåˆ é™¤keyçš„index
 			
-			indexKeyMap.remove(index);//index-key É¾³ıÄ©Î²indexÔªËØ	
+			indexKeyMap.remove(index);//index-key åˆ é™¤æœ«å°¾indexå…ƒç´ 	
 			indexKeyMap.put(deleteIndex,lastKey);
 		}
 	}
 
-	//µÈ¸ÅÂÊËæ»ú»ñÈ¡ÔªËØ
+	//ç­‰æ¦‚ç‡éšæœºè·å–å…ƒç´ 
 	public K getRandom()
 	{
 		Random ran = new Random();
-		int randomIndex = ran.nextInt(index);//°üº¬index
+		int randomIndex = ran.nextInt(index);//åŒ…å«index
 		if (indexKeyMap.containsKey(randomIndex) )
 		{
 			return indexKeyMap.get(randomIndex);
