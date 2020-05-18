@@ -1,3 +1,5 @@
+package sort;
+
 /**
 *基本排序：冒泡、选择、插入（时间复杂度为O（N^2) )
 *@author Hartley

@@ -1,3 +1,5 @@
+package Collection;
+
 import java.util.*;
 /**
 *泛型：为了让集合记住其数据类型~（传入类型实参--相当于多个逻辑子类） 
@@ -90,7 +92,7 @@ class  GenericTest
 	//自动推断
 	public static void assertTest()
 	{
-		Test<String> t1 = new Test<>(5);//右端均隐藏
+		Test<String> t1 = new Test<String>(5);//右端均隐藏
 		Test<String> t2 = new <Integer>Test<String>(6);//右端类型均显示
 		Test<String> t3 = new Test<String>(7);//构造器隐式
 		//Test<String> t4 = new <Integer>Test<>(8);//构造器显示+菱形-->不可推断出Test的类型参数

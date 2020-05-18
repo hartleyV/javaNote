@@ -1,3 +1,5 @@
+package linkedlist;
+
 import java.util.Stack;
 /**
 *案例：判断【链表】是否为回文序列
@@ -9,7 +11,7 @@ import java.util.Stack;
 
   1 ->2->3 ->2 ->1->null
 			  ^    ^    ^             =>   n1->null后，要n2->n1，然后指针平移
-			  n1   n2   n3					   n1=n2; n2=n3; n3=n3.next;  依次往复，直到n3为null
+			  n1   n2   n3			 n1=n2; n2=n3; n3=n3.next;  依次往复，直到n3为null
 
 *@author Hartley
 *@version 1.0.0
@@ -178,12 +180,3 @@ class  IsPalindromeLink
 	}
 }
 
-class Node
-{
-	public int value;
-	public Node next;
-	public Node(int value)
-	{
-		this.value = value;
-	}
-}

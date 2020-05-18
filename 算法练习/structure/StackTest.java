@@ -1,5 +1,7 @@
+package structure;
+
 import java.util.Stack;
-import java.io.*;
+
 /**
 *堆栈练习
 *案例【1】：要求在实现一特殊栈的同时，可以在O(1)时间内求出栈中最小值
