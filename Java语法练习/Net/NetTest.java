@@ -45,19 +45,21 @@ class  NetTest
 	//服务端
 	@Test
 	public void server() throws IOException {
-		ServerSocket ss = new ServerSocket(8848);//创建服务端的socket并指定端口
+		ServerSocket ss = new ServerSocket(8848);//1】创建服务端的socket并指定端口
 
-		try(Socket socket = ss.accept();//从客户端接收到socket对象
-			InputStream is = socket.getInputStream();
+		try(Socket socket = ss.accept();//2】accept方法从客户端接收到socket对象
+			InputStream is = socket.getInputStream();//3】获取输入流
 			Reader r = new InputStreamReader(is)) {
 
 			//byte[] buffer = new byte[1024];//字节流，当汉字过多有可能乱码
 			char[] buffer = new char[32];
 			int len = -1;
-			while ( (len = r.read(buffer)) != -1)
+			while ( (len = r.read(buffer)) != -1)//4】读取数据、关闭资源
 			{
 				System.out.println(new String(buffer,0,len));
 			}
+
+			System.out.println("this message is from : "+socket.getInetAddress().getHostAddress());
 		}catch (Exception e){
 			e.printStackTrace();
 		}
