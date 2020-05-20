@@ -7,6 +7,7 @@ import java.util.Arrays;
 /**
  * 案例：以一个基准值a，将一链表分为三段，左边小于a，中间等于a，右边大于a
  * 要求：时间复杂度O(N) 空间O(1)
+ * 思路：遍历把第一次比基准的小的、等于的、大于的依次用small、equal、large三个指针指向
  *
  * @author Hartley
  * @create 2020/5/18
