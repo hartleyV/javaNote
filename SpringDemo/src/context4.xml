@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+   http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/aop
+   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+   http://www.springframework.org/schema/tx
+   http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+<!--    声明业务对象ProductService-->
+    <bean name="s" class="service.ProductService">
+    </bean>
+<!--    声明日志切面——记录日志的功能LoggerAspect-->
+    <bean id="loggerAspect" class="aspect.LoggerAspect"/>
+
+    <!--通过aop：config把核心业务与辅助功能编织在一起-->
+    <aop:config>
+        <aop:pointcut id="loggerCutpoint"
+                      expression=
+                              "execution(* service.ProductService.*(..)) "/>
+            <!--  指定核心业务功能，在调用满足该条件的方法时，执行下面的辅助操作↑↑↑↑↑-->
+<!--                                 指定的辅助功能-->
+        <aop:aspect id="logAspect" ref="loggerAspect">
+            <aop:around pointcut-ref="loggerCutpoint" method="log"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
