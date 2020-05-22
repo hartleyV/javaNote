@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+
+    <servlet>
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>HelloServlet</servlet-class>
+    </servlet>
+<!--    将路径与类相互绑定-->
+    <servlet-mapping>
+<!--        Servlet类-->
+        <servlet-name>HelloServlet</servlet-name>
+<!--        网址的路径-->
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+
+</web-app>
