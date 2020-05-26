@@ -3,6 +3,7 @@ package JDBC;
 import org.junit.jupiter.api.Test;
 
 import java.sql.*;
+import java.util.Scanner;
 
 /**
  * description：JDBC练习
@@ -285,22 +286,77 @@ public class JDBCTest {
             throwables.printStackTrace();
         }
     }
-    @Test//==========【7事务】============================
-    public void innodbTest(){
+    //==========【7事务】============================
+    public static void main(String[] args) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        try (Connection conn = DriverManager.getConnection
-                ("jdbc:mysql://127.0.0.1/firstdb?characterEncoding", "root", "admin");) {
+        Connection conn = null;
+        Statement s4query = null;
+        Statement s4delete = null;
+        try {
+            conn = DriverManager.getConnection
+                    ("jdbc:mysql://127.0.0.1/firstdb?characterEncoding", "root", "admin");
 
-           //【1】关闭自动提交
+            s4query = conn.createStatement();
+            s4delete = conn.createStatement();
+            Scanner s = new Scanner(System.in);
+
+           //【1】关闭自动提交ee
             conn.setAutoCommit(false);
-            //【2】手动提交
+            //获取前1-10条id
+            ResultSet rs = s4query.executeQuery("select id from hero order by id asc limit 0,10");
+            while(rs.next()){
+                int id = rs.getInt(1);
+                System.out.println("将要删掉id为："+id+"了哟");
+                s4delete.execute("delete from hero where id = "+id);
+            }
+
+            //是否删除这10条
+            while(true){
+                System.out.println("是否要删除数据(Y/N)");
+
+                String str = s.next();
+                if ("Y".equals(str)) {
+                    //如果输入的是Y，则提交删除操作
+                    //【2】手动提交
+                    conn.commit();
+                    System.out.println("提交删除");
+                    break;
+                } else if ("N".equals(str)) {
+                    System.out.println("放弃删除");
+                    break;
+                }
+            }
+
         } catch (SQLException throwables) {
+            try {
+                //【3】发生异常则回滚操作
+                conn.rollback();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             throwables.printStackTrace();
+        }finally {
+            try {
+                s4query.close();//依次关闭数据库资源
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+            try {
+                s4delete.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            try {
+                conn.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
     }
 
