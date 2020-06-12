@@ -39,7 +39,7 @@ public class LongestSubStr {
         return true;
     }
 
-    //方法【2】一次循环完，时间复杂度O(N)
+    //方法【2】一次循环完，时间复杂度O(N) 额外空间复杂度O(min(M,N))--字符集长M，最长不重复子串长N
     //利用hashMap边循环边装，如果发现重复字符，定位重复字符位置，得出的新子字符从该位置+1开始
     public static int getLongestSubStr2(String str){
         HashMap<Character,Integer> map = new HashMap<>();//字符为key 角标为value
@@ -54,6 +54,21 @@ public class LongestSubStr {
         }
         return max;
     }
+
+    //【3】方法三，将数组替换HashMap、----没想通呢
+    public static int getLongestSubStr3(String str){
+        int[] arr = new int[128];//用于存储字符(ascil码）和对应角标的数组
+        int M = str.length();
+        int max = 0;
+
+        for (int i=0,j=0;i<M;i++){
+            j = Math.min( arr[str.charAt(i)] , j );//存入字符的对应位置(如果遇到重复的就自动更新~）
+
+        }
+
+        return max;
+    }
+
     //程序入口
     public static void main(String[] args) {
         String str = "abcabvaabb";

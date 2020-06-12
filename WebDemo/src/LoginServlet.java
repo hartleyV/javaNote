@@ -50,6 +50,9 @@ import javax.servlet.http.HttpServletResponse;
         setDateHeader("Expires", 0);通知浏览器不要使用缓存
         setHeader("Cache-Control", "no-cache");
         setHeader("pragma", "no-cache");
+
+ *只依靠Servlet需要在Servlet类里面编写html代码，效率不高，可读性差，难以维护。
+ * 所以需要JSON让html只在html页面中，并且可以直接调用java变量，实现前后端分离
  */
 public class LoginServlet extends HttpServlet {
 

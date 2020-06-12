@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title >登录</title>
+
+    <script type="text/javascript">
+        window.onload = function(){
+
+            var subbut = document.getElementById("submit");
+            subbut.onclick = function () {
+                //alert("userName");
+            //1.取用户名的值
+            var userName = document.getElementById("user").value;
+            if (userName== null || ""==userName){
+                //alert("用户名为空！")//只有确认按钮
+                var flag = confirm("确认你没输入错误？");
+                alert(flag);
+                //取消默认sumbit行为
+                return false;
+            }
+
+            //2.
+
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1 style="color:green">登登登录</h1>
+
+    <form method="get" action="success.html">
+    <table>
+        <tr>
+            <td>用户名<input type="text" id="user" name="username"> </td>
+            <td>密&emsp;码<input type="password" id="pwd" name="pwd"> </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right" >
+                <button id="submit" >登录</button>
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>

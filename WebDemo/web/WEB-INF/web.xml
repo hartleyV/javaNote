@@ -45,4 +45,79 @@
         <servlet-name>UploadPhotoServlet</servlet-name>
         <url-pattern>/uploadPhoto</url-pattern>
     </servlet-mapping>
+    <!--=====================/listHero与HeroListServlet====================-->
+    <servlet>
+        <servlet-name>HeroListServlet</servlet-name>
+        <servlet-class>servlet.HeroListServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HeroListServlet</servlet-name>
+<!--        listHero页面是通过Servlet的response获取PrintWriter的write方法，写到页面-->
+        <url-pattern>/listHero</url-pattern>
+    </servlet-mapping>
+    <!--=====================/addHero与HeroAddServlet====================-->
+    <servlet>
+        <servlet-name>HeroAddServlet</servlet-name>
+        <servlet-class>servlet.HeroAddServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HeroAddServlet</servlet-name>
+        <url-pattern>/addHero</url-pattern>
+    </servlet-mapping>
+    <!--=====================/deleteHero与HeroDeleteServlet====================-->
+    <servlet>
+        <servlet-name>HeroDeleteServlet</servlet-name>
+        <servlet-class>servlet.HeroDeleteServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HeroDeleteServlet</servlet-name>
+        <url-pattern>/deleteHero</url-pattern>
+    </servlet-mapping>
+
+    <!--=====================/editHero与HeroEditServlet====================-->
+    <servlet>
+        <servlet-name>HeroEditServlet</servlet-name>
+        <servlet-class>servlet.HeroEditServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HeroEditServlet</servlet-name>
+        <url-pattern>/editHero</url-pattern>
+    </servlet-mapping>
+
+    <!--=====================/updateHero与HeroUpdateServlet====================-->
+    <servlet>
+        <servlet-name>HeroUpdateServlet</servlet-name>
+        <servlet-class>servlet.HeroUpdateServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HeroUpdateServlet</servlet-name>
+        <url-pattern>/updateHero</url-pattern>
+    </servlet-mapping>
+
+    <!--=====================/submit与SubmitServlet====================-->
+    <servlet>
+        <servlet-name>SubmitServlet</servlet-name>
+        <servlet-class>servlet.SubmitServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SubmitServlet</servlet-name>
+        <url-pattern>/submitServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--=====================/getOneServlet与GetOneServlet====================-->
+    <servlet>
+        <servlet-name>GetOneServlet</servlet-name>
+        <servlet-class>GetOneServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetOneServlet</servlet-name>
+        <url-pattern>/getOneServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

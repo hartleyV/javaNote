@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+<!--    js进行dom查询
+    通过Id、name、tagName获取元素节点
+    innerText与innerHTML区别在于范围不只一个标签时innerHTML会连带标签一起输出
+    parentNode、childNode、ElementSibling-->
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+
+        //1.查找按钮节点，以便对其点击做出响应
+        var but1 = document.getElementById("bt1");
+        but1.onclick = function () {
+            var shEle = document.getElementById("sh");
+            //有开始有结束的标签，获取其中文本用innerText
+            //alert(shEle.innerText);
+            //获取文本的第二种方式：
+            alert(shEle.firstChild.nodeValue);
+        }
+
+        //2.遍历所有列表中元素
+            var but2 = document.getElementById("bt2");
+        but2.onclick = function () {
+            //通过li标签获取所有列表里节点
+            var lis = document.getElementsByTagName("li");
+            for (var i=0;i<lis.length;i++){
+                alert(lis[i].innerHTML);//与innnerText区别？？见获取父节点：
+            }
+        }
+
+        //3.通过ID获取元素节点，#xxx，然后获取旗下的所有li节点
+            var but3 = document.getElementById("bt3");
+        but3.onclick = function () {
+            var citys = document.getElementById("city");//通过#city获取city节点
+            var lis = citys.getElementsByTagName("li");
+            for (var i=0;i<lis.length;i++){
+                alert(lis[i].innerText);
+            }
+        }
+
+
+            //4.获取旗下的所有子节点
+            var but4 = document.getElementById("bt4");
+            but4.onclick = function () {
+                var citys = document.getElementById("city");//通过#city获取city节点
+                var cs = citys.childNodes;//内核版本大于8，会将回车空格算作子节点
+                for (var i=0;i<cs.length;i++){
+                    alert(cs[i].innerText);
+                }
+            }
+
+            //5.获取city下第一个li子节点
+            var but5 = document.getElementById("bt5");
+            but5.onclick = function () {
+                var citys = document.getElementById("city");//通过#city获取city节点
+                var first = citys.firstElementChild;//第一个节点(firstElementChild则不算空格
+                    alert(first.innerText);
+            }
+
+            //6.获取sh的父节点下第一个li子节点
+            var but6 = document.getElementById("bt6");
+            but6.onclick = function () {
+                var sh = document.getElementById("sh");//获取sh节点
+                var city = sh.parentNode;//获取父节点
+
+                // alert(city.innerText);//只是文本
+                alert(city.innerHTML);//文本+标签
+
+            }
+
+            //7.获取sh的前一个兄弟节点
+            var but7 = document.getElementById("bt7");
+            but7.onclick = function () {
+                var sh = document.getElementById("sh");//获取sh节点
+                var pre = sh.previousElementSibling;//获取前一个兄弟节点
+
+                // alert(city.innerText);//只是文本
+                alert(pre.innerHTML);//文本+标签
+
+            }
+
+            //8.获取文本框内容
+            var but8 = document.getElementById("bt8");
+            but8.onclick=function () {
+                var nameEle = document.getElementById("username");
+                alert(nameEle.value);
+            }
+
+            //9.设置文本框内容
+            var but9 = document.getElementById("bt9");
+            but9.onclick=function () {
+                var nameEle = document.getElementById("username");
+                nameEle.value = "jay chou";
+            }
+
+        }
+    </script>
+</head>
+<body>
+
+    <h1>dom查询小测</h1>
+
+  <form>
+    <table>
+        <tr>
+            <th >姓名</th>
+            <th>学号</th>
+            <th>爱好</th>
+        </tr>
+
+
+        <tr>
+            <td><input type="text" id="username" name="name"></td>
+            <td><input type="password" name="stdID"></td>
+            <td><input type="text" name="hobby"></td>
+
+        </tr>
+
+        <tr>
+            <td colspan="3" align="left">
+                <input type="reset" value="重置">
+                <input type="submit" value="提交">
+
+            </td>
+        </tr>
+    </table>
+  </form>
+
+    <p>
+        你喜欢去哪里流浪？
+    </p>
+    <ul id="city">
+        <li id="bj">北京</li>
+        <li id="sh">魔都</li>
+        <li>广州</li>
+        <li>深圳</li>
+    </ul>
+
+
+    <ul id="text">
+        <li id="bit">比特</li>
+        <li id="bite">字节</li>
+        <li>跳动</li>
+        <li>躁动</li>
+    </ul>
+
+    <button id="bt1" >找</button>
+    <button id="bt2" >遍历</button>
+    <button id="bt3" >通过ID找子li节点</button>
+    <button id="bt4" >通过ID找所有子节点</button>
+    <button id="bt5" >获取city下第一个子节点</button><br>
+    <button id="bt6" >获取sh的父节点</button>
+    <button id="bt7" >获取sh的前一个兄弟节点</button>
+    <button id="bt8" >获取姓名文本框</button>
+    <button id="bt9" >设置姓名文本框</button>
+
+
+</body>
+</html>
