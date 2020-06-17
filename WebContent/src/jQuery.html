@@ -3,9 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>jQuery</title>
+    <style>
+        div.one{
+            width: 100px;
+            height: 100px;
+            background-color: cadetblue;
+            font-size: 12px;
+        }
+    </style>
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" >
         // $(alert($));
+        /**
+         * jQuery操作文本与js区别；
+         * text() --- innerText
+         * html() --- innerHTML
+         * val()  --- value
+         */
         $(function(){//类似window.onload
             var $li = $("<li>三里屯</li>");//命名规则
             $("ul").append($li);
@@ -13,14 +27,41 @@
             //dom对象包装为jQuery对象
             var city = document.getElementById("city");//[object HTMLUListElement]
             var $city = $(city);//[object Object]
-            alert($city);
+            //alert($city);
+
+            //使用dom对象调用dom方法
+            $("#bt1").click(function () {
+                var li = document.getElementById("sh");
+                alert(li.innerText);
+            })
+
+            //使用jQuery对象调用jQuery方法
+            $("#bt3").click(function () {
+                var $li = $("#sh");
+                alert($li.text());
+            })
+
+            //使用dom对象调用jQuery方法(不可以直接调用text()，需要转成jQuery对象
+            $("#bt2").click(function () {
+                var li = document.getElementById("sh");
+                var $li = $(li);
+                alert($li.text());
+            })
+
+            //使用jQuery对象调用dom方法
+            $("#bt4").click(function () {
+                var $li = $("#sh");
+                //alert($li[0].innerText);
+                alert($li.get(0).innerText);
+            })
         })
     </script>
 </head>
 <body>
 
-<h1>jQuery练习</h1>
+<h1 style="background: greenyellow">jQuery练习</h1>
 
+<h2>jQuery对象与dom对象</h2>
 <ul id="city">
     <li id="bj">北京</li>
     <li id="sh">魔都</li>
@@ -28,5 +69,33 @@
     <li>深圳</li>
 </ul>
 
+<table>
+    <tr>
+        <td><button id="bt1" >dom调用dom方法</button></td>
+        <td><button id="bt2" >dom调用jQuery方法</button></td>
+        <td><button id="bt3" >jQuery调用jQuery方法</button></td>
+        <td><button id="bt4" >jQuery调用dom方法</button></td>
+    </tr>
+</table>
+
+<h2>jQuery基本选择器 </h2>
+
+<div class="one" id="one">id为one，class为one的div块
+    <div  class = "sub" >第一个div块里的div子块,class为sub</div>
+</div>
+
+<div class="one" id="two" title="tt">id为two，class为one的div块
+    <div  class = "sub" title="tt">class为sub的div子块，title为tt</div>
+    <div  class = "sub" title="other">class为sub的div子块，title为other</div>
+</div>
+
+<div class="hide">class为hide的div</div>
+<div style="display: none;"></div>
+
+<div>
+        包含input的type为hidden的div<input type="hidden" size="8">
+</div>
+
+<span class="one" id="span">span元素</span>
 </body>
 </html>

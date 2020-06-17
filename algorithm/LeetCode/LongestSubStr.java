@@ -55,15 +55,16 @@ public class LongestSubStr {
         return max;
     }
 
-    //【3】方法三，将数组替换HashMap、----没想通呢
+    //【3】方法三，将数组替换HashMap、----!!更新子串起点的操作&用ascil码存 “当前角标+1”
     public static int getLongestSubStr3(String str){
         int[] arr = new int[128];//用于存储字符(ascil码）和对应角标的数组
         int M = str.length();
         int max = 0;
-
+        //用j来记录每次子串的起点
         for (int i=0,j=0;i<M;i++){
-            j = Math.min( arr[str.charAt(i)] , j );//存入字符的对应位置(如果遇到重复的就自动更新~）
-
+            j = Math.max( arr[str.charAt(i)] , j );//比较、更新子串的起点j
+            max = Math.max(i-j+1,max);
+            arr[str.charAt(i)] = i+1;//对应字符ascil码位置的数组存入 “当前角标+1”
         }
 
         return max;
