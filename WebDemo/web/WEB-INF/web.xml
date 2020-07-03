@@ -120,4 +120,14 @@
         <servlet-name>GetOneServlet</servlet-name>
         <url-pattern>/getOneServlet</url-pattern>
     </servlet-mapping>
+    <!--=====================/EndServlet与endServlet====================-->
+    <servlet>
+        <servlet-name>EndServlet</servlet-name>
+        <servlet-class>EndServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EndServlet</servlet-name>
+        <url-pattern>/endServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
