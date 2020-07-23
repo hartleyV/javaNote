@@ -3,6 +3,9 @@
 # Compiled class file
 *.class
 
+#directory
+WebContent/
+
 # Log file
 *.log
 
