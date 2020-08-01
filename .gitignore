@@ -4,7 +4,7 @@
 *.class
 
 #directory
-WebContent/
+#WebContent/
 
 # Log file
 *.log
