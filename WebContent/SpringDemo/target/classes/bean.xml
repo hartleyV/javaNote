@@ -3,6 +3,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!-- ============使用XML配置！！！====================-->
     <!--Spring对bean的管理方式：
         1.创建方式(3种）
         2.bean对象作用范围？？
@@ -24,22 +27,77 @@
 
     <!-- [第一种方式]无其他标签Spring 使用默认构造函数-->
     <!--把对象的创建交给Spring的IOC-->
+    <!-- -->
     <bean id="accountService"
           class="com.spring.couple_demo.service.impl.AccountService"
           scope="prototype"
-          init-method="init" destroy-method="destory"
-    >
+          init-method="init" destroy-method="destory">
         <!-- 依赖注入
+
+        [方法一：构造函数注入]
         标签：constructor-arg
         位置：在bean标签内
         属性：
             type：注入数据是数据类型
             index：给构造函数中指定位置的参数赋值（索引0开始
             name：构造函数中指定名称的参数（常用
+
+            value:赋值给基本类型和String
+            ref：指定其他bean类型的数据（在Spring的IOC核心容器中出现的bean对象
+         优势：只有指定构造方法时，可以根据参数获取bean对象；且构造完对应bean类出于就绪状态，可以直接使用
+         劣势：改变bean对象的实例化方式（比如用不到
     -->
+        <!--
         <constructor-arg name="name" value="test"></constructor-arg>
         <constructor-arg name="age" value="18"></constructor-arg>
-        <constructor-arg name="birthday" ref="now"></constructor-arg>
+        <constructor-arg name="birthday" ref="now"></constructor-arg>-->
+
+        <!-- [方法二：set注入]
+            标签：property
+            优势：创建对象没有限制（用默认构造函数即可
+            劣势：获取的对象成员有可能没有set
+        --><!--
+        <property name="name" value="test.."></property>
+        <property name="age" value="12"></property>
+        <property name="birthday" ref="now"></property>
+        -->
+        <!-- [方法三：复杂类型的注入]
+            也是用set方法的property标签，利用其子标签的属性
+            标签（结构相同可以互换）
+                给list结构注入的标签：list array set
+                给map结构的标签：map props
+        -->
+        <property name="strs">
+            <array>
+                <value>I</value>
+                <value>-Love</value>
+                <value>-Myself</value>
+            </array>
+        </property>
+
+        <property name="lists">
+            <array>
+                <value>nj</value>
+                <value>-Love</value>
+                <value>-Myself</value>
+            </array>
+        </property>
+
+        <property name="map">
+            <map>
+                <entry key="tt1" value="33"></entry>
+                <entry key="tt2" >
+                    <value>44</value>
+                </entry>
+            </map>
+        </property>
+
+        <property name="props">
+            <props>
+                <prop key="name">jack</prop>
+                <prop key="pwd">123</prop>
+            </props>
+        </property>
     </bean>
 
     <!-- 读取全限定类名，通过反射创建date对象并存入Spring核心容器，通过id可以获取该对象-->

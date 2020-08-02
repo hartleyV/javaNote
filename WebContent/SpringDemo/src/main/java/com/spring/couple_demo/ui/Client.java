@@ -1,21 +1,16 @@
 package com.spring.couple_demo.ui;
 
-import com.spring.couple_demo.dao.IAccountDao;
 import com.spring.couple_demo.service.IAccountService;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 /**
  * description：
-    模拟表现层，用来调用业务层
+ 模拟表现层，用来调用业务层
 
- //流程：表现层Client调用业务层AccountService，业务层调用持久层AccountDao
- //其中new关键字出现两次，表现当前程序耦合很强
+流程：表现层Client调用业务层AccountService，业务层调用持久层AccountDao
+其中new关键字出现两次，表现当前程序耦合很强
+    =======通过Spring的xml配置IOC===============
  * @author Hartley
  * date： 2020/7/31
  */
@@ -32,7 +27,7 @@ public class Client {
                 (IAccountService)applicationContext.getBean("accountService");
         //IAccountDao accountDao = applicationContext.getBean("accountDao",IAccountDao.class);
 
-        //accountService.saveAccount();
+        accountService.saveAccount();
         System.out.println(accountService);
 
         //手动关闭IOC容器
