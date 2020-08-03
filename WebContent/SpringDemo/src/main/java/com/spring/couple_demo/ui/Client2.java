@@ -20,13 +20,17 @@ public class Client2 {
         //2.根据Id获取Bean对象
         IAccountService accountService =
                 (IAccountService)applicationContext.getBean("accountService2");
-        System.out.println(accountService);
+
+        IAccountService accountService2 =
+                (IAccountService)applicationContext.getBean("accountService2");
+
+        System.out.println("是否为单例？"+(accountService==accountService2));
 
         IAccountDao accountDao = applicationContext.getBean("accountDao",IAccountDao.class);
-        System.out.println(accountDao);
 
         accountService.saveAccount();
 
+        ((ClassPathXmlApplicationContext)applicationContext).close();
 
     }
 

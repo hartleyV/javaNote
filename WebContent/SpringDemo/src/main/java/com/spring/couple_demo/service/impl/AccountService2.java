@@ -4,8 +4,14 @@ import com.spring.couple_demo.dao.IAccountDao;
 import com.spring.couple_demo.service.IAccountService;
 import com.spring.couple_demo.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 import java.util.*;
 
 /**
@@ -28,18 +34,33 @@ import java.util.*;
 
  *
  */
-@Component(value = "accountService2")
+//@Component(value = "accountService2")
+@Service
+//@Scope(value="prototype")
 public class AccountService2 implements IAccountService {
 
+    /*
     @Autowired
+    @Qualifier(value = "accountDao2")
+     */
+    @Resource(name = "accountDao2")
     private IAccountDao accountDao;
 
     public  AccountService2(){
-        System.out.println("accountService对象创建了");
+        System.out.println("accountService2对象创建了");
     }
 
     public void saveAccount() {
         accountDao.saveAccount();
+    }
+
+    @PostConstruct
+    public void init(){
+        System.out.println("initialize this program");
+    }
+    @PreDestroy
+    public void destory(){
+        System.out.println("destory this program");
     }
 
 }

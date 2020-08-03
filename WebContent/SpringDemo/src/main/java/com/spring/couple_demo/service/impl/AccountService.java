@@ -4,6 +4,7 @@ import com.spring.couple_demo.dao.IAccountDao;
 import com.spring.couple_demo.service.IAccountService;
 import com.spring.couple_demo.factory.BeanFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
@@ -46,7 +47,7 @@ public class AccountService implements IAccountService {
 
     private  int i=0;
     public  AccountService(){
-        System.out.println("accountService对象创建了");
+        System.out.println("accountService1对象创建了");
     }
 
     public  AccountService(String name,Integer age,Date birthday){
