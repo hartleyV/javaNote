@@ -1,4 +1,4 @@
-package sort;
+package algorithm.courseProblem.sort.merge;
 
 import java.util.*;
 /**

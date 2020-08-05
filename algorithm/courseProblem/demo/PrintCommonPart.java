@@ -1,3 +1,5 @@
+package algorithm.courseProblem.demo;
+
 /**
 *打印【有序】链表的公共部分：
 思路：利用类似外排的方法

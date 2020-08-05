@@ -1,3 +1,5 @@
+package algorithm.courseProblem.demo;
+
 /**
 *迭代法求最值
 *@author Hatley

@@ -1,3 +1,5 @@
+package algorithm.courseProblem.demo;
+
 /**
 *用归并排序衍生到求：小和、逆序对问题；
 *@author Hatley

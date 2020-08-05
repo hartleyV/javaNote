@@ -1,3 +1,5 @@
+package algorithm.courseProblem.demo;
+
 import java.util.HashMap;
 import java.util.Random;
 /**

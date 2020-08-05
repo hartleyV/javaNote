@@ -1,3 +1,5 @@
+package algorithm.courseProblem.demo;
+
 /**
 *数组、矩阵打印练习题===宏观调度思路，摒弃局部坐标变换
 案例【1】：转圈打印一数字数组

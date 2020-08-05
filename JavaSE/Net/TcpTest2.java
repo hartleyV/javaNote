@@ -2,7 +2,8 @@ package Net;
 
 
 
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 
 import java.io.*;
 import java.net.InetAddress;

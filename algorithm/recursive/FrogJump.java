@@ -24,7 +24,6 @@ public class FrogJump {
         Map<Integer,Integer> note = new HashMap<>();
         return helper(note,n);
     }
-
     public static int helper(Map<Integer,Integer> note,int n){
         if (n==1) return 1;
         if (n==2) return 2;

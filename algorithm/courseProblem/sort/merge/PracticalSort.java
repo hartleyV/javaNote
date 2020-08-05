@@ -1,4 +1,4 @@
-package sort;
+package algorithm.courseProblem.sort.merge;
 
 /**
 *实用排序：归并、快速排序、堆排序(运用递归，充分利用每次判断->降低时间复杂度）

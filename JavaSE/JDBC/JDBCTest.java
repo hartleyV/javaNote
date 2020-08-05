@@ -1,6 +1,5 @@
 package JDBC;
-
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.sql.*;
 import java.util.Scanner;
