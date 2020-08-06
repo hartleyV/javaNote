@@ -17,7 +17,9 @@ public class SortTest {
         //Integer[] res = new _1PopSort().sort(arr);
         //Integer[] res = new _2SelectSort().sort(arr);
         //Integer[] res = new _3InsertSort().sort(arr);
-        Integer[] res = new _4MergeSort().sort(arr);
+        //Integer[] res = new _4MergeSort().sort(arr);
+        //Integer[] res = new _5QuickSort().sort(arr);
+        Integer[] res = new _6BucketSort().sort(arr);
         System.out.println(Arrays.toString(res));
     }
 
