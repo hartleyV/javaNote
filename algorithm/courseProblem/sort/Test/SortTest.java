@@ -10,6 +10,7 @@ import java.util.Arrays;
  * date： 2020/8/5
  */
 public class SortTest {
+    //Integer[] arr = {1,4,2,0 };
     Integer[] arr = {1,4,2,5,0,3,6,8,7};
 
     @Test
@@ -19,8 +20,9 @@ public class SortTest {
         //Integer[] res = new _3InsertSort().sort(arr);
         //Integer[] res = new _4MergeSort().sort(arr);
         //Integer[] res = new _5QuickSort().sort(arr);
-        Integer[] res = new _6BucketSort().sort(arr);
-        System.out.println(Arrays.toString(res));
+        //Integer[] res = new _6BucketSort().sort(arr);
+        Integer[] res = new _7HeapSort().sort(arr);
+        //System.out.println(Arrays.toString(res));
     }
 
 

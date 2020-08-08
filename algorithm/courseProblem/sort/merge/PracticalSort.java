@@ -168,7 +168,7 @@ public class PracticalSort
 		}
 		
 	}
-	//调整堆--由上到下的过程：依次与子节点比较，若子节点较大，根节点处元素就依次换下去
+	//调整堆为大根堆--由上到下的过程：依次与子节点比较，若子节点较大，根节点处元素就依次换下去
 	public static void heapify(int[] arr,int index,int size)
 	{
 		//父节点的子左节点 (完全二叉树）
