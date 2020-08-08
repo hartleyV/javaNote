@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--====================基于xmL配置Aop===========================-->
+
+
+    <!--配置Spring IOC,里面有*切入点：待增强的方法-->
+    <bean id = "accountService_aop" class="com.spring.service.impl.AopAccountService"></bean>
+
+
+
+    <!--1.把通知Bean交给spring-->
+    <bean id="logger" class="com.spring.utils.Logger"></bean>
+    <!--2.配置Aop-->
+    <aop:config>
+        <!--配置切面中的通知ref-->
+        <aop:aspect id="logAdvice" ref="logger">
+            <!--切入点表达式-->
+            <aop:pointcut id="savepc" expression="execution( * com.spring.service.impl.AopAccountService.*(..))"></aop:pointcut>
+            <!--指定要增强的方法和通知中的方法：调整通知和切入点的关系-->
+            <aop:before method="printLog"
+                        pointcut-ref="savepc"></aop:before>
+
+            <aop:after-returning method="afterLog"
+                                 pointcut-ref="savepc"></aop:after-returning>
+
+            <aop:after-throwing method="exceptionLog"
+                                pointcut-ref="savepc"></aop:after-throwing>
+
+            <aop:after method="finallyLog"
+                       pointcut-ref="savepc"></aop:after>
+            <!--注意参数表达式的书写-->
+        </aop:aspect>
+    </aop:config>
+
+
+
+</beans>

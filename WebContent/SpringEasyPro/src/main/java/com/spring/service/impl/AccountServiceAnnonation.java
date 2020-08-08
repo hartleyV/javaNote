@@ -22,6 +22,10 @@ public class AccountServiceAnnonation implements IAccountService {
     @Qualifier("accountDaoAnno")
     private IAccountDao accountDao;
 
+    public void transfer(Integer src, Integer dst, Float money) {
+
+    }
+
     public List<Account> findAllAccount() {
         return accountDao.findAllAccount();
     }
