@@ -1,4 +1,7 @@
+import algorithm.courseProblem.sort.merge.QuickSort;
 import algorithm.courseProblem.sort.method.*;
+import algorithm.courseProblem.sort.method.review.HeapSort;
+import algorithm.courseProblem.sort.method.review.MergeSort;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -19,10 +22,13 @@ public class SortTest {
         //Integer[] res = new _2SelectSort().sort(arr);
         //Integer[] res = new _3InsertSort().sort(arr);
         //Integer[] res = new _4MergeSort().sort(arr);
+//        Integer[] res = new MergeSort().sort(arr);
         //Integer[] res = new _5QuickSort().sort(arr);
+        Integer[] res = new QuickSort().sort(arr);
         //Integer[] res = new _6BucketSort().sort(arr);
-        Integer[] res = new _7HeapSort().sort(arr);
-        //System.out.println(Arrays.toString(res));
+        //Integer[] res = new _7HeapSort().sort(arr);
+        //Integer[] res = new HeapSort().sort(arr);
+        System.out.println(Arrays.toString(res));
     }
 
 

@@ -1,4 +1,4 @@
-package algorithm.linkedlist;
+package algorithm.courseProblem.linkedlist;
 
 import java.util.Stack;
 /**
