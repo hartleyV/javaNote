@@ -1,4 +1,4 @@
-package algorithm.JZoffer;
+package algorithm.JZoffer.LinkedList;
 
 import java.util.ArrayList;
 import java.util.Stack;

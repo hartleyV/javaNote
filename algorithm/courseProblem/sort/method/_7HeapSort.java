@@ -13,10 +13,10 @@ public class _7HeapSort {
 
     //堆排序
     public Integer[] sort(Integer[] arr){
-        printArray("初始数组：",arr);
+        //printArray("初始数组：",arr);
 
         heapify(arr);//把数组变成堆
-        printArray("变成堆之后",arr);
+        //printArray("变成堆之后",arr);
 
         int size = arr.length;
         while (size!=0){
@@ -25,7 +25,7 @@ public class _7HeapSort {
             siftDown(arr,0,size);
         }
 
-        printArray("堆排序结果：",arr);
+        //printArray("堆排序结果：",arr);
         return arr;
     }
 
