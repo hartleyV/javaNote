@@ -9,7 +9,7 @@ import algorithm.utils.ListNode;
  * @author Hartley
  * date： 2020/8/13
  */
-public class _56deleteDuplicationLinkedList {
+public class _56DeleteDuplicationLinkedList {
 
     //不用空间的，还没有捋明白。。
     public ListNode deleteDuplication(ListNode pHead)

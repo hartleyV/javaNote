@@ -25,7 +25,7 @@ public class _3ReversePrintLinkedList {
         ArrayList<Integer> res = new ArrayList<>();
 
         while(listNode!=null){
-            res.add(listNode.value);
+            res.add(listNode.val );
             listNode = listNode.next;
         }
 
@@ -40,7 +40,7 @@ public class _3ReversePrintLinkedList {
 
         //压栈
         while (listNode!=null){
-            helper.push(listNode.value);
+            helper.push(listNode.val );
             listNode = listNode.next;
         }
 
@@ -57,9 +57,16 @@ public class _3ReversePrintLinkedList {
             if (listNode.next!=null){
                 recursiveMethod(listNode.next,res);
             }
-            res.add(listNode.value);
+            res.add(listNode.val );
         }
 
+    }
+    //同上~
+    public void printListFromTailToHead(ListNode listNode,ArrayList<Integer> res){
+        if(listNode==null) return;
+        printListFromTailToHead(listNode.next,res);
+
+        res.add(listNode.val);
     }
 
     public ListNode reverseLinkedList(ListNode listNode){
@@ -76,7 +83,7 @@ public class _3ReversePrintLinkedList {
 
 
     private  class ListNode{
-        Integer value;
+        Integer val;
         ListNode next;
     }
 }
