@@ -1,4 +1,4 @@
-package algorithm.JZoffer;
+package algorithm.JZoffer.Tree;
 
 import algorithm.utils.TreeNode;
 
